@@ -1,4 +1,4 @@
-/* ALLOY ASCENT — "blueprint grimoire": ink-navy drafting grid, brass inscriptions,
+/* SkyForge — "blueprint grimoire": ink-navy drafting grid, brass inscriptions,
    material colours as the only saturated hues. Light theme = projector mode. */
 
 :root {
@@ -234,25 +234,46 @@ small { color: var(--muted); }
 .empty-state { color: var(--muted); }
 
 /* ---------- route map */
-.route { display: block; width: 100%; height: auto; }
-.star { fill: var(--star); opacity: .7; }
-.mtn { fill: var(--mtn); }
-.karman { stroke: var(--cyan); stroke-dasharray: 3 5; opacity: .5; }
-.kl { font: 600 9px var(--f-cond); fill: var(--cyan); letter-spacing: .1em; text-transform: uppercase; opacity: .8; }
-.rpath { fill: none; stroke: var(--brass); stroke-width: 2.5; stroke-dasharray: 6 5; opacity: .85; }
-.node circle { fill: var(--panel); stroke: var(--brass); stroke-width: 2; }
-.node.past circle { fill: var(--brass); }
-.node.cur circle { stroke: #fff; stroke-width: 3; animation: glow 1.6s infinite; }
-.nl { font: 700 10px var(--f-mono); fill: #fff; }
-.nl2 { font: 700 10px var(--f-cond); fill: #fff; letter-spacing: .08em; text-transform: uppercase; }
-.tok polygon { stroke: #0a0f1d; stroke-width: 1.5; }
-.tok.pulse polygon { animation: tokpulse 1s ease-in-out infinite; transform-origin: center; }
-.tok.lost { opacity: .35; }
+/* Drawn over img/route-bg.webp in 1536×1024 image pixels, so sizes here are large. */
+.route { display: block; width: 100%; height: auto; border-radius: 10px; background: #050914; }
+.rp-future { fill: none; stroke: rgba(255, 255, 255, .55); stroke-width: 6; stroke-dasharray: 2 16; stroke-linecap: round; }
+.rp-done { fill: none; stroke: #f6d590; stroke-width: 11; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 10px rgba(246, 213, 144, .8)); }
+.rp-active { fill: none; stroke: #f6d590; stroke-width: 9; stroke-dasharray: 26 18; stroke-linecap: round; animation: march 1s linear infinite; }
+.node circle { fill: rgba(6, 10, 22, .78); stroke: #fff; stroke-width: 5; }
+.node text { font: 700 28px var(--f-mono); fill: #fff; text-anchor: middle; dominant-baseline: central; }
+.node.past circle { fill: #e3b04b; stroke: #fff4d6; }
+.node.past text { fill: #1a1306; }
+.node.cur circle { stroke: #f6d590; stroke-width: 9; animation: glow 1.4s infinite; }
+.rl { font: 700 34px var(--f-cond); fill: #fff; letter-spacing: .03em; paint-order: stroke; stroke: rgba(4, 7, 16, .88); stroke-width: 9px; stroke-linejoin: round; }
+.tok polygon { stroke: #050914; stroke-width: 5; }
+.tok text { font: 700 20px var(--f-mono); fill: #10131c; text-anchor: middle; dominant-baseline: central; }
+.tok.pulse { animation: tokpulse 1s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.tok.lost { opacity: .4; }
+@keyframes march { to { stroke-dashoffset: -44; } }
 
 /* ---------- game */
-.game { max-width: 1600px; margin: 0 auto; padding: 14px 16px 40px; display: grid; grid-template-columns: 290px minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
-.g-left, .g-right { position: sticky; top: 72px; max-height: calc(100vh - 86px); overflow: auto; scrollbar-width: thin; }
-.map-panel { padding: 8px; }
+.game { max-width: 1500px; margin: 0 auto; padding: 14px 16px 40px; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-left { position: sticky; top: 72px; max-height: calc(100vh - 86px); overflow: auto; scrollbar-width: thin; }
+.map-panel { display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: 12px; background: none; cursor: zoom-in; position: relative; overflow: hidden; box-shadow: var(--shadow); }
+.map-panel:hover { border-color: var(--brass); }
+.map-hint { position: absolute; left: 8px; bottom: 8px; font: 600 .78rem var(--f-cond); letter-spacing: .04em; color: #fff; background: rgba(4, 7, 16, .7); padding: 3px 8px; border-radius: 6px; }
+.route-modal { width: min(1200px, 100%); }
+.route-modal .route { margin-top: 10px; }
+.route-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-weight: 600; }
+.route-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.route-legend em { font-style: normal; font-weight: 400; font-size: .85rem; }
+.leg-map { margin: -10px -6px 16px; }
+.leg-map .route { border-radius: 10px; }
+.map-final { padding: 8px; }
+.mlog summary { cursor: pointer; display: flex; align-items: baseline; gap: 12px; list-style: none; }
+.mlog summary::-webkit-details-marker { display: none; }
+.mlog summary h3 { margin: 0; }
+.mlog summary::before { content: '▸'; color: var(--brass); }
+.mlog[open] summary::before { content: '▾'; }
+.mlog-body { columns: 2 380px; column-gap: 28px; margin-top: 10px; }
+.mlog-body h4 { break-after: avoid; margin: 12px 0 6px; color: var(--brass2); }
+.mlog-body ol { list-style: none; padding: 0; margin: 0 0 8px; display: grid; gap: 4px; }
+.mlog-body li { break-inside: avoid; }
 .roster { display: grid; gap: 8px; margin-top: 12px; }
 .rc { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--mc); border-radius: 12px; padding: 10px 12px; }
 .rc.active { box-shadow: 0 0 0 2px var(--mc), 0 6px 20px color-mix(in srgb, var(--mc) 25%, transparent); }
@@ -366,7 +387,7 @@ small { color: var(--muted); }
 .scrim { position: absolute; inset: 0; background: rgba(4, 7, 15, .72); backdrop-filter: blur(3px); animation: fade .2s; }
 .modal { position: relative; width: min(1040px, 100%); max-height: calc(100vh - 32px); overflow: auto; background: var(--panel); border: 1px solid var(--line2); border-radius: 18px; padding: 20px 22px; box-shadow: 0 30px 80px rgba(0, 0, 0, .5); animation: pop .25s ease-out; }
 .small-modal { width: min(460px, 100%); }
-.leg-modal { width: min(640px, 100%); text-align: center; padding: 30px 26px; border-top: 5px solid var(--brass); }
+.leg-modal { width: min(780px, 100%); text-align: center; padding: 30px 26px; border-top: 5px solid var(--brass); }
 .leg-modal h2 { font-size: clamp(2rem, 5vw, 2.8rem); margin: 4px 0; }
 .leg-topic { font: 700 1.05rem var(--f-cond); text-transform: uppercase; letter-spacing: .12em; color: var(--cyan); }
 .leg-modal p { font-size: 1.05rem; color: var(--ink2); }
@@ -503,8 +524,7 @@ table.lca td:first-child { white-space: nowrap; }
 
 /* ---------- responsive */
 @media (max-width: 1250px) {
-  .game { grid-template-columns: 270px minmax(0, 1fr); }
-  .g-right { grid-column: 1 / -1; position: static; max-height: none; }
+  .game { grid-template-columns: 300px minmax(0, 1fr); }
   .derived { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 900px) {
@@ -513,7 +533,7 @@ table.lca td:first-child { white-space: nowrap; }
   .lobby { grid-template-columns: 1fr; }
   .lobby-side { order: 2; }
   .game { grid-template-columns: 1fr; }
-  .g-main { order: 1; } .g-left { order: 2; position: static; max-height: none; } .g-right { order: 3; }
+  .g-main { order: 1; } .g-left { order: 2; position: static; max-height: none; }
   .roster { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
   .cx-mat { grid-template-columns: 1fr; }
   .cx-mats { position: static; grid-template-columns: repeat(3, 1fr); }

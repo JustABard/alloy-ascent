@@ -1,4 +1,4 @@
-// ALLOY ASCENT — game data (rules-facing).
+// SkyForge — game data (rules-facing).
 // Every modifier below is derived from a real property ranking; the "why" strings are shown
 // to players at the moment of the roll so the metallurgy is visible, not hidden in a table.
 

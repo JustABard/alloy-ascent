@@ -1,4 +1,4 @@
-// ALLOY ASCENT — user interface. Vanilla JS: render() rebuilds the view from state;
+// SkyForge — user interface. Vanilla JS: render() rebuilds the view from state;
 // all clicks go through one delegated handler (data-act attributes).
 import * as E from './engine.js';
 import { CONFIG, MATERIALS, MATERIAL_ORDER, ROLES, ROLE_ORDER, LEGS, CONDITIONS, TAGS, CARDS, cardById } from './data.js';
@@ -176,7 +176,7 @@ function renderBusy() { document.body.classList.toggle('busy', S.busy); }
 
 function topbar(extra = '') {
   return `<header class="topbar">
-    <button class="brand" data-act="home" title="Back to title">${d20svg('', 'tiny')}<span>ALLOY <em>ASCENT</em></span></button>
+    <button class="brand" data-act="home" title="Back to title">${d20svg('', 'tiny')}<span>SKY<em>FORGE</em></span></button>
     <div class="tb-mid">${extra}</div>
     <nav class="tb-nav">
       <button class="ghost" data-act="codex">Codex</button>
@@ -195,7 +195,7 @@ function titleScreen() {
       <section class="hero">
         <div class="hero-dice">${d20svg('20', 'hero-d')}</div>
         <p class="eyebrow">A metallurgical tabletop adventure · 2–6 crews · 5–15 minutes</p>
-        <h1>ALLOY <em>ASCENT</em></h1>
+        <h1>SKY<em>FORGE</em></h1>
         <p class="sub">Six legs to orbit. Six frames to choose from — titanium, aluminium, stainless steel, carbon composite, magnesium, chromoly. Your metallurgy decides your odds.</p>
         <div class="cta">
           <button class="btn primary big" data-act="go-host">Host an online room</button>
@@ -209,7 +209,7 @@ function titleScreen() {
           <button class="link" data-act="playtest">📊 Playtest data</button>
         </div>
       </section>
-      <section class="route-teaser">${routeSVG(null)}</section>
+      <section class="route-teaser">${routeSVG(null, { labels: true })}</section>
       <section class="mat-strip">${MATERIAL_ORDER.map(k => `<button class="mat-mini" data-act="codex-mat" data-mat="${k}" style="--mc:${MATERIALS[k].color}">${matBadge(k)}<span>${esc(MATERIALS[k].short)}</span></button>`).join('')}</section>
     </main>
     <footer class="foot">Second-year metallurgical engineering design project · prototype · <button class="link" data-act="about">About & design rationale</button></footer>
@@ -364,11 +364,10 @@ function gameScreen(s) {
   return `${topbar(mid)}
   <main class="game">
     <aside class="g-left">
-      <div class="panel map-panel">${routeSVG(s)}</div>
+      <button class="map-panel" data-act="route-zoom" title="Enlarge the route map">${routeSVG(s)}<span class="map-hint">⤢ Leg ${s.leg}/6 · ${esc(leg.name)}</span></button>
       <div class="roster">${s.crews.map((c, i) => rosterCard(s, c, i)).join('')}</div>
     </aside>
     <section class="g-main">${t ? turnPanel(s, t, crew) : ''}</section>
-    <aside class="g-right"><div class="panel log"><h3>Mission log</h3><ol>${[...s.log].reverse().slice(0, 40).map(l => `<li class="lg ${l.kind}">${esc(l.text)}</li>`).join('')}</ol></div></aside>
   </main>`;
 }
 
@@ -505,34 +504,62 @@ function hangarBlock(s, t, crew, mine) {
 }
 
 // ------------------------------------------------------------------ route map
-function routeSVG(s) {
-  const W = 360, H = 250;
-  const pts = [[30, 225], [90, 190], [150, 165], [205, 130], [255, 95], [300, 60], [335, 28]];
-  const names = ['Ironhold', ...LEGS.map(l => l.name)];
-  const path = pts.map((p, i) => `${i ? 'L' : 'M'}${p[0]},${p[1]}`).join(' ');
-  const cur = s?.leg || 0;
+// Nodes sit on the trajectory painted in img/route-bg.webp (1536×1024 px): launch pad → exhaust
+// trail → shock rings at the atmosphere's edge → debris field → Station Meridian.
+const ROUTE = {
+  view: [70, 60, 1440, 790],
+  pts: [[190, 735], [300, 575], [405, 488], [468, 452], [528, 414], [790, 296], [1290, 150]],
+  labels: [['Ironhold Spaceport', 44, 14, 'start'], ['1 · Heavy Lift', -42, 12, 'end'], ['2 · Storm Corridor', -42, 14, 'end'],
+    ['3 · Wildcard Skies', -44, -26, 'end'], ['4 · Hypersonic Burn', 46, 46, 'start'], ['5 · Edge of Space', 0, 84, 'middle'], ['6 · Station Meridian', 0, 92, 'middle']],
+};
+
+function routeSVG(s, { labels = false } = {}) {
+  const P = ROUTE.pts;
+  const ended = s?.phase === 'ended';
+  const leg = ended ? 7 : (s?.leg || 0);         // leg in progress (node `leg` is its destination)
+  const line = (a, b) => P.slice(a, b + 1).map((p, i) => `${i ? 'L' : 'M'}${p[0]},${p[1]}`).join(' ');
+  const doneTo = Math.min(6, Math.max(0, leg - 1));
+  const paths = `${leg < 7 ? `<path d="${line(Math.max(0, leg - 1), 6)}" class="rp-future"/>` : ''}
+    ${doneTo > 0 ? `<path d="${line(0, doneTo)}" class="rp-done"/>` : ''}
+    ${leg >= 1 && leg <= 6 ? `<path d="${line(leg - 1, leg)}" class="rp-active"/>` : ''}`;
+  const nodes = P.map(([x, y], i) => {
+    const state = i < leg || ended ? 'past' : i === leg ? 'cur' : '';
+    return `<g class="node ${state}"><circle cx="${x}" cy="${y}" r="${i === 0 || i === 6 ? 30 : 25}"/>${i ? `<text x="${x}" y="${y + 1}">${i}</text>` : `<text x="${x}" y="${y + 1}">⌂</text>`}</g>`;
+  }).join('');
+  const names = labels ? ROUTE.labels.map(([t, dx, dy, a], i) => `<text class="rl" x="${P[i][0] + dx}" y="${P[i][1] + dy}" text-anchor="${a}">${esc(t)}</text>`).join('') : '';
   let tokens = '';
-  if (s && s.crews) {
+  if (s?.crews && s.phase !== 'lobby') {
+    const at = {};
     s.crews.forEach((c, i) => {
-      const done = Math.max(0, (s.phase === 'ended' ? 6 : s.leg - 1) + (s.turn && s.turn.crewIdx > i && s.phase === 'play' ? 1 : 0));
-      const idx = c.lost ? Math.max(0, (c.lostLeg || 1) - 1) : Math.min(6, done);
-      const [x, y] = pts[idx];
-      const off = (i - (s.crews.length - 1) / 2) * 9;
-      tokens += `<g class="tok ${s.turn?.crewIdx === i ? 'pulse' : ''} ${c.lost ? 'lost' : ''}" transform="translate(${x + off},${y + 16})"><polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" style="fill:${MATERIALS[c.material]?.color || '#888'}"/></g>`;
+      const done = (ended ? 6 : s.leg - 1) + (s.turn && s.turn.crewIdx > i ? 1 : 0);
+      const idx = c.lost ? Math.max(0, (c.lostLeg || 1) - 1) : Math.max(0, Math.min(6, done));
+      (at[idx] ||= []).push([c, i]);
     });
+    for (const [idx, list] of Object.entries(at)) {
+      const [x, y] = P[idx];
+      list.forEach(([c, i], k) => {
+        const tx = x + (k - (list.length - 1) / 2) * 54, ty = y + (+idx >= 5 ? -66 : 66);
+        // translate on the outer group; the pulse animation (a CSS transform) goes on the inner one
+        tokens += `<g transform="translate(${tx},${ty})"><g class="tok ${s.turn?.crewIdx === i ? 'pulse' : ''} ${c.lost ? 'lost' : ''}"><title>${esc(c.name)}</title><polygon points="0,-26 22.5,-13 22.5,13 0,26 -22.5,13 -22.5,-13" style="fill:${MATERIALS[c.material]?.color || '#888'}"/><text y="1">${esc(MATERIALS[c.material]?.symbol || '')}</text></g></g>`;
+      });
+    }
   }
-  return `<svg class="route" viewBox="0 0 ${W} ${H}" role="img" aria-label="Route map">
-    <defs><linearGradient id="sky" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="var(--sky0)"/><stop offset=".55" stop-color="var(--sky1)"/><stop offset="1" stop-color="var(--sky2)"/></linearGradient></defs>
-    <rect width="${W}" height="${H}" rx="10" fill="url(#sky)"/>
-    ${Array.from({ length: 28 }, (_, i) => `<circle cx="${(i * 97) % W}" cy="${(i * 53) % 110}" r="${i % 3 ? 0.7 : 1.2}" class="star"/>`).join('')}
-    <path d="M0,${H} L0,215 L40,200 L70,212 L105,178 L130,196 L160,170 L190,198 L220,${H} Z" class="mtn"/>
-    <line x1="0" y1="78" x2="${W}" y2="78" class="karman"/><text x="6" y="74" class="kl">Kármán line</text>
-    <path d="${path}" class="rpath"/>
-    ${pts.map((p, i) => `<g class="node ${i <= cur ? 'past' : ''} ${i === cur ? 'cur' : ''}"><circle cx="${p[0]}" cy="${p[1]}" r="${i === 0 || i === 6 ? 7 : 5.5}"/>${i ? `<text x="${p[0] - 8}" y="${p[1] - 9}" class="nl">${i}</text>` : ''}</g>`).join('')}
-    <text x="${pts[6][0] - 52}" y="${pts[6][1] + 4}" class="nl2">Meridian</text>
-    <text x="${pts[0][0] - 10}" y="${pts[0][1] + 18}" class="nl2">Ironhold</text>
-    ${tokens}
+  return `<svg class="route ${labels ? 'big' : ''}" viewBox="${ROUTE.view.join(' ')}" role="img" aria-label="Route map: Ironhold Spaceport to Station Meridian${s?.leg ? `, leg ${Math.min(6, s.leg)} of 6` : ''}">
+    <image href="img/route-bg.webp" x="0" y="0" width="1536" height="1024" preserveAspectRatio="none"/>
+    ${paths}${nodes}${names}${tokens}
   </svg>`;
+}
+
+// Full mission log, grouped by leg, for the debrief.
+function missionLog(s) {
+  let html = '', open = false;
+  for (const l of s.log) {
+    if (l.kind === 'leg') { if (open) html += '</ol>'; html += `<h4>${esc(l.text)}</h4><ol>`; open = true; continue; }
+    if (!open) { html += '<ol>'; open = true; }
+    html += `<li class="lg ${l.kind}">${esc(l.text)}</li>`;
+  }
+  if (open) html += '</ol>';
+  return `<details class="mlog" open><summary><h3>Mission log</h3><span class="muted small">${s.log.length} entries · every roll, repair and failure in order</span></summary><div class="mlog-body">${html}</div></details>`;
 }
 
 // ------------------------------------------------------------------ results
@@ -549,6 +576,7 @@ function resultsScreen(s) {
       <p class="eyebrow">Mission complete</p>${matBadge(win.material, 'xl')}
       <h1>${esc(win.name)} wins</h1><p class="sub">${esc(MATERIALS[win.material].short)} · ${esc(E.procOf(win).name)} · ${esc(ROLES[win.role].name)} — ${rows[0].total} points</p>
     </section>
+    <section class="panel map-final">${routeSVG(s, { labels: true })}</section>
     <section class="panel"><h3>Scoreboard</h3><div class="tablewrap"><table class="score">
       <thead><tr><th>#</th><th>Crew</th>${cols.map(c => `<th>${c[0]}</th>`).join('')}<th>Total</th></tr></thead>
       <tbody>${rows.map(r => { const c = crewOf(r.crewId); return `<tr class="${c.lost ? 'lost' : ''}"><td>${r.rank}</td><td class="sc-crew">${matBadge(c.material, 'sm')} <b>${esc(c.name)}</b><small>${esc(MATERIALS[c.material].short)} ${esc(E.procOf(c).name)} · ${esc(ROLES[c.role].name)}</small></td>${cols.map(([, k]) => `<td>${r[k]}</td>`).join('')}<td class="tot">${r.total}</td></tr>`; }).join('')}</tbody></table></div>
@@ -556,6 +584,7 @@ function resultsScreen(s) {
     <section class="panel"><h3>Each crew’s journey</h3><div class="journeys">${s.crews.map(c => journey(c)).join('')}</div></section>
     <section class="panel"><h3>Cost & environment — the life-cycle view</h3>${lifeCycle(s)}</section>
     <section class="panel"><h3>Discuss</h3><ol class="discuss">${DISCUSSION.map(d => `<li>${esc(d)}</li>`).join('')}</ol></section>
+    <section class="panel">${missionLog(s)}</section>
     <section class="row center">
       ${isHost() ? `<button class="btn primary big" data-act="to-lobby">Return to lobby — play again</button>` : '<p class="muted">The host can return everyone to the lobby.</p>'}
       <button class="btn" data-act="dl-json">Download match log (JSON)</button>
@@ -610,14 +639,24 @@ function renderOverlay() {
   else if (o.kind === 'playtest') inner = playtestView(o);
   else if (o.kind === 'confirm') inner = `<div class="modal small-modal"><h3>${esc(o.title)}</h3><p>${esc(o.text)}</p><div class="row"><button class="btn primary" data-act="confirm-yes">${esc(o.yes || 'Yes')}</button><button class="btn ghost" data-act="close">Cancel</button></div></div>`;
   else if (o.kind === 'about') inner = aboutView();
+  else if (o.kind === 'route') inner = routeModal();
   $overlay.className = `open ${o.kind}`;
   $overlay.innerHTML = `<div class="scrim" data-act="close"></div>${inner}`;
   if (o.kind === 'tutorial') wireTutorial();
 }
 
+function routeModal() {
+  const s = S.state;
+  if (!s || s.phase === 'lobby') return `<div class="modal route-modal">${routeSVG(null, { labels: true })}</div>`;
+  return `<div class="modal route-modal"><div class="cx-head"><h2 class="h-display">The route to Meridian</h2><button class="x" data-act="close" aria-label="Close">✕</button></div>
+    ${routeSVG(s, { labels: true })}
+    <div class="route-legend">${s.crews.map(c => `<span style="--mc:${MATERIALS[c.material].color}">${matBadge(c.material, 'sm')} ${esc(c.name)}${c.lost ? ` <em class="bad">lost on leg ${c.lostLeg}</em>` : ` <em class="muted">${c.integrity} integrity · ${hrs(c.time)}</em>`}</span>`).join('')}</div></div>`;
+}
+
 function legIntro(n) {
   const L = LEGS[n - 1];
   return `<div class="modal leg-modal">
+    <div class="leg-map">${routeSVG(S.state, { labels: true })}</div>
     <p class="eyebrow">Leg ${n} of 6 · ${esc(L.place)}</p>
     <h2 class="h-display">${esc(L.name)}</h2>
     <p class="leg-topic">${esc(L.topic)}${L.kind === 'luck' ? ' — no material modifiers' : L.kind === 'specialist' ? ' — your role decides it' : ''}</p>
@@ -717,7 +756,7 @@ function rulesText() {
 
 function aboutView() {
   return `<div class="modal about"><div class="cx-head"><h2 class="h-display">About this prototype</h2><button class="x" data-act="close">✕</button></div>
-  <div class="cx-body"><p>ALLOY ASCENT is a second-year metallurgical engineering design project: a short, replayable tabletop-style game in which the choice of airframe material, its processing route and the crew specialist change the odds of completing a six-leg journey to orbit.</p>
+  <div class="cx-body"><p>SkyForge is a second-year metallurgical engineering design project: a short, replayable tabletop-style game in which the choice of airframe material, its processing route and the crew specialist change the odds of completing a six-leg journey to orbit.</p>
   <h4>Design intent</h4><ul><li>Every material modifier comes from a real property ranking (σy/ρ, ∛E/ρ, endurance limit, max service temperature, k/α, DBTT, Pilling–Bedworth ratio…) and the reason is shown at the moment of the roll.</li>
   <li>No material dominates: each wins some legs and loses others, and the processing route trades one property for another, as it does in practice (T6 vs T73, normalised vs Q&T, cast vs extruded…).</li>
   <li>Legs 3 and 6 are deliberately not material-driven — Leg 3 is pure probability and risk, Leg 6 is decided by the specialist role.</li>
@@ -914,6 +953,7 @@ document.addEventListener('click', async (ev) => {
     case 'tut-prev': S.ui.tut = Math.max(0, S.ui.tut - 1); renderOverlay(); break;
     case 'tut-go': S.ui.tut = +el.dataset.i; renderOverlay(); break;
     case 'about': S.overlay = { kind: 'about' }; renderOverlay(); break;
+    case 'route-zoom': S.overlay = { kind: 'route' }; renderOverlay(); break;
     case 'close': S.overlay = null; renderOverlay(); break;
     case 'confirm-yes': { const fn = S.overlay?.fn; S.overlay = null; renderOverlay(); fn?.(); break; }
     case 'playtest': S.overlay = { kind: 'playtest', loading: true }; renderOverlay();
@@ -923,7 +963,7 @@ document.addEventListener('click', async (ev) => {
       const rows = S.overlay?.rows || [];
       const out = [['date', 'mode', 'crews', 'duration_s', 'material', 'processing', 'role', 'cargo_start', 'cargo_end', 'lost', 'lost_leg', 'score', 'rank']];
       for (const g of rows) for (const c of g.data?.crews || []) out.push([g.created_at, g.mode, g.crews, g.duration_s, c.material, c.processing, c.role, c.cargoStart, c.cargoEnd, c.lost, c.lostLeg, c.score, c.rank]);
-      download('alloy-ascent-playtests.csv', csvOf(out), 'text/csv'); break;
+      download('skyforge-playtests.csv', csvOf(out), 'text/csv'); break;
     }
     case 'go-host': S.overlay = null; S.screen = 'host'; S.ui.hostErr = ''; render(); setTimeout(() => document.getElementById('host-name')?.focus(), 30); break;
     case 'go-join': S.screen = 'join'; S.ui.joinErr = ''; render(); setTimeout(() => document.getElementById(S.ui.joinCode ? 'join-name' : 'join-code')?.focus(), 30); break;
@@ -986,8 +1026,8 @@ document.addEventListener('click', async (ev) => {
     case 'roll': { const sel = S.ui.sel; dispatch({ type: 'roll', approach: sel.approach, jettison: sel.jettison, ability: sel.ability, seq: +el.dataset.seq }); break; }
     case 'hangar': dispatch({ type: 'hangar', option: el.dataset.opt, seq: +el.dataset.seq }); break;
     case 'end': dispatch({ type: 'end', seq: +el.dataset.seq }); break;
-    case 'dl-json': download(`alloy-ascent-${s.code || 'local'}-game${s.gameNo}.json`, JSON.stringify({ summary: E.matchSummary(s), log: s.log, crews: s.crews.map(c => ({ name: c.name, material: c.material, processing: c.processing, role: c.role, history: c.history })) }, null, 2), 'application/json'); break;
-    case 'dl-csv': download(`alloy-ascent-${s.code || 'local'}-game${s.gameNo}.csv`, resultsCSV(s), 'text/csv'); break;
+    case 'dl-json': download(`skyforge-${s.code || 'local'}-game${s.gameNo}.json`, JSON.stringify({ summary: E.matchSummary(s), log: s.log, crews: s.crews.map(c => ({ name: c.name, material: c.material, processing: c.processing, role: c.role, history: c.history })) }, null, 2), 'application/json'); break;
+    case 'dl-csv': download(`skyforge-${s.code || 'local'}-game${s.gameNo}.csv`, resultsCSV(s), 'text/csv'); break;
     default: break;
   }
 });
