@@ -137,9 +137,8 @@ export const SOURCES = [
   'I. J. Polmear et al., Light Alloys: Metallurgy of the Light Metals, 5th ed., 2017 — 7xxx tempers, Mg-RE alloys.',
   'G. Lütjering & J. C. Williams, Titanium, 2nd ed., Springer, 2007 — α+β microstructures and properties.',
   'ASM Handbook Vol. 1 (Properties of Irons and Steels) and Vol. 2 (Nonferrous Alloys); ASM Specialty Handbook: Stainless Steels.',
-  'MMPDS (Metallic Materials Properties Development and Standardization), FAA/Battelle — design allowables for aerospace alloys.',
-  'NASA Conference Publication 3134, LDEF — 69 Months in Space (1991) — atomic-oxygen and space-environment effects.',
+  'NASA Conference Publication 3134, LDEF — 69 Months in Space (1992) — atomic-oxygen and space-environment effects.',
   'ASTM E595 — Total Mass Loss and Collected Volatile Condensable Materials from Outgassing in a Vacuum Environment.',
   'NTSB Aircraft Accident Report AAR-89/03 — Aloha Airlines Flight 243 (multi-site fatigue damage).',
-  'Typical property values cross-checked against manufacturer datasheets (e.g. Magnesium Elektron WE43) and Ansys Granta EduPack.',
+  'Typical property values from ASM/MatWeb datasheets (via ASM Aerospace Specification Metals) and the Luxfer MEL Technologies WE43B datasheet. Full Harvard reference list: see the project docs.',
 ];

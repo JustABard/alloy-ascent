@@ -46,7 +46,7 @@
 
 ### 3.1 Property basis
 
-Typical values for the stated condition, cross-checked against ASM handbooks, MMPDS, datasheets and Granta EduPack. See the Codex "Sources" tab.
+Typical values for the stated condition, taken from ASM handbooks, manufacturer and MatWeb datasheets and the textbooks in the Harvard reference list.
 
 | Frame (condition) | ρ (g/cm³) | E (GPa) | σy (MPa) | σy/ρ (kN·m/kg) | ∛E/ρ | Fatigue | K_IC (MPa√m) | Max service T (°C) | k/α | Structure |
 |---|---|---|---|---|---|---|---|---|---|---|
