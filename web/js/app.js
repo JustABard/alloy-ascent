@@ -1016,10 +1016,13 @@ function confirmBox(title, text, yes, fn) { S.overlay = { kind: 'confirm', title
   const code = Net.normaliseCode(params.get('room'));
   if (code) {
     S.ui.joinCode = code;
-    if (S.me.name) {
-      try { const row = await Net.fetchRoom(code); if (row) { await openRoom(code, { join: true, spectate: false }); return; } }
-      catch { /* fall through to join screen */ }
-    }
+    // Refreshing a tab that is already in the room resumes straight away; a fresh invite link
+    // shows the join screen (pre-filled) so a shared PC never joins under someone else's name.
+    try {
+      const row = await Net.fetchRoom(code);
+      if (row && row.state.players.some(p => p.id === S.me.id)) { await openRoom(code, { join: true, spectate: false }); return; }
+      if (!row) S.ui.joinErr = `Room ${code} was not found — it may have expired. Ask your host for a new code.`;
+    } catch { /* offline: fall through to the join screen */ }
     S.screen = 'join';
   }
   render();
