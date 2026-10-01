@@ -722,7 +722,7 @@ function aboutView() {
   <li>No material dominates: each wins some legs and loses others, and the processing route trades one property for another, as it does in practice (T6 vs T73, normalised vs Q&T, cast vs extruded…).</li>
   <li>Legs 3 and 6 are deliberately not material-driven — Leg 3 is pure probability and risk, Leg 6 is decided by the specialist role.</li>
   <li>Cost and sustainability are scored (budget points, green award) and broken down in the debrief to start a discussion, not to settle it.</li></ul>
-  <h4>Balance testing</h4><p>The same rules engine was run through tens of thousands of automated games with simple player bots to tune difficulty, survival rates and game length. See the project repository (docs/) for the design rationale, critical reflection and playtesting report.</p>
+  <h4>Balance testing</h4><p>The same rules engine was run through tens of thousands of automated games with simple player bots to tune difficulty, survival rates and game length. The design rationale, critical reflection, rules and playtesting report are in the <a href="https://github.com/JustABard/alloy-ascent/tree/main/docs" target="_blank" rel="noopener">project repository</a>.</p>
   <h4>Limitations</h4><p>Modifiers are ordinal rankings, not design allowables; one property often stands in for a complex behaviour; online rooms trust the clients (fine for a classroom, not for a tournament).</p></div></div>`;
 }
 

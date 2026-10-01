@@ -1,0 +1,3 @@
+session,date,observer,mode (online/pass-and-play),crews,timer_s,questions_on,tutorial_start,tutorial_end,game_start,game_end,crew,material,processing,role,cargo_loaded,finished (Y/N),score,rank,confusions_observed,bugs_observed,notable_moments
+P1,,,pass-and-play,2,60,Y,,,,,Crew 1,,,,,,,,,,
+P1,,,pass-and-play,2,60,Y,,,,,Crew 2,,,,,,,,,,
