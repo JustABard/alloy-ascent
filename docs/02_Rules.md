@@ -1,4 +1,4 @@
-# ALLOY ASCENT — Rules of Play
+# SkyForge — Rules of Play
 
 **Players:** 2–6 crews (one device each online, or one shared screen) · **Time:** 5–15 minutes · **Play at:** https://justabard.github.io/alloy-ascent/
 

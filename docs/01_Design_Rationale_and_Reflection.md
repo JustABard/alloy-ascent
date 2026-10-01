@@ -1,4 +1,4 @@
-# ALLOY ASCENT — Design Rationale and Critical Reflection
+# SkyForge — Design Rationale and Critical Reflection
 
 *Second-year metallurgical engineering design project · game prototype*
 **Play:** https://justabard.github.io/alloy-ascent/ · **Code:** https://github.com/JustABard/alloy-ascent

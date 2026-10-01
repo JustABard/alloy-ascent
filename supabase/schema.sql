@@ -1,4 +1,4 @@
--- ALLOY ASCENT — multiplayer backend (Supabase / Postgres 17)
+-- SkyForge — multiplayer backend (Supabase / Postgres 17)
 -- One row per room. Clients run the shared rules engine and write the next state with an
 -- optimistic version check; every client subscribes to Realtime changes on its room row.
 

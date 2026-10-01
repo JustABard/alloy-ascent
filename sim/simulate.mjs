@@ -1,4 +1,4 @@
-// Monte-Carlo balance testing for ALLOY ASCENT.
+// Monte-Carlo balance testing for SkyForge.
 // Plays thousands of complete games with simple bot policies through the SAME engine the
 // browser uses, then reports win rates, survival, scores and estimated play time.
 //

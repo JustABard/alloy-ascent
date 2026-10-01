@@ -1,8 +1,8 @@
 {
-  "name": "alloy-ascent",
+  "name": "skyforge",
   "version": "1.0.0",
   "private": true,
-  "description": "ALLOY ASCENT: Six Legs to Orbit — a metallurgical tabletop-style engineering game (2–6 crews, online rooms or pass-and-play).",
+  "description": "SkyForge: Six Legs to Orbit — a metallurgical tabletop-style engineering game (2–6 crews, online rooms or pass-and-play).",
   "type": "module",
   "scripts": {
     "sim": "node sim/simulate.mjs 20000 --out docs/playtest",

@@ -1,4 +1,4 @@
-// ALLOY ASCENT — rules engine.
+// SkyForge — rules engine.
 // Pure state machine shared by the browser (pass-and-play and online rooms) and the Node
 // balance simulator. act(state, action, ctx) returns a NEW state; ctx = { now, rng, actor }.
 
@@ -78,7 +78,7 @@ function isHost(state, actor) {
 
 function log(s, kind, text, crewId = null) {
   s.log.push({ n: (s.logN = (s.logN || 0) + 1), leg: s.leg, kind, text, crewId });
-  if (s.log.length > 80) s.log.splice(0, s.log.length - 80);
+  if (s.log.length > 250) s.log.splice(0, s.log.length - 250);
 }
 
 // ------------------------------------------------------------------ creation

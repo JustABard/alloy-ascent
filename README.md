@@ -1,4 +1,4 @@
-# ALLOY ASCENT — Six Legs to Orbit
+# SkyForge — Six Legs to Orbit
 
 A tabletop-style (D&D-flavoured) engineering game for **2–6 crews** and **5–15 minutes**, built as a second-year metallurgical engineering design project. Each crew chooses an airframe material, its processing route, a specialist role and a cargo load. They then fly six legs to an orbital station, rolling a d20 against odds that come straight from the metallurgy.
 
