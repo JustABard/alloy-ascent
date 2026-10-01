@@ -1,0 +1,14 @@
+{
+  "name": "alloy-ascent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ALLOY ASCENT: Six Legs to Orbit — a metallurgical tabletop-style engineering game (2–6 crews, online rooms or pass-and-play).",
+  "type": "module",
+  "scripts": {
+    "sim": "node sim/simulate.mjs 20000 --out docs/playtest",
+    "sim:quick": "node sim/simulate.mjs 2000",
+    "test": "node sim/test-engine.mjs",
+    "serve": "npx --yes http-server web -p 5173 -c-1"
+  },
+  "license": "MIT"
+}
