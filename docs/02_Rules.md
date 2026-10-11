@@ -1,6 +1,6 @@
 # SkyForge — Rules of Play
 
-**Players:** 2–6 crews (one device each online, or one shared screen) · **Time:** 5–15 minutes · **Play at:** https://justabard.github.io/alloy-ascent/
+**Players:** 2–6 crews (one device each online, or one shared screen) · **Time:** 5–15 minutes · **Play at:** https://skyforge-game.vercel.app
 
 ## Goal
 Fly your crew from Ironhold Spaceport to Station Meridian across **six legs** and finish with the most **mission points**. Most points come from delivering cargo and arriving intact, on time and on budget.

@@ -37,6 +37,8 @@ Until then, the site is served from the `gh-pages` branch. To update it after ch
 git subtree split --prefix web -b gh-pages-tmp && git push -f origin gh-pages-tmp:gh-pages && git branch -D gh-pages-tmp
 ```
 
+https://skyforge-game.vercel.app proxies to the GitHub Pages site (see `deploy/vercel/vercel.json`), so it picks up the update too.
+
 GitHub Pages caches files for about 10 minutes, so after an update, players may need a hard refresh (Ctrl+F5) to see it straight away. Avoid redeploying in the 10 minutes before a demo.
 
 If the multiplayer backend is ever paused (no use for a week), open the Supabase dashboard and press **Restore project**. Pass-and-play keeps working regardless.

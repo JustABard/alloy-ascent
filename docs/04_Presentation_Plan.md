@@ -1,7 +1,7 @@
 # SkyForge — Classroom Presentation Plan (≈12 minutes + questions)
 
 **Format:** short talk → live game with the class → evidence and reflection.
-**You need:** a laptop on the projector, the site open at https://justabard.github.io/alloy-ascent/ in **light (projector) mode** (☀ button), and phones for 2–6 volunteer crews.
+**You need:** a laptop on the projector, the site open at https://skyforge-game.vercel.app in **light (projector) mode** (☀ button), and phones for 2–6 volunteer crews.
 
 ## Run sheet
 

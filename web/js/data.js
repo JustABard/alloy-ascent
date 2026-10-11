@@ -155,7 +155,7 @@ export const ROLES = {
     id: 'structural', name: 'Structural Engineer', icon: '⌂', home: 'Legs 1–2',
     tags: ['strength', 'stiffness', 'notch'], bonus: 2,
     summary: '+2 on strength, stiffness and stress-concentration (notch) checks.',
-    ability: { id: 'loadpath', name: 'Redundant load path', when: 'preroll', desc: 'Once per game: if this roll is a Failure, treat it as a Partial (a fail-safe design).' },
+    ability: { id: 'loadpath', name: 'Redundant load path', when: 'auto', desc: 'Once per game, automatically: the first roll that would be a Failure becomes a Partial instead (a fail-safe design).' },
   },
   metallurgist: {
     id: 'metallurgist', name: 'Metallurgist', icon: '⚗', home: 'Legs 4–5',

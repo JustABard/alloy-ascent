@@ -2,7 +2,7 @@
 
 A tabletop-style (D&D-flavoured) engineering game for **2–6 crews** and **5–15 minutes**, built as a second-year metallurgical engineering design project. Each crew chooses an airframe material, its processing route, a specialist role and a cargo load. They then fly six legs to an orbital station, rolling a d20 against odds that come straight from the metallurgy.
 
-**Play online:** https://justabard.github.io/alloy-ascent/
+**Play online:** https://skyforge-game.vercel.app (mirror of https://justabard.github.io/alloy-ascent/)
 Host a room and share the code, link or QR code, or choose *Pass-and-play* to play on one screen.
 
 | Frame | Family | Character |
@@ -55,7 +55,7 @@ npm run sim
 
 ## Online infrastructure
 
-- **Hosting:** GitHub Pages (static).
+- **Hosting:** GitHub Pages (static), with https://skyforge-game.vercel.app as the short link. The Vercel project (`deploy/vercel/vercel.json`) only proxies to GitHub Pages, so it never needs redeploying.
 - **Rooms:** Supabase free tier (Postgres with Realtime). The publishable key in `web/js/config.js` is designed to be public; row-level security restricts it to reading and updating rooms and inserting anonymous results.
 - **Keep-alive:** `.github/workflows/keepalive.yml` pings the database daily so the free project does not pause, and it purges rooms that have been idle for three days.
 - **Analytics:** anonymous match results (materials, roles, scores, no names) are stored for the in-game **Playtest data** page when the host leaves *Share anonymous results* switched on.
