@@ -364,11 +364,15 @@ function resolveRoll(s, action, ctx, timedOut = false) {
       const rank = { fail: 0, partial: 1, success: 2 };
       if (rank[t2] > rank[tier]) tier = t2;
     }
-    if (useAbility && R.ability.id === 'loadpath' && tier === 'fail') { tier = 'partial'; notes.push({ t: 'save', text: 'Redundant load path: Failure → Partial' }); }
     if (appr.effect === 'failToPartialSet' && tier === 'fail') {
       tier = 'partial';
       addCondition(crew, 'yielded');
       notes.push({ t: 'cond', cond: 'yielded', text: 'Ductile reserve: Failure → Partial, but a spar takes a permanent set' });
+    }
+    // Structural Engineer: automatic, once per game
+    if (R.ability.id === 'loadpath' && !crew.abilityUsed && tier === 'fail') {
+      tier = 'partial'; crew.abilityUsed = true;
+      notes.push({ t: 'save', text: 'Redundant load path: Failure → Partial' });
     }
   }
   if (useAbility) crew.abilityUsed = true;
