@@ -16,7 +16,7 @@
 | 4:45 | **7. LIVE: launch.** Volunteers press *Ready*; the host presses *Launch*. Set the timer to **45 s**. | Talk through the first crew's choices out loud: "Your odds are 60% — push hard to save 3 hours, or play it safe?" |
 | 5:00–9:00 | **Play Legs 1–2** (and 3 if time allows). Press **Pause** once to discuss a result. | After a fatigue partial: "Notice the ⚠ suspected damage — that's a hidden crack. Do you inspect now, or gamble?" |
 | 9:00 | Host → **Lobby** (or let it run during the next slides if the class is engaged) | |
-| 9:15 | **8. Playtesting evidence** (`03_Playtesting_Report.md` tables) | 20,000 simulated games: first draft CFRP won 54%, 316L 0.7%. Five tuning passes → 8–30% for every frame. Key insight: steels have the *highest mean score* but the *lowest variance*, so they rarely win a six-way race. That's reliability vs performance. |
+| 9:15 | **8. Playtesting evidence** (`03_Playtesting_Report.md` tables) | 20,000 simulated games: first draft CFRP won 54%, 316L 0.7%. Five tuning passes → roughly 8–31% for every frame. Key insight: steels have the *highest mean score* but the *lowest variance*, so they rarely win a six-way race. That's reliability vs performance. |
 | 10:15 | **9. Cost & environment** (a debrief screen) | Budget points and life-cycle CO₂e per crate delivered. The use phase dominates aircraft, so light frames repay embodied carbon — *if* they survive. Ask: how many missions before CFRP beats 4130? |
 | 11:00 | **10. Critical reflection** | Ordinal modifiers; one property per mechanism; bots ≠ people; trust model; next steps (human playtests, server-authoritative rooms, more processing routes). |
 | 11:45 | **11. Close** — link and QR code | "Play it yourselves — pass-and-play works on one laptop." |
@@ -45,7 +45,7 @@
 | D | Floor support: helps volunteers join, keeps time |
 
 ## Likely questions — prepared answers
-- **"Why does CFRP win most often?"** It has the highest payload and specific strength. Its 27% loss rate and zero budget points are the counterweights. Steels have higher *average* scores; CFRP wins on *variance*.
+- **"Why does CFRP win most often?"** It has the highest payload and specific strength. Its 25% loss rate and zero budget points are the counterweights. Steels have higher *average* scores; CFRP wins on *variance*.
 - **"Aren't the numbers made up?"** The modifiers are rankings of real properties (table in `01_Design_Rationale_and_Reflection.md` §3). Every one is shown with its reason. They teach ranking and mechanism, not design allowables.
 - **"Why is WE43 even an option?"** It is the best metal for panel stiffness per kg and holds strength to 250 °C, but corrosion, low toughness and space effects make it a specialist choice. A Surface & Corrosion Engineer pairs well with it.
 - **"Is this cheat-proof?"** No. Clients are trusted (fine for a classroom). Next step: server-authoritative rooms.

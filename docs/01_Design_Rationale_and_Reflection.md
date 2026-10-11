@@ -13,7 +13,7 @@
 | Six candidate frames: Ti-6Al-4V, 7075-T6, 316L, CFRP, WE43, 4130 chromoly | `web/js/data.js` → `MATERIALS`; Materials Codex in-game |
 | Choose a craft/frame **and** a role; choices must change the odds of finishing | Material, processing route, role and cargo load all feed every roll; survival ranges from 67% (WE43) to 99% (316L) (§7) |
 | Material sets weight, speed, transport capacity, torsional performance and environmental resistance | Frame mass → hours per leg and cargo capacity; stiffness/torsion, heat, cryogenic, corrosion and space modifiers on event cards (§3) |
-| Genuine trade-offs (light/fast/more cargo vs vulnerable) | CFRP: 6 crates and 7 h/leg but 73% survival. 316L: 3 crates and 10 h/leg but 99% survival (§7) |
+| Genuine trade-offs (light/fast/more cargo vs vulnerable) | CFRP: 6 crates and 7 h/leg but 75% survival. 316L: 3 crates and 10 h/leg but 99% survival (§7) |
 | Board/route, scripted events, dice, understandable success %, repair and shortcut decisions | Six-leg route map; per-leg event decks; d20 vs DC with the success/partial/fail % shown before every roll; *Push hard* (shortcut), *Play it safe*, hangar repairs and inspections |
 | Legs 3 and 6 are probability-based; Leg 6 is specialist-focused | Leg 3 cards have no material modifiers. Leg 6 has one crisis card per role, with +3 for the specialist and a +3 specialist question |
 | Legs 1, 2, 4, 5 = specific strength & stiffness, fatigue, thermal, vacuum/space | Card decks `l1*`, `l2*`, `l4*`, `l5*` (§4) |
@@ -145,16 +145,16 @@ Bots played the game through the same engine the browser uses, with seeded and r
 
 | Frame | Win rate (fair = 16.7%) | Survival | Mean score | Score SD |
 |---|---|---|---|---|
-| Ti-6Al-4V | 13.5% | 83.7% | 41.2 | 17.6 |
-| Al 7075 | 21.0% | 83.4% | 42.3 | 18.7 |
-| 316L | 7.9% | 99.1% | 44.2 | 8.4 |
-| CFRP | 29.9% | 72.5% | 39.8 | 22.8 |
-| Mg WE43 | 16.0% | 67.1% | 34.8 | 22.9 |
-| 4130 | 11.6% | 97.0% | 44.8 | 10.4 |
+| Ti-6Al-4V | 12.9% | 85.7% | 42.2 | 16.9 |
+| Al 7075 | 21.5% | 85.1% | 43.4 | 18.1 |
+| 316L | 7.5% | 99.2% | 44.9 | 8.2 |
+| CFRP | 31.1% | 75.2% | 41.4 | 22.3 |
+| Mg WE43 | 15.9% | 69.3% | 36.1 | 22.7 |
+| 4130 | 10.9% | 97.5% | 45.4 | 10.0 |
 
-The first version was badly unbalanced: CFRP won 54% of six-crew games and 316L 0.7%. Five tuning passes, logged in the playtesting report, brought every frame into a 8–30% band. The remaining spread is mostly *variance*, not average strength. 316L and 4130 have the **highest mean scores** but the lowest spread, so they rarely top a six-crew table. CFRP and WE43 are high-risk and high-reward. This was kept on purpose, because it is a real engineering lesson about reliability and risk, and the debrief asks students about it directly. In two-crew games the spread narrows to 38–58%.
+The first version was badly unbalanced: CFRP won 54% of six-crew games and 316L 0.7%. Five tuning passes, logged in the playtesting report, brought every frame into roughly an 8–31% band (7.5–31.1% in the final version). The remaining spread is mostly *variance*, not average strength. 316L and 4130 have the **highest mean scores** but the lowest spread, so they rarely top a six-crew table. CFRP and WE43 are high-risk and high-reward. This was kept on purpose, because it is a real engineering lesson about reliability and risk, and the debrief asks students about it directly. In two-crew games the spread narrows to 38–61%.
 
-Decisions matter. In mixed games, "sensible" bots (expected-value reasoning) won 25.2% against 7.1% for always-cautious and 17.7% for always-reckless bots.
+Decisions matter. In mixed games, "sensible" bots (expected-value reasoning) won 25.5% against 6.4% for always-cautious and 18.1% for always-reckless bots.
 
 ---
 

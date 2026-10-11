@@ -35,42 +35,44 @@ Strand A is complete; its numbers are reproducible with `npm run sim`. Strand B 
 | v2 | Payload capacity Ti 4→5, 4130 3→4, 316L 2→3; 316L faster | 36.6% | 22.1% | 16.6% | 10.5% | 11.0% | 3.3% | 36.0–46.0 |
 | v3 | +10 completion bonus; 316L integrity 17, 10 h/leg; CFRP fatigue/galvanic/impact corrected | 34.5% | 23.1% | 17.1% | 10.9% | 9.7% | 4.8% | 37.7–47.6 |
 | v4 | Crate value 5→4 (narrows high-payload upside) | 30.0% | 23.0% | 17.4% | 10.1% | 12.0% | 7.4% | 34.8–44.5 |
-| **v5 (final)** | Ti 9→8.5 h/leg | **29.9%** | **21.0%** | **16.0%** | **13.5%** | **11.6%** | **7.9%** | **34.8–44.8** |
+| v5 | Ti 9→8.5 h/leg | 29.9% | 21.0% | 16.0% | 13.5% | 11.6% | 7.9% | 34.8–44.8 |
+| **v6 (final)** | Structural Engineer's *Redundant load path* made automatic (no checkbox) | **31.1%** | **21.5%** | **15.9%** | **12.9%** | **10.9%** | **7.5%** | **36.1–45.4** |
 
-Fair share for 6 crews is 16.7%. Versions v0–v4 used 1,500–2,000 games each; v5 used 20,000.
+Fair share for 6 crews is 16.7%. Versions v0–v4 used 1,500–2,000 games each; v5 and v6 used 20,000.
 
 **What the tuning taught us**
 - In v0 the schedule bonus (1 pt/h) was the biggest score difference between light and heavy frames. Speed was over-rewarded compared with survival.
-- Mean score and win rate are different things. 316L and 4130 finish with the **highest mean scores** (44–45) but the **lowest spread** (SD 8–10 vs 23 for CFRP and WE43). In a six-way contest, the top score usually comes from a high-variance frame that got lucky. More payload for steels would have fixed this numerically, but it would break the core physical trade-off (heavier structure → less payload). So we kept it and turned it into a discussion question.
+- Mean score and win rate are different things. 316L and 4130 finish with the **highest mean scores** (44–45) but the **lowest spread** (SD 8–10 vs 22–23 for CFRP and WE43). In a six-way contest, the top score usually comes from a high-variance frame that got lucky. More payload for steels would have fixed this numerically, but it would break the core physical trade-off (heavier structure → less payload). So we kept it and turned it into a discussion question.
+- v6 made the Structural Engineer's once-per-game save trigger automatically on the first Failure, instead of needing a checkbox ticked before the roll. Its six-crew win rate rose from 13.0% (weakest role) to 20.6% (strongest), because a pre-roll choice is easy to waste: you have to guess which roll will fail. All six roles now sit between 12.7% and 20.6%, and every frame shifted by less than 1.5 points.
 - The material modifiers were mostly right first time. The imbalance came from **scoring weights**. Material fidelity and game balance can be tuned largely independently.
 
-### A.3 Final results (v5)
+### A.3 Final results (v6)
 
-**Six crews** — 20,000 games · 34.7 turns per game · 7.6% ties
+**Six crews** — 20,000 games · 34.8 turns per game · 8.1% ties
 
 | Frame | Win rate | Survival | Mean score | Crates delivered | Mean hours | Score SD |
 |---|---|---|---|---|---|---|
-| Ti-6Al-4V | 13.5% | 83.7% | 41.2 | 3.63 | 51.5 | 17.6 |
-| Al 7075 | 21.0% | 83.4% | 42.3 | 3.58 | 51.7 | 18.7 |
-| 316L | 7.9% | 99.1% | 44.2 | 2.23 | 58.2 | 8.4 |
-| CFRP | 29.9% | 72.5% | 39.8 | 3.88 | 47.9 | 22.8 |
-| Mg WE43 | 16.0% | 67.1% | 34.8 | 2.90 | 43.8 | 22.9 |
-| 4130 | 11.6% | 97.0% | 44.8 | 3.17 | 62.3 | 10.4 |
+| Ti-6Al-4V | 12.9% | 85.7% | 42.2 | 3.73 | 51.6 | 16.9 |
+| Al 7075 | 21.5% | 85.1% | 43.4 | 3.67 | 51.8 | 18.1 |
+| 316L | 7.5% | 99.2% | 44.9 | 2.28 | 58.0 | 8.2 |
+| CFRP | 31.1% | 75.2% | 41.4 | 4.03 | 47.7 | 22.3 |
+| Mg WE43 | 15.9% | 69.3% | 36.1 | 3.00 | 43.9 | 22.7 |
+| 4130 | 10.9% | 97.5% | 45.4 | 3.21 | 62.1 | 10.0 |
 
-**Four crews** (fair share 25%): Ti 22.0% · Al 31.9% · 316L 12.8% · CFRP 39.4% · WE43 23.2% · 4130 18.4%.
+**Four crews** (fair share 25%): Ti 22.0% · Al 32.4% · 316L 12.7% · CFRP 39.7% · WE43 24.1% · 4130 16.8%.
 
-**Two crews** (fair share 50%): Ti 47.2% · Al 57.4% · 316L 38.4% · CFRP 57.6% · WE43 47.0% · 4130 49.0%.
+**Two crews** (fair share 50%): Ti 47.5% · Al 57.6% · 316L 38.1% · CFRP 61.0% · WE43 46.4% · 4130 44.8%.
 
 **Where each frame struggles.** Success % / failure % on the main check of each leg, six-crew batch:
 
 | Frame | L1 strength/stiffness | L2 fatigue | L3 odds | L4 thermal | L5 space | L6 specialist |
 |---|---|---|---|---|---|---|
-| Ti-6Al-4V | 44.6 / 30.1 | 40.7 / 34.8 | 53.8 / 20.5 | 45.8 / 29.5 | 50.9 / 23.9 | 53.5 / 21.2 |
-| Al 7075 | 48.5 / 25.7 | **30.1 / 44.8** | 55.0 / 19.5 | 42.0 / 32.9 | 53.5 / 21.0 | 54.2 / 20.4 |
-| 316L | **30.8 / 44.3** | 42.9 / 32.2 | 53.3 / 21.5 | 49.1 / 25.7 | 51.1 / 23.8 | 53.0 / 22.6 |
-| CFRP | **55.2 / 20.3** | 38.8 / 36.4 | 56.9 / 18.4 | 44.0 / 30.9 | **43.2 / 31.8** | 53.6 / 21.5 |
-| Mg WE43 | 47.3 / 27.5 | 37.3 / 38.1 | 55.9 / 19.4 | 44.4 / 30.6 | 45.6 / 29.6 | 54.6 / 20.4 |
-| 4130 | 34.2 / 41.1 | 41.9 / 32.9 | 53.6 / 21.5 | **50.0 / 25.1** | 44.4 / 30.8 | 55.0 / 19.9 |
+| Ti-6Al-4V | 45.8 / 25.2 | 40.1 / 30.0 | 54.1 / 19.2 | 44.7 / 28.3 | 50.1 / 23.9 | 52.5 / 21.6 |
+| Al 7075 | 48.8 / 23.2 | **29.8 / 38.4** | 56.2 / 18.4 | 41.4 / 31.5 | 53.0 / 20.7 | 54.7 / 20.2 |
+| 316L | **31.4 / 37.7** | 42.4 / 28.6 | 53.2 / 20.1 | 49.6 / 24.1 | 50.9 / 23.2 | 53.4 / 20.7 |
+| CFRP | **55.4 / 17.5** | 38.8 / 30.4 | 56.2 / 17.3 | 43.2 / 29.0 | **42.2 / 30.8** | 54.1 / 20.7 |
+| Mg WE43 | 47.9 / 23.8 | 36.8 / 32.7 | 55.5 / 18.1 | 43.4 / 29.2 | 44.3 / 28.3 | 54.7 / 20.0 |
+| 4130 | 33.8 / 35.5 | 42.0 / 28.9 | 54.2 / 19.7 | **49.4 / 23.5** | 42.8 / 30.4 | 54.7 / 19.8 |
 
 Legs 3 and 6 are flat across materials, as the brief requires. On the material legs, raw success rates differ less than the modifiers suggest. Bots with weak frames choose *Play it safe* (slower) and bots with strong frames choose *Push hard* (faster). Material advantage therefore shows up as **time and risk**, not only as success rate. That matches how engineers actually use a margin.
 
@@ -78,12 +80,12 @@ Legs 3 and 6 are flat across materials, as the brief requires. On the material l
 
 | Frame | Route A | Route B | Reading |
 |---|---|---|---|
-| Ti-6Al-4V | Mill-annealed 13.0% / 83.9% | β-annealed 14.0% / 83.6% | Evenly matched: initiation resistance vs growth resistance |
-| Al 7075 | T6 20.9% / 81.2% | T73 21.1% / **85.6%** | Over-aged temper's SCC and toughness benefits pay for its strength loss |
-| 316L | Annealed **9.6%** / 99.4% | Cold-worked 6.2% / 98.7% | Extra strength is lost to heat and corrosion |
-| CFRP | Epoxy **31.5%** / 75.6% | Cyanate ester 28.3% / 69.3% | Space-grade matrix helps Legs 4–5 but costs impact toughness on a mixed mission |
-| WE43 | Cast T6 15.3% / 66.0% | Extruded 16.7% / 68.2% | Fine grains (Hall–Petch) slightly ahead |
-| 4130 | Normalised **13.1%** / 98.4% | Q&T 10.0% / 95.6% | Repairability and toughness beat peak strength |
+| Ti-6Al-4V | Mill-annealed 12.6% / 85.4% | β-annealed 13.3% / 86.1% | Evenly matched: initiation resistance vs growth resistance |
+| Al 7075 | T6 21.1% / 83.2% | T73 22.0% / **87.0%** | Over-aged temper's SCC and toughness benefits pay for its strength loss |
+| 316L | Annealed **9.4%** / 99.6% | Cold-worked 5.7% / 98.8% | Extra strength is lost to heat and corrosion |
+| CFRP | Epoxy **33.0%** / 77.7% | Cyanate ester 29.3% / 72.7% | Space-grade matrix helps Legs 4–5 but costs impact toughness on a mixed mission |
+| WE43 | Cast T6 15.1% / 67.7% | Extruded 16.7% / 70.9% | Fine grains (Hall–Petch) slightly ahead |
+| 4130 | Normalised **12.1%** / 98.8% | Q&T 9.7% / 96.2% | Repairability and toughness beat peak strength |
 
 Across the frames, the *peak-strength* processing route rarely wins. Damage tolerance, repairability and environmental resistance matter over a whole mission — the same reasoning behind T73/T7351 tempers and normalised tube frames in practice.
 
@@ -91,25 +93,25 @@ Across the frames, the *peak-strength* processing route rarely wins. Damage tole
 
 | Cause | Share of crews |
 |---|---|
-| Fast fracture from a growing fatigue crack | 3.9% (largest single cause) |
-| Cold soak (DBTT) | 1.3% |
-| Engine-bay fire | 1.1% |
-| Outgassing & cold welding | 1.1% |
+| Fast fracture from a growing fatigue crack | 3.4% (largest single cause) |
+| Cold soak (DBTT) | 1.1% |
+| Engine-bay fire | 1.0% |
 | Atomic oxygen | 1.0% |
-| Micrometeoroid | 1.0% |
+| Micrometeoroid | 0.9% |
+| Outgassing & cold welding | 0.9% |
 
 **Does decision-making matter?** Mixed games with 6 crews: 2 reckless, 2 cautious and 2 sensible, in random seats.
 
 | Policy | Win rate | Survival | Mean score |
 |---|---|---|---|
-| Sensible | **25.2%** | 84.3% | 41.3 |
-| Reckless | 17.7% | 74.9% | 35.8 |
-| Cautious | 7.1% | 97.0% | 41.8 |
+| Sensible | **25.5%** | 85.6% | 42.3 |
+| Reckless | 18.1% | 77.6% | 37.5 |
+| Cautious | 6.4% | 97.3% | 42.2 |
 
 Good decisions beat both extremes, so the game rewards thought rather than only luck.
 
 ### A.4 Game length
-Turns per game are 11.6 (2 crews), 23.1 (4 crews) and 34.7 (6 crews). At 20–30 s per turn, plus about 2 minutes of set-up:
+Turns per game are 11.6 (2 crews), 23.2 (4 crews) and 34.8 (6 crews). At 20–30 s per turn, plus about 2 minutes of set-up:
 
 | Crews | Estimated length |
 |---|---|
