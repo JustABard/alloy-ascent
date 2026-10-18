@@ -2,23 +2,22 @@
 import assert from 'node:assert/strict';
 import { act, createGame, odds, tierOf, computeCheck, crewStats, approachesFor, specialAvailable, matchSummary } from '../web/js/engine.js';
 import { MATERIALS, MATERIAL_ORDER, ROLE_ORDER, CARDS, LEGS, cardById } from '../web/js/data.js';
-import { QUESTIONS, ROLE_QUESTIONS } from '../web/js/questions.js';
 
 let seed = 7;
 const rng = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
 let passed = 0;
 const test = (name, fn) => { fn(); passed++; console.log(`✓ ${name}`); };
 
-test('odds always sum to 1 and respect natural 1/20', () => {
-  for (let tot = -10; tot <= 15; tot++) for (let dc = 5; dc <= 20; dc++) {
+test('only Success or Failure; odds sum to 1 and respect natural 1/20', () => {
+  for (let tot = -10; tot <= 15; tot++) for (let dc = 0; dc <= 20; dc++) {
     const o = odds(tot, dc);
-    assert.ok(Math.abs(o.success + o.partial + o.fail - 1) < 1e-9);
-    assert.ok(o.success >= 0.05 && o.fail >= 0.05 || o.partial > 0 || tot > 15);
+    assert.ok(Math.abs(o.success + o.fail - 1) < 1e-9);
+    assert.ok(o.success >= 0.05 && o.fail >= 0.05);
   }
   assert.equal(tierOf(20, -50, 30), 'success');
   assert.equal(tierOf(1, 50, 2), 'fail');
-  assert.equal(tierOf(10, 0, 11), 'partial');
-  assert.equal(tierOf(5, 0, 11), 'fail');
+  assert.equal(tierOf(6, 0, 6), 'success');
+  assert.equal(tierOf(5, 0, 6), 'fail');
 });
 
 test('every card has a modifier and a reason for every material', () => {
@@ -39,14 +38,40 @@ test('legs 3 and 6 carry no material modifiers; 1,2,4,5 do', () => {
   }
 });
 
-test('questions are well-formed', () => {
-  for (const q of [...Object.values(QUESTIONS), ...Object.values(ROLE_QUESTIONS).flat()]) {
-    assert.ok(q.options.length >= 3);
-    assert.ok(q.answer >= 0 && q.answer < q.options.length);
-    assert.ok(q.explain.length > 5);
+function playThrough(settings, pick) {
+  let s = createGame({ mode: 'local', settings });
+  const ctx = { now: 0, rng, actor: 'local' };
+  ROLE_ORDER.forEach((r, i) => {
+    s = act(s, { type: 'addCrew', id: `c${i}` }, ctx);
+    s = act(s, { type: 'configCrew', crewId: `c${i}`, patch: { material: MATERIAL_ORDER[i], role: r } }, ctx);
+  });
+  s = act(s, { type: 'start', force: true }, ctx);
+  let guard = 0;
+  while (s.phase === 'play' && guard++ < 400) {
+    const t = s.turn;
+    if (t.step === 'handover') { s = act(s, { type: 'ready', seq: t.seq }, ctx); continue; }
+    if (t.step === 'event') { pick(s, t); s = act(s, { type: 'roll', approach: approachesFor(cardById(t.card), s.crews[t.crewIdx])[0].id, seq: t.seq }, ctx); continue; }
+    s = act(s, { type: 'end', seq: t.seq }, ctx);
   }
-  for (const L of [1, 2, 3, 4, 5]) assert.ok(Object.values(QUESTIONS).filter(q => q.leg === L).length >= 5, `leg ${L} pool`);
-  for (const r of ROLE_ORDER) assert.ok(ROLE_QUESTIONS[r].length >= 2, r);
+  return s;
+}
+
+test('standard route: every crew faces the same fixed event; Leg 6 is Manual Docking', () => {
+  const seen = {};
+  playThrough({}, (s, t) => { (seen[t.leg] ||= new Set()).add(t.card); });
+  for (const L of LEGS) if (seen[L.n]) assert.deepEqual([...seen[L.n]], [L.fixed], `leg ${L.n}`);
+  assert.equal(LEGS[5].fixed, 'dock:pilot');
+  assert.equal(cardById('dock:pilot').title, 'Manual Docking — Guidance Lost');
+});
+
+test('random events: crews draw from the leg decks and Leg 6 follows the role', () => {
+  const seen = {};
+  playThrough({ randomEvents: true }, (s, t) => {
+    (seen[t.leg] ||= []).push(t.card);
+    if (t.leg === 6) assert.equal(t.card, `dock:${s.crews[t.crewIdx].role}`);
+    else assert.ok(LEGS[t.leg - 1].cards.includes(t.card));
+  });
+  assert.ok(Object.entries(seen).some(([L, ids]) => +L < 6 && new Set(ids).size > 1), 'some leg shows more than one event');
 });
 
 test('lighter frames carry more cargo; heavier frames are tougher', () => {
@@ -97,7 +122,7 @@ test('online permissions: only the owner acts, timeouts need an expired deadline
 
 test('a full random pass-and-play game always terminates with consistent scores', () => {
   for (let g = 0; g < 300; g++) {
-    let s = createGame({ mode: 'local' });
+    let s = createGame({ mode: 'local', settings: { randomEvents: g % 2 === 1 } });
     const ctx = { now: 0, rng, actor: 'local' };
     const n = 2 + Math.floor(rng() * 5);
     for (let i = 0; i < n; i++) s = act(s, { type: 'addCrew', id: `c${i}` }, ctx);
@@ -108,7 +133,6 @@ test('a full random pass-and-play game always terminates with consistent scores'
       if (t.step === 'handover') { s = act(s, { type: 'ready', seq: t.seq }, ctx); continue; }
       if (t.step === 'event') {
         const crew = s.crews[t.crewIdx];
-        if (t.q && rng() < 0.5) s = act(s, { type: 'answer', choice: 0, seq: t.seq }, ctx);
         const ap = approachesFor(cardById(t.card), crew).filter(a => !a.special || specialAvailable(a, crew));
         const a = ap[Math.floor(rng() * ap.length)];
         s = act(s, { type: 'roll', approach: a.id, jettison: rng() < 0.1, ability: rng() < 0.3, seq: t.seq }, ctx);

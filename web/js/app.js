@@ -2,7 +2,6 @@
 // all clicks go through one delegated handler (data-act attributes).
 import * as E from './engine.js';
 import { CONFIG, MATERIALS, MATERIAL_ORDER, ROLES, ROLE_ORDER, LEGS, CONDITIONS, TAGS, CARDS, cardById } from './data.js';
-import { questionById } from './questions.js';
 import { CODEX, CARGO_TEXT, SCORING, GLOSSARY, DISCUSSION, SOURCES } from './content.js';
 import { TUTORIAL } from './tutorial.js';
 import * as Net from './net.js';
@@ -127,8 +126,8 @@ function bars(r) {
   return `<div class="bars">${rows.map(([k, v]) => `<div class="bar-row"><span>${k}</span><i>${'<b></b>'.repeat(v)}${'<b class="off"></b>'.repeat(5 - v)}</i></div>`).join('')}</div>`;
 }
 function oddsBar(o, compact = false) {
-  return `<div class="odds ${compact ? 'compact' : ''}"><div class="ob s" style="flex:${o.success}"></div><div class="ob p" style="flex:${o.partial}"></div><div class="ob f" style="flex:${o.fail}"></div></div>
-  <div class="odds-l"><span class="s">✓ ${pct(o.success)}</span><span class="p">~ ${pct(o.partial)}</span><span class="f">✗ ${pct(o.fail)}</span></div>`;
+  return `<div class="odds ${compact ? 'compact' : ''}"><div class="ob s" style="flex:${o.success}"></div><div class="ob f" style="flex:${o.fail}"></div></div>
+  <div class="odds-l"><span class="s">✓ ${pct(o.success)}</span><span class="f">✗ ${pct(o.fail)}</span></div>`;
 }
 function tagChips(tags) { return tags.filter(t => t !== 'luck').map(t => `<span class="tag">${TAGS[t].icon} ${TAGS[t].name}</span>`).join(''); }
 function condChips(crew) {
@@ -260,7 +259,7 @@ function lobbyScreen(s) {
       <div class="panel settings">
         <h3>Mission settings ${host ? '' : '<span class="muted small">(host)</span>'}</h3>
         <label class="tog"><input type="checkbox" data-set="uniqueFrames" ${s.settings.uniqueFrames ? 'checked' : ''} ${host ? '' : 'disabled'}> One crew per frame material</label>
-        <label class="tog"><input type="checkbox" data-set="questions" ${s.settings.questions ? 'checked' : ''} ${host ? '' : 'disabled'}> Briefing questions (+1 for a right answer)</label>
+        <label class="tog"><input type="checkbox" data-set="randomEvents" ${s.settings.randomEvents ? 'checked' : ''} ${host ? '' : 'disabled'}> Random events (each crew draws its own event card per leg; Leg 6 is a crisis for its role)</label>
         <label class="tog"><input type="checkbox" data-set="shareResults" ${s.settings.shareResults ? 'checked' : ''} ${host ? '' : 'disabled'}> Share anonymous results for playtest data</label>
         <label class="sel">Control window per crew
           <select data-set="timer" ${host ? '' : 'disabled'}>${[[0, 'Off (untimed)'], [45, '45 s'], [60, '60 s (standard)'], [90, '90 s']].map(([v, l]) => `<option value="${v}" ${+s.settings.timer === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -381,7 +380,7 @@ function rosterCard(s, c, i) {
     <div class="rc-sub">${esc(M.short)} · ${esc(E.procOf(c).name)}</div>
     ${c.lost ? `<div class="lost-tag">Lost on leg ${c.lostLeg} — ${esc(c.lostCause)}</div>` : `
     <div class="hp"><i style="width:${(100 * c.integrity / st.maxIntegrity).toFixed(0)}%"></i><span>${c.integrity}/${st.maxIntegrity}</span></div>
-    <div class="rc-stats"><span title="Cargo crates">▣ ${c.cargo}</span><span title="Spare parts">⚙ ${c.spares}</span><span title="Hours flown">◷ ${hrs(c.time)}</span><span title="Correct briefing answers">✎ ${c.insight}</span></div>
+    <div class="rc-stats"><span title="Cargo crates">▣ ${c.cargo}</span><span title="Spare parts">⚙ ${c.spares}</span><span title="Hours flown">◷ ${hrs(c.time)}</span></div>
     ${condChips(c)}`}
   </div>`;
 }
@@ -399,7 +398,7 @@ function turnPanel(s, t, crew) {
   const ev = `<article class="event" style="--mc:${M.color}">
     <div class="ev-tags"><span class="ev-leg">Leg ${t.leg} · ${esc(LEGS[t.leg - 1].topic)}</span>${tagChips(card.tags)}</div>
     <h2>${esc(card.title)}</h2><p>${esc(card.text)}</p></article>`;
-  if (t.step === 'event') return `<div class="turn">${head}${notes}${ev}${briefing(t, crew, mine)}${choices(s, t, crew, card, mine)}</div>`;
+  if (t.step === 'event') return `<div class="turn">${head}${notes}${ev}${choices(s, t, crew, card, mine)}</div>`;
   return `<div class="turn">${head}${notes}${ev}${resultBlock(s, t, crew, card)}${hangarBlock(s, t, crew, mine)}</div>`;
 }
 
@@ -415,19 +414,6 @@ function handoverPanel(s, t, crew) {
     <button class="btn primary huge" data-act="ready-turn" data-seq="${t.seq}">I’m ready — start our ${s.settings.timer ? `${s.settings.timer}-second` : ''} turn</button>
     <div class="ho-recent"><h4>Since your last turn</h4><ol>${recent.map(l => `<li class="lg ${l.kind}">${esc(l.text)}</li>`).join('')}</ol></div>
   </div>`;
-}
-
-function briefing(t, crew, mine) {
-  if (!t.q) return '';
-  const Q = questionById(t.q);
-  const leg6 = t.leg === 6;
-  const bonus = leg6 ? CONFIG.specialistQuestionBonus : (ROLES[crew.role].briefingBonus || CONFIG.briefingBonus);
-  if (!t.answer) {
-    return `<section class="brief"><div class="br-h">${leg6 ? 'Specialist question' : 'Engineering briefing'} <span class="pill">${sgn(bonus)} if correct</span></div>
-      <p class="q">${esc(Q.q)}</p><div class="q-opts">${Q.options.map((o, i) => `<button class="qo" data-act="answer" data-i="${i}" data-seq="${t.seq}" ${mine ? '' : 'disabled'}>${String.fromCharCode(65 + i)}. ${esc(o)}</button>`).join('')}</div></section>`;
-  }
-  return `<section class="brief done ${t.answer.correct ? 'right' : 'wrong'}"><div class="br-h">${t.answer.correct ? `✓ Correct — ${sgn(bonus)} on this roll` : '✗ Not quite'}</div>
-    <p class="q">${esc(Q.q)}</p><p class="ans"><b>${esc(Q.options[Q.answer])}</b> — ${esc(Q.explain)}</p></section>`;
 }
 
 function choices(s, t, crew, card, mine) {
@@ -455,7 +441,7 @@ function choices(s, t, crew, card, mine) {
     ${showAbility ? `<label class="tog"><input type="checkbox" data-act="sel-ab" ${sel.ability ? 'checked' : ''} ${mine ? '' : 'disabled'}> Use ${esc(R.ability.name)} (once per game): ${esc(R.ability.desc)}</label>` : ''}
   </div>`;
   const parts = chk.auto ? '<p class="muted">No roll needed.</p>' : `<ul class="mods">${chk.parts.map(p => `<li class="m-${p.kind}"><span class="mv ${p.value > 0 ? 'up' : p.value < 0 ? 'down' : ''}">${sgn(p.value)}</span><span><b>${esc(p.label)}</b>${p.why ? ` <small>${esc(p.why)}</small>` : ''}</span></li>`).join('') || '<li class="muted">No modifiers.</li>'}</ul>
-    <div class="need">Roll d20 ${sgn(chk.total)} — need <b>${Math.max(2, chk.dc - chk.total)}+</b> to succeed (DC ${chk.dc}); ${Math.max(2, chk.dc - 5 - chk.total)}+ for a partial.</div>`;
+    <div class="need">Roll d20 ${sgn(chk.total)} — need <b>${Math.min(20, Math.max(2, chk.dc - chk.total))}+</b> to succeed (DC ${chk.dc}). Anything lower is a Failure.</div>`;
   return `<section class="choose"><h3>Choose your approach</h3><div class="apprs">${items}</div>${toggles}
     <div class="checkbox"><h4>Your odds</h4>${parts}${chk.auto ? '' : oddsBar(chk.odds)}</div>
     ${mine ? `<button class="btn primary huge roll-btn" data-act="roll" data-seq="${t.seq}">${chk.auto ? 'Confirm choice' : `${d20svg('', 'tiny')} Roll the d20`}</button>` : `<p class="waiting">Waiting for ${esc(crew.name)} to decide…</p>`}
@@ -465,13 +451,13 @@ function choices(s, t, crew, card, mine) {
 function fxSummary(fx) {
   const word = (list) => (list || []).map(e => e.dmg ? `−${e.dmg} integrity` : e.time ? `${e.time > 0 ? '+' : '−'}${Math.abs(e.time)} h` : e.spare ? `+${e.spare} spare` : e.pts ? `+${e.pts} pts` : e.crate ? '−1 crate' : '').filter(Boolean).join(', ') || 'no effect';
   if (fx.auto) return `Result: ${word(fx.auto)}`;
-  return `✓ ${word(fx.success)} · ~ ${word(fx.partial)} · ✗ ${word(fx.fail)}`;
+  return `✓ ${word(fx.success)} · ✗ ${word(fx.fail)}`;
 }
 
 function resultBlock(s, t, crew, card) {
   const r = t.roll;
   if (!r) return '';
-  const tierName = { success: 'Success', partial: 'Partial success', fail: 'Failure', auto: 'Decision made' }[r.tier];
+  const tierName = { success: 'Success', fail: 'Failure', auto: 'Decision made' }[r.tier];
   return `<section class="result tier-${r.tier}">
     <div class="res-top">${r.d ? d20svg(r.d, `res-d ${r.d === 20 ? 'crit' : r.d === 1 ? 'fumble' : ''}`) : ''}
       <div><div class="res-tier">${tierName}${r.timedOut ? ' <span class="pill">autopilot — time ran out</span>' : ''}</div>
@@ -484,7 +470,7 @@ function resultBlock(s, t, crew, card) {
 }
 
 function hangarBlock(s, t, crew, mine) {
-  if (crew.lost) return `<section class="hangar lost"><h3>Craft lost</h3><p>${esc(crew.lostCause)}. The crew ejected safely — they keep any insight and bonus points.</p>${mine ? `<button class="btn primary big" data-act="end" data-seq="${t.seq}">End turn</button>` : ''}</section>`;
+  if (crew.lost) return `<section class="hangar lost"><h3>Craft lost</h3><p>${esc(crew.lostCause)}. The crew ejected safely — they keep any event points.</p>${mine ? `<button class="btn primary big" data-act="end" data-seq="${t.seq}">End turn</button>` : ''}</section>`;
   if (t.step === 'hangarDone') {
     const h = t.hangar;
     return `<section class="hangar"><h3>Hangar stop</h3>
@@ -568,7 +554,7 @@ function resultsScreen(s) {
   const rows = [...R.rows].sort((a, b) => a.rank - b.rank);
   const crewOf = (id) => s.crews.find(c => c.id === id);
   const win = crewOf(R.winner);
-  const cols = [['Cargo', 'cargoPts'], ['Integrity', 'integrityPts'], ['Complete', 'completePts'], ['Schedule', 'timePts'], ['Budget', 'budgetPts'], ['Spares', 'sparePts'], ['Insight', 'insightPts'], ['Events', 'bonusPts'], ['Green', 'greenPts']];
+  const cols = [['Cargo', 'cargoPts'], ['Integrity', 'integrityPts'], ['Complete', 'completePts'], ['Schedule', 'timePts'], ['Budget', 'budgetPts'], ['Spares', 'sparePts'], ['Events', 'bonusPts'], ['Green', 'greenPts']];
   const mins = Math.round(R.durationMs / 60000);
   return `${topbar(`<div class="legbar"><b>Mission debrief</b><span class="muted">${mins} min · ${s.crews.length} crews</span></div>`)}
   <main class="results">
@@ -580,7 +566,7 @@ function resultsScreen(s) {
     <section class="panel"><h3>Scoreboard</h3><div class="tablewrap"><table class="score">
       <thead><tr><th>#</th><th>Crew</th>${cols.map(c => `<th>${c[0]}</th>`).join('')}<th>Total</th></tr></thead>
       <tbody>${rows.map(r => { const c = crewOf(r.crewId); return `<tr class="${c.lost ? 'lost' : ''}"><td>${r.rank}</td><td class="sc-crew">${matBadge(c.material, 'sm')} <b>${esc(c.name)}</b><small>${esc(MATERIALS[c.material].short)} ${esc(E.procOf(c).name)} · ${esc(ROLES[c.role].name)}</small></td>${cols.map(([, k]) => `<td>${r[k]}</td>`).join('')}<td class="tot">${r.total}</td></tr>`; }).join('')}</tbody></table></div>
-      <p class="muted small">Lost craft score only insight and event points. Scoring rules: <button class="link small" data-act="codex" data-tab="scoring">see the Codex</button>.</p></section>
+      <p class="muted small">Lost craft score only event points. Scoring rules: <button class="link small" data-act="codex" data-tab="scoring">see the Codex</button>.</p></section>
     <section class="panel"><h3>Each crew’s journey</h3><div class="journeys">${s.crews.map(c => journey(c)).join('')}</div></section>
     <section class="panel"><h3>Cost & environment — the life-cycle view</h3>${lifeCycle(s)}</section>
     <section class="panel"><h3>Discuss</h3><ol class="discuss">${DISCUSSION.map(d => `<li>${esc(d)}</li>`).join('')}</ol></section>
@@ -601,7 +587,7 @@ function journey(c) {
     const h = c.history.find(x => x.leg === L && x.tier !== 'lost');
     const lostHere = c.lost && c.lostLeg === L;
     const tier = h ? h.tier : lostHere ? 'lost' : 'none';
-    const sym = { success: '✓', partial: '~', fail: '✗', auto: '•', lost: '☠', none: '·' }[tier];
+    const sym = { success: '✓', fail: '✗', auto: '•', lost: '☠', none: '·' }[tier];
     return `<span class="jl t-${tier}" title="Leg ${L}${h ? `: ${esc(h.title)} — ${tier}` : ''}">${sym}</span>`;
   }).join('');
   const lessons = [];
@@ -657,11 +643,8 @@ function legIntro(n) {
   const L = LEGS[n - 1];
   return `<div class="modal leg-modal">
     <div class="leg-map">${routeSVG(S.state, { labels: true })}</div>
-    <p class="eyebrow">Leg ${n} of 6 · ${esc(L.place)}</p>
+    <p class="eyebrow">Leg ${n} of 6</p>
     <h2 class="h-display">${esc(L.name)}</h2>
-    <p class="leg-topic">${esc(L.topic)}${L.kind === 'luck' ? ' — no material modifiers' : L.kind === 'specialist' ? ' — your role decides it' : ''}</p>
-    <p>${esc(L.intro)}</p>
-    <div class="watch">${L.watch.map(w => `<span class="tag">${esc(w)}</span>`).join('')}</div>
     <button class="btn primary big" data-act="close">Begin leg ${n}</button>
   </div>`;
 }
@@ -673,9 +656,9 @@ function codexView() {
   if (tab === 'materials') body = codexMaterial(S.ui.codexMat);
   else if (tab === 'compare') body = codexCompare();
   else if (tab === 'roles') body = `<div class="role-grid static">${ROLE_ORDER.map(r => { const R = ROLES[r]; return `<div class="role"><span class="role-big">${R.icon}</span><b>${esc(R.name)}</b><small>Home: ${esc(R.home)}</small><p>${esc(R.summary)}</p><p class="ab"><i>Ability:</i> ${esc(R.ability.name)} — ${esc(R.ability.desc)}</p></div>`; }).join('')}</div>
-    <p class="muted">Leg 6 is specialist-focused: every crew faces a docking crisis written for its own role, gets +${CONFIG.specialistBonus} for its speciality and +${CONFIG.specialistQuestionBonus} for answering its specialist question.</p>`;
+    <p class="muted">Leg 6 is specialist-focused. On the standard route every crew hand-flies Manual Docking, where a Test Pilot gets +${CONFIG.specialistBonus}. With random events on, every crew faces a docking crisis written for its own role and gets +${CONFIG.specialistBonus} for its speciality.</p>`;
   else if (tab === 'route') body = LEGS.map(L => `<div class="route-leg"><h4>Leg ${L.n} · ${esc(L.name)} <span class="muted">— ${esc(L.topic)}</span></h4><p>${esc(L.intro)}</p>
-    ${L.cards ? `<p class="small muted">Event cards: ${L.cards.map(id => esc(CARDS[id].title)).join(' · ')}</p>` : '<p class="small muted">Event cards: one per specialist role.</p>'}</div>`).join('');
+    <p class="small muted">Standard event: <b>${esc(cardById(L.fixed).title)}</b> · With random events: ${L.cards ? L.cards.map(id => esc(CARDS[id].title)).join(' · ') : 'one crisis per specialist role'}</p></div>`).join('');
   else if (tab === 'cargo') body = `<dl class="cargo-dl">${CARGO_TEXT.points.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
     <p>Crates are worth <b>${CONFIG.crateValue} points</b> each. Capacity by frame: ${MATERIAL_ORDER.map(k => `${esc(MATERIALS[k].short)} ${MATERIALS[k].stats.capacity}`).join(' · ')} (Quartermaster +1).</p>`;
   else if (tab === 'scoring') body = `<table class="plain">${SCORING.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</table>
@@ -747,9 +730,9 @@ function rulesText() {
   return `<div class="rules">
   <h4>Goal</h4><p>Fly your crew’s craft from Ironhold Spaceport to Station Meridian across six legs and score the most mission points — mostly by delivering cargo and arriving intact and on time.</p>
   <h4>Setup (per crew)</h4><ol><li>Choose a <b>frame material</b> (one crew per material by default).</li><li>Choose its <b>processing route</b> — this sets the microstructure and shifts some checks.</li><li>Choose a <b>specialist role</b>.</li><li>Load <b>cargo</b> (0 to capacity). More cargo = more points, but heavier, slower and harder checks.</li></ol>
-  <h4>A turn (one-minute control window)</h4><ol><li>Start-of-turn effects: cracks grow, corrosion bites.</li><li>Draw the leg’s event card. Optionally answer the briefing question (+1 if right).</li><li>Choose an approach: <b>Standard</b>, <b>Push hard</b> (+3 DC, −3 h, failure +1 damage), <b>Play it safe</b> (−3 DC, +3 h), or a ★ material/role special if your frame allows it. Optionally jettison a crate (+3) or use your once-per-game ability.</li><li>Roll d20 + modifiers vs the DC. Total ≥ DC: <b>Success</b>. Within 5 below: <b>Partial</b>. Lower: <b>Failure</b>. A natural 20 always succeeds; a natural 1 always fails. Odds are shown before you roll.</li><li>Apply the outcome: damage, time, lost crates, conditions.</li><li>Optional <b>hangar stop</b>: inspect for hidden damage (+1 h), then spend a spare on one repair (+2 h; roll d20 + repair modifier ≥ 10).</li></ol>
+  <h4>A turn (one-minute control window)</h4><ol><li>Start-of-turn effects: cracks grow, corrosion bites.</li><li>Face the leg’s event: the same event for every crew on the standard route, or a random card per crew with random events on.</li><li>Choose an approach: <b>Standard</b>, <b>Push hard</b> (+3 DC, −3 h, failure +1 damage), <b>Play it safe</b> (−3 DC, +3 h), or a ★ material/role special if your frame allows it. Optionally jettison a crate (+3) or use your once-per-game ability.</li><li>Roll d20 + modifiers vs the DC. Total ≥ DC: <b>Success</b>. Lower: <b>Failure</b>. A natural 20 always succeeds; a natural 1 always fails. Odds are shown before you roll.</li><li>Apply the outcome: damage, time, lost crates, conditions.</li><li>Optional <b>hangar stop</b>: inspect for hidden damage (+1 h), then spend a spare on one repair (+2 h; roll d20 + repair modifier ≥ 10).</li></ol>
   <p>If the timer runs out, the autopilot flies the standard (or no-roll) option and control passes on.</p>
-  <h4>The legs</h4><p>1 Specific strength & stiffness · 2 Fatigue · 3 Probability (no material modifiers) · 4 Thermal · 5 Vacuum & space · 6 Specialist docking (your role decides it).</p>
+  <h4>The legs</h4><p>1 Specific strength & stiffness · 2 Fatigue · 3 Probability (no material modifiers) · 4 Thermal · 5 Vacuum & space · 6 Docking (Manual Docking on the standard route; with random events, a crisis for your role).</p>
   <h4>Damage</h4><p>Integrity 0 = craft lost (crew ejects safely). Conditions persist: fatigue cracks grow one stage per leg and fast-fracture (−5) beyond your material’s critical crack stage; corrosion costs 1 integrity per leg; heat can permanently over-age or soften a microstructure (only a Metallurgist’s field heat treatment fixes that). Some damage is hidden until inspected.</p>
   <h4>Scoring</h4><table class="plain">${SCORING.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</table></div>`;
 }
@@ -808,7 +791,7 @@ let diceTimer = null;
 function showDice(r, crew) {
   const el = document.getElementById('dice');
   clearTimeout(diceTimer);
-  const tierName = { success: 'SUCCESS', partial: 'PARTIAL', fail: r.repair ? 'REPAIR FAILED' : 'FAILURE' }[r.tier] || '';
+  const tierName = { success: 'SUCCESS', fail: r.repair ? 'REPAIR FAILED' : 'FAILURE' }[r.tier] || '';
   el.className = 'show rolling';
   el.innerHTML = `<div class="dice-card" style="--mc:${MATERIALS[crew.material].color}"><div class="dc-who">${esc(crew.name)}${r.repair ? ` · ${esc(r.label)}` : ''}</div>${d20svg('?', 'big-d')}<div class="dc-tier"></div><div class="dc-math"></div></div>`;
   const numEl = el.querySelector('.d20-n');
@@ -928,8 +911,8 @@ function download(name, text, type) {
 function csvOf(rows) { return rows.map(r => r.map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\n'); }
 function resultsCSV(s) {
   const sum = E.matchSummary(s);
-  const head = ['crew', 'material', 'processing', 'role', 'cargo_start', 'cargo_end', 'integrity', 'hours', 'lost', 'lost_leg', 'lost_cause', 'insight', 'answered', 'repairs', 'jettisoned', 'score', 'rank', 'cargo_pts', 'integrity_pts', 'complete_pts', 'time_pts', 'budget_pts', 'spare_pts', 'insight_pts', 'event_pts', 'green_pts', 'leg1', 'leg2', 'leg3', 'leg4', 'leg5', 'leg6'];
-  const rows = sum.crews.map((c, i) => [s.crews[i].name, c.material, c.processing, c.role, c.cargoStart, c.cargoEnd, c.integrity, c.time, c.lost, c.lostLeg, c.lostCause, c.insight, c.answered, c.repairs, c.jettisoned, c.score, c.rank, c.breakdown.cargo, c.breakdown.integrity, c.breakdown.complete, c.breakdown.time, c.breakdown.budget, c.breakdown.spares, c.breakdown.insight, c.breakdown.bonus, c.breakdown.green,
+  const head = ['crew', 'material', 'processing', 'role', 'cargo_start', 'cargo_end', 'integrity', 'hours', 'lost', 'lost_leg', 'lost_cause', 'repairs', 'jettisoned', 'score', 'rank', 'cargo_pts', 'integrity_pts', 'complete_pts', 'time_pts', 'budget_pts', 'spare_pts', 'event_pts', 'green_pts', 'leg1', 'leg2', 'leg3', 'leg4', 'leg5', 'leg6'];
+  const rows = sum.crews.map((c, i) => [s.crews[i].name, c.material, c.processing, c.role, c.cargoStart, c.cargoEnd, c.integrity, c.time, c.lost, c.lostLeg, c.lostCause, c.repairs, c.jettisoned, c.score, c.rank, c.breakdown.cargo, c.breakdown.integrity, c.breakdown.complete, c.breakdown.time, c.breakdown.budget, c.breakdown.spares, c.breakdown.bonus, c.breakdown.green,
     ...[1, 2, 3, 4, 5, 6].map(L => { const h = c.history.find(x => x.leg === L); return h ? `${h.card}:${h.tier}${h.timedOut ? ':timeout' : ''}` : ''; })]);
   return csvOf([head, ...rows]);
 }
@@ -1021,7 +1004,6 @@ document.addEventListener('click', async (ev) => {
     case 'pause': dispatch({ type: 'pause' }); break;
     case 'resume': dispatch({ type: 'resume' }); break;
     case 'ready-turn': dispatch({ type: 'ready', seq: +el.dataset.seq }); break;
-    case 'answer': dispatch({ type: 'answer', choice: +el.dataset.i, seq: +el.dataset.seq }); break;
     case 'sel-appr': S.ui.sel.approach = el.dataset.id; render(); break;
     case 'roll': { const sel = S.ui.sel; dispatch({ type: 'roll', approach: sel.approach, jettison: sel.jettison, ability: sel.ability, seq: +el.dataset.seq }); break; }
     case 'hangar': dispatch({ type: 'hangar', option: el.dataset.opt, seq: +el.dataset.seq }); break;

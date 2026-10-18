@@ -6,7 +6,6 @@
 //
 import { act, computeCheck, approachesFor, specialAvailable, hangarOptions, crewStats, abilityApplies, matchSummary } from '../web/js/engine.js';
 import { MATERIALS, MATERIAL_ORDER, ROLE_ORDER, cardById, CONFIG } from '../web/js/data.js';
-import { questionById } from '../web/js/questions.js';
 import { writeFileSync, mkdirSync } from 'node:fs';
 
 const args = process.argv.slice(2);
@@ -26,11 +25,11 @@ function mulberry32(a) {
 
 const POLICIES = {
   // Sensible player: weighs expected damage vs time, protects integrity when low.
-  sensible: { name: 'sensible', answerAcc: 0.7 },
+  sensible: { name: 'sensible' },
   // Reckless player: always pushes when allowed.
-  reckless: { name: 'reckless', answerAcc: 0.5 },
+  reckless: { name: 'reckless' },
   // Cautious player: always plays it safe.
-  cautious: { name: 'cautious', answerAcc: 0.7 },
+  cautious: { name: 'cautious' },
 };
 
 function expectedCost(check, crew, card, appr) {
@@ -50,7 +49,7 @@ function expectedCost(check, crew, card, appr) {
     return dmg * frag + time + crates * 5 - pts;
   };
   if (check.auto) return outcomeCost('auto') + (appr.time || 0);
-  return o.success * outcomeCost('success') + o.partial * outcomeCost('partial') + o.fail * outcomeCost('fail') + (appr.time || 0) + (appr.cost?.spare ? 2 : 0) + (appr.cost?.crate ? 5 : 0);
+  return o.success * outcomeCost('success') + o.fail * outcomeCost('fail') + (appr.time || 0) + (appr.cost?.spare ? 2 : 0) + (appr.cost?.crate ? 5 : 0);
 }
 
 function chooseApproach(s, crew, policy) {
@@ -88,9 +87,9 @@ function hangarChoice(s, crew) {
   return null;
 }
 
-function playGame(nCrews, rng, policyFor, cfgFor) {
+function playGame(nCrews, rng, policyFor, cfgFor, randomEvents = false) {
   const ctx = () => ({ now: 0, rng, actor: 'local' });
-  let s = act({ v: 1, mode: 'sim', phase: 'lobby', settings: { uniqueFrames: true, questions: true, timer: 0 }, players: [], crews: [], leg: 0, turn: null, decks: {}, qdecks: {}, log: [], rollSeq: 0, seq: 0, gameNo: 0 }, { type: 'join', player: { id: 'local', name: 'sim' } }, ctx());
+  let s = act({ v: 1, mode: 'sim', phase: 'lobby', settings: { uniqueFrames: true, randomEvents, timer: 0 }, players: [], crews: [], leg: 0, turn: null, decks: {}, log: [], rollSeq: 0, seq: 0, gameNo: 0 }, { type: 'join', player: { id: 'local', name: 'sim' } }, ctx());
   const mats = [...MATERIAL_ORDER].sort(() => rng() - 0.5);
   for (let i = 0; i < nCrews; i++) {
     s = act(s, { type: 'addCrew', id: `c${i}`, name: `Crew ${i + 1}` }, ctx());
@@ -109,12 +108,6 @@ function playGame(nCrews, rng, policyFor, cfgFor) {
     if (t.step === 'handover') { s = act(s, { type: 'ready', seq: t.seq }, ctx()); continue; }
     if (t.step === 'event') {
       turns++;
-      if (t.q && !t.answer) {
-        const Q = questionById(t.q);
-        const right = rng() < pol.answerAcc;
-        const choice = right ? Q.answer : (Q.answer + 1) % Q.options.length;
-        s = act(s, { type: 'answer', choice, seq: t.seq }, ctx());
-      }
       const c = chooseApproach(s, s.crews[t.crewIdx], pol);
       s = act(s, { type: 'roll', approach: c.approach, jettison: c.jettison, ability: c.ability, seq: t.seq }, ctx());
       continue;
@@ -141,13 +134,13 @@ function randomCfg(i, mat, rng) {
   };
 }
 
-function runBatch(label, games, nCrews, policyFor, cfgFor = randomCfg, seed = 1) {
+function runBatch(label, games, nCrews, policyFor, cfgFor = randomCfg, seed = 1, randomEvents = false) {
   const rng = mulberry32(seed);
   const by = (k) => ({});
   const stat = { mat: {}, role: {}, proc: {}, leg: {}, tiers: {}, turns: 0, games: 0, ties: 0, lostLegs: {}, causes: {} };
   const bump = (obj, key, field, v = 1) => { obj[key] ||= {}; obj[key][field] = (obj[key][field] || 0) + v; };
   for (let g = 0; g < games; g++) {
-    const { s, turns } = playGame(nCrews, rng, policyFor, cfgFor);
+    const { s, turns } = playGame(nCrews, rng, policyFor, cfgFor, randomEvents);
     stat.turns += turns; stat.games++;
     const sum = matchSummary(s);
     const top = Math.max(...sum.crews.map(c => c.score));
@@ -165,7 +158,7 @@ function runBatch(label, games, nCrews, policyFor, cfgFor = randomCfg, seed = 1)
       }
       if (c.lost) { bump(stat.lostLegs, c.material, `L${c.lostLeg}`); stat.causes[c.lostCause?.replace(/ \(Leg \d\)/, '')] = (stat.causes[c.lostCause?.replace(/ \(Leg \d\)/, '')] || 0) + 1; }
       for (const h of c.history) {
-        if (!['success', 'partial', 'fail'].includes(h.tier)) continue;
+        if (!['success', 'fail'].includes(h.tier)) continue;
         bump(stat.tiers, `${c.material}|L${h.leg}`, h.tier);
       }
     }
@@ -200,7 +193,7 @@ function report(b) {
   lines.push('');
   lines.push('Mean score breakdown by material:');
   lines.push('');
-  const bks = ['cargo', 'integrity', 'time', 'spares', 'complete', 'budget', 'insight', 'bonus', 'green'];
+  const bks = ['cargo', 'integrity', 'time', 'spares', 'complete', 'budget', 'bonus', 'green'];
   lines.push(table(matRows, [['Material', r => MATERIALS[r.k].short], ...bks.map(k => [k, r => ((r[`b_${k}`] || 0) / r.n).toFixed(1)])]));
   lines.push('');
   const roleRows = ROLE_ORDER.map(k => ({ k, ...b.role[k] })).filter(r => r.n);
@@ -219,7 +212,7 @@ function legMatrix(b) {
     const cells = [1, 2, 3, 4, 5, 6].map(L => {
       const t = b.tiers[`${k}|L${L}`];
       if (!t) return '—';
-      const n = (t.success || 0) + (t.partial || 0) + (t.fail || 0);
+      const n = (t.success || 0) + (t.fail || 0);
       return `${pct((t.success || 0) / n)} / ${pct((t.fail || 0) / n)}`;
     });
     lines.push(`| ${MATERIALS[k].short} | ${cells.join(' | ')} |`);
@@ -239,7 +232,8 @@ function procTable(b) {
 
 const sensible = () => POLICIES.sensible;
 const t0 = Date.now();
-const main6 = runBatch('6 crews · all materials · sensible bots', N, 6, sensible, randomCfg, 11);
+const main6 = runBatch('6 crews · all materials · sensible bots · standard route', N, 6, sensible, randomCfg, 11);
+const rand6 = runBatch('6 crews · all materials · sensible bots · random events', Math.round(N / 2), 6, sensible, randomCfg, 66, true);
 const four = runBatch('4 crews · random materials · sensible bots', Math.round(N / 2), 4, sensible, randomCfg, 22);
 const two = runBatch('2 crews · random materials · sensible bots', Math.round(N / 2), 2, sensible, randomCfg, 33);
 const mixed = runBatch('6 crews · policy mix (2 reckless, 2 cautious, 2 sensible)', Math.round(N / 2), 6,
@@ -279,6 +273,8 @@ md.push('#### Causes of craft loss (6-crew batch)');
 md.push('');
 md.push(Object.entries(main6.causes).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([k, v]) => `- ${k}: ${v} (${pct(v / (main6.games * 6))} of crews)`).join('\n'));
 md.push('');
+md.push(report(rand6));
+md.push('');
 md.push(report(four));
 md.push('');
 md.push(report(two));
@@ -292,6 +288,6 @@ console.log(text);
 if (OUT) {
   mkdirSync(OUT, { recursive: true });
   writeFileSync(`${OUT}/sim-results.md`, text + '\n');
-  writeFileSync(`${OUT}/sim-results.json`, JSON.stringify({ main6, four, two, mixed, polStat }, null, 1));
+  writeFileSync(`${OUT}/sim-results.json`, JSON.stringify({ main6, rand6, four, two, mixed, polStat }, null, 1));
   console.error(`wrote ${OUT}/sim-results.md`);
 }

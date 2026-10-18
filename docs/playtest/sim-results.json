@@ -1,691 +1,1242 @@
 {
  "main6": {
-  "label": "6 crews · all materials · sensible bots",
+  "label": "6 crews · all materials · sensible bots · standard route",
   "games": 20000,
   "nCrews": 6,
   "mat": {
    "ti": {
     "n": 20000,
-    "win": 2589.0333333333338,
-    "survive": 17146,
-    "score": 844520,
-    "cargo": 74583,
-    "time": 1031081.5,
-    "b_cargo": 298332,
-    "b_integrity": 121203,
-    "b_time": 119283,
-    "b_spares": 2564,
-    "b_complete": 171460,
-    "b_budget": 17146,
-    "b_insight": 81602,
-    "b_bonus": 30986,
-    "b_green": 1944,
-    "sq": 41363914
+    "win": 3557.0833333333353,
+    "survive": 18035,
+    "score": 809802,
+    "cargo": 74400,
+    "time": 1022404.5,
+    "b_cargo": 297600,
+    "b_integrity": 144570,
+    "b_time": 128759,
+    "b_spares": 6039,
+    "b_complete": 180350,
+    "b_budget": 18035,
+    "b_bonus": 31935,
+    "b_green": 2514,
+    "sq": 37280844
    },
    "al": {
     "n": 20000,
-    "win": 4309.783333333335,
-    "survive": 17013,
-    "score": 868584,
-    "cargo": 73495,
-    "time": 1035785.5,
-    "b_cargo": 293980,
-    "b_integrity": 110782,
-    "b_time": 109775,
-    "b_spares": 11408,
-    "b_complete": 170130,
-    "b_budget": 51039,
-    "b_insight": 80656,
-    "b_bonus": 31760,
-    "b_green": 9054,
-    "sq": 44262738
+    "win": 3881.916666666669,
+    "survive": 17015,
+    "score": 770093,
+    "cargo": 69582,
+    "time": 1040186.5,
+    "b_cargo": 278328,
+    "b_integrity": 110105,
+    "b_time": 109824,
+    "b_spares": 11332,
+    "b_complete": 170150,
+    "b_budget": 51045,
+    "b_bonus": 31563,
+    "b_green": 7746,
+    "sq": 35845671
    },
    "ss": {
     "n": 20000,
-    "win": 1505.1166666666666,
-    "survive": 19841,
-    "score": 898297,
-    "cargo": 45674,
-    "time": 1160841,
-    "b_cargo": 182696,
-    "b_integrity": 242128,
-    "b_time": 82969,
-    "b_spares": 14327,
-    "b_complete": 198410,
-    "b_budget": 59523,
-    "b_insight": 83743,
-    "b_bonus": 34492,
-    "b_green": 9,
-    "sq": 41682681
+    "win": 2124.1666666666656,
+    "survive": 19851,
+    "score": 816590,
+    "cargo": 38706,
+    "time": 1141598.5,
+    "b_cargo": 154824,
+    "b_integrity": 256780,
+    "b_time": 91792,
+    "b_spares": 20880,
+    "b_complete": 198510,
+    "b_budget": 59553,
+    "b_bonus": 34248,
+    "b_green": 3,
+    "sq": 34866564
    },
    "cf": {
     "n": 20000,
-    "win": 6229.6666666666615,
-    "survive": 15036,
-    "score": 828779,
-    "cargo": 80684,
-    "time": 954864,
-    "b_cargo": 322736,
-    "b_integrity": 64880,
-    "b_time": 133240,
-    "b_spares": 2029,
-    "b_complete": 150360,
+    "win": 5337.916666666666,
+    "survive": 15474,
+    "score": 749625,
+    "cargo": 80476,
+    "time": 979417.5,
+    "b_cargo": 321904,
+    "b_integrity": 67687,
+    "b_time": 127049,
+    "b_spares": 3275,
+    "b_complete": 154740,
     "b_budget": 0,
-    "b_insight": 81490,
-    "b_bonus": 30205,
-    "b_green": 43839,
-    "sq": 44259613
+    "b_bonus": 30222,
+    "b_green": 44748,
+    "sq": 36934951
    },
    "mg": {
     "n": 20000,
-    "win": 3183.8666666666695,
-    "survive": 13855,
-    "score": 721490,
-    "cargo": 60075,
-    "time": 878037.5,
-    "b_cargo": 240300,
-    "b_integrity": 68390,
-    "b_time": 132920,
-    "b_spares": 4493,
-    "b_complete": 138550,
-    "b_budget": 27710,
-    "b_insight": 76372,
-    "b_bonus": 27742,
-    "b_green": 5013,
-    "sq": 36305306
+    "win": 3065.2500000000014,
+    "survive": 13943,
+    "score": 638877,
+    "cargo": 56700,
+    "time": 866835.5,
+    "b_cargo": 226800,
+    "b_integrity": 68694,
+    "b_time": 139436,
+    "b_spares": 5374,
+    "b_complete": 139430,
+    "b_budget": 27886,
+    "b_bonus": 26421,
+    "b_green": 4836,
+    "sq": 29965133
    },
    "cr": {
     "n": 20000,
-    "win": 2182.533333333332,
-    "survive": 19506,
-    "score": 908780,
-    "cargo": 64279,
-    "time": 1241239.5,
-    "b_cargo": 257116,
-    "b_integrity": 196205,
-    "b_time": 41112,
-    "b_spares": 22835,
-    "b_complete": 195060,
-    "b_budget": 78024,
-    "b_insight": 83536,
-    "b_bonus": 34751,
-    "b_green": 141,
-    "sq": 43274858
+    "win": 2033.6666666666656,
+    "survive": 19564,
+    "score": 802152,
+    "cargo": 58292,
+    "time": 1231117.5,
+    "b_cargo": 233168,
+    "b_integrity": 188485,
+    "b_time": 45997,
+    "b_spares": 26514,
+    "b_complete": 195640,
+    "b_budget": 78256,
+    "b_bonus": 33939,
+    "b_green": 153,
+    "sq": 34180732
    }
   },
   "role": {
    "pilot": {
-    "n": 19851,
-    "win": 3728.500000000002,
-    "survive": 15402,
-    "score": 787894,
-    "cargo": 55338,
-    "time": 919567,
-    "b_cargo": 221352,
-    "b_integrity": 122226,
-    "b_time": 130273,
-    "b_spares": 8151,
-    "b_complete": 154020,
-    "b_budget": 36138,
-    "b_insight": 78655,
-    "b_bonus": 29141,
-    "b_green": 7938,
-    "sq": 39784438
+    "n": 19910,
+    "win": 4323.583333333335,
+    "survive": 16097,
+    "score": 751314,
+    "cargo": 54598,
+    "time": 903593.5,
+    "b_cargo": 218392,
+    "b_integrity": 134776,
+    "b_time": 145159,
+    "b_spares": 11245,
+    "b_complete": 160970,
+    "b_budget": 37653,
+    "b_bonus": 35124,
+    "b_green": 7995,
+    "sq": 36048426
    },
    "metallurgist": {
-    "n": 20078,
-    "win": 2727.4500000000007,
-    "survive": 16991,
-    "score": 822116,
-    "cargo": 62364,
-    "time": 1058085.5,
-    "b_cargo": 249456,
-    "b_integrity": 132127,
-    "b_time": 100478,
-    "b_spares": 8576,
-    "b_complete": 169910,
-    "b_budget": 38709,
-    "b_insight": 81224,
-    "b_bonus": 31883,
-    "b_green": 9753,
-    "sq": 39809486
-   },
-   "coatings": {
-    "n": 20028,
-    "win": 2538.083333333333,
-    "survive": 16870,
-    "score": 807385,
-    "cargo": 60986,
-    "time": 1056194.5,
-    "b_cargo": 243944,
-    "b_integrity": 127836,
-    "b_time": 98868,
-    "b_spares": 7556,
-    "b_complete": 168700,
-    "b_budget": 38833,
-    "b_insight": 80978,
-    "b_bonus": 31334,
-    "b_green": 9336,
-    "sq": 38655469
-   },
-   "structural": {
-    "n": 20088,
-    "win": 4143.900000000003,
-    "survive": 18486,
-    "score": 930492,
-    "cargo": 71205,
-    "time": 1052864,
-    "b_cargo": 284820,
-    "b_integrity": 154758,
-    "b_time": 123061,
-    "b_spares": 14135,
-    "b_complete": 184860,
-    "b_budget": 41057,
-    "b_insight": 83019,
-    "b_bonus": 33583,
-    "b_green": 11199,
-    "sq": 47216856
-   },
-   "ndt": {
-    "n": 19903,
-    "win": 2926.200000000001,
-    "survive": 17958,
-    "score": 868698,
-    "cargo": 65785,
-    "time": 1055115.5,
-    "b_cargo": 263140,
-    "b_integrity": 136771,
-    "b_time": 114528,
-    "b_spares": 8366,
-    "b_complete": 179580,
-    "b_budget": 40532,
-    "b_insight": 82742,
-    "b_bonus": 33064,
-    "b_green": 9975,
-    "sq": 42273288
+    "n": 19972,
+    "win": 2747.5000000000005,
+    "survive": 17518,
+    "score": 748537,
+    "cargo": 58269,
+    "time": 1051042,
+    "b_cargo": 233076,
+    "b_integrity": 141784,
+    "b_time": 107054,
+    "b_spares": 11895,
+    "b_complete": 175180,
+    "b_budget": 39159,
+    "b_bonus": 30480,
+    "b_green": 9909,
+    "sq": 33104373
    },
    "quartermaster": {
-    "n": 20052,
-    "win": 3935.8666666666704,
-    "survive": 16690,
-    "score": 853865,
-    "cargo": 83112,
-    "time": 1160022.5,
-    "b_cargo": 332448,
-    "b_integrity": 129870,
-    "b_time": 52091,
-    "b_spares": 10872,
-    "b_complete": 166900,
-    "b_budget": 38173,
-    "b_insight": 80781,
-    "b_bonus": 30931,
-    "b_green": 11799,
-    "sq": 43409573
+    "n": 19965,
+    "win": 4276.500000000003,
+    "survive": 16917,
+    "score": 784248,
+    "cargo": 83030,
+    "time": 1153016.5,
+    "b_cargo": 332120,
+    "b_integrity": 133074,
+    "b_time": 55785,
+    "b_spares": 13968,
+    "b_complete": 169170,
+    "b_budget": 38146,
+    "b_bonus": 29625,
+    "b_green": 12360,
+    "sq": 37295918
+   },
+   "coatings": {
+    "n": 19964,
+    "win": 2643.416666666667,
+    "survive": 17213,
+    "score": 734258,
+    "cargo": 56526,
+    "time": 1033076.5,
+    "b_cargo": 226104,
+    "b_integrity": 138683,
+    "b_time": 108755,
+    "b_spares": 10596,
+    "b_complete": 172130,
+    "b_budget": 38831,
+    "b_bonus": 29769,
+    "b_green": 9390,
+    "sq": 32394350
+   },
+   "structural": {
+    "n": 20132,
+    "win": 3314.7500000000023,
+    "survive": 17952,
+    "score": 797310,
+    "cargo": 65928,
+    "time": 1079674.5,
+    "b_cargo": 263712,
+    "b_integrity": 147334,
+    "b_time": 109004,
+    "b_spares": 15292,
+    "b_complete": 179520,
+    "b_budget": 40448,
+    "b_bonus": 31428,
+    "b_green": 10572,
+    "sq": 36364674
+   },
+   "ndt": {
+    "n": 20057,
+    "win": 2694.250000000001,
+    "survive": 18185,
+    "score": 771472,
+    "cargo": 59805,
+    "time": 1061157,
+    "b_cargo": 239220,
+    "b_integrity": 140670,
+    "b_time": 117100,
+    "b_spares": 10418,
+    "b_complete": 181850,
+    "b_budget": 40538,
+    "b_bonus": 31902,
+    "b_green": 9774,
+    "sq": 33866154
    }
   },
   "proc": {
    "ti:ba": {
-    "n": 10034,
-    "win": 1331.8666666666668,
-    "survive": 8639,
-    "score": 426966,
-    "cargo": 37584,
-    "time": 518777,
-    "b_cargo": 150336,
-    "b_integrity": 62460,
-    "b_time": 60242,
-    "b_spares": 1151,
-    "b_complete": 86390,
-    "b_budget": 8639,
-    "b_insight": 41241,
-    "b_bonus": 15526,
-    "b_green": 981,
-    "sq": 20983988
+    "n": 10161,
+    "win": 1875.083333333333,
+    "survive": 9186,
+    "score": 414683,
+    "cargo": 37985,
+    "time": 522779.5,
+    "b_cargo": 151940,
+    "b_integrity": 76072,
+    "b_time": 64947,
+    "b_spares": 2900,
+    "b_complete": 91860,
+    "b_budget": 9186,
+    "b_bonus": 16437,
+    "b_green": 1341,
+    "sq": 19192935
    },
    "al:t73": {
-    "n": 9966,
-    "win": 2196.5333333333333,
-    "survive": 8669,
-    "score": 442533,
-    "cargo": 37441,
-    "time": 523047,
-    "b_cargo": 149764,
-    "b_integrity": 56565,
-    "b_time": 56053,
-    "b_spares": 5818,
-    "b_complete": 86690,
-    "b_budget": 26007,
-    "b_insight": 40784,
-    "b_bonus": 16298,
-    "b_green": 4554,
-    "sq": 22582347
+    "n": 10056,
+    "win": 1841.2499999999995,
+    "survive": 8620,
+    "score": 387628,
+    "cargo": 34879,
+    "time": 527886.5,
+    "b_cargo": 139516,
+    "b_integrity": 55161,
+    "b_time": 55729,
+    "b_spares": 5428,
+    "b_complete": 86200,
+    "b_budget": 25860,
+    "b_bonus": 15990,
+    "b_green": 3744,
+    "sq": 17929886
    },
    "ss:cw": {
-    "n": 10025,
-    "win": 570.8333333333334,
-    "survive": 9909,
-    "score": 440281,
-    "cargo": 23038,
-    "time": 582385.5,
-    "b_cargo": 92152,
-    "b_integrity": 111546,
-    "b_time": 41163,
-    "b_spares": 7351,
-    "b_complete": 99090,
-    "b_budget": 29727,
-    "b_insight": 41962,
-    "b_bonus": 17287,
+    "n": 9989,
+    "win": 937.9166666666669,
+    "survive": 9891,
+    "score": 400898,
+    "cargo": 19822,
+    "time": 570409,
+    "b_cargo": 79288,
+    "b_integrity": 119100,
+    "b_time": 45752,
+    "b_spares": 10964,
+    "b_complete": 98910,
+    "b_budget": 29673,
+    "b_bonus": 17208,
     "b_green": 3,
-    "sq": 20042681
+    "sq": 16879732
    },
    "cf:ce": {
-    "n": 10014,
-    "win": 2932.333333333334,
-    "survive": 7279,
-    "score": 401319,
-    "cargo": 39262,
-    "time": 479211,
-    "b_cargo": 157048,
-    "b_integrity": 30426,
-    "b_time": 63234,
-    "b_spares": 1134,
-    "b_complete": 72790,
+    "n": 9987,
+    "win": 2534.0833333333326,
+    "survive": 7837,
+    "score": 375626,
+    "cargo": 41027,
+    "time": 496845.5,
+    "b_cargo": 164108,
+    "b_integrity": 33232,
+    "b_time": 60088,
+    "b_spares": 1971,
+    "b_complete": 78370,
     "b_budget": 0,
-    "b_insight": 40476,
-    "b_bonus": 14896,
-    "b_green": 21315,
-    "sq": 21305945
+    "b_bonus": 15108,
+    "b_green": 22749,
+    "sq": 18317976
    },
    "mg:ct6": {
-    "n": 9988,
-    "win": 1511.8333333333326,
-    "survive": 6761,
-    "score": 352052,
-    "cargo": 29259,
-    "time": 436201.5,
-    "b_cargo": 117036,
-    "b_integrity": 33180,
-    "b_time": 64645,
-    "b_spares": 2064,
-    "b_complete": 67610,
-    "b_budget": 13522,
-    "b_insight": 37975,
-    "b_bonus": 13617,
-    "b_green": 2403,
-    "sq": 17643580
+    "n": 10057,
+    "win": 1472.4999999999995,
+    "survive": 6865,
+    "score": 315099,
+    "cargo": 27751,
+    "time": 429053,
+    "b_cargo": 111004,
+    "b_integrity": 33657,
+    "b_time": 69917,
+    "b_spares": 2634,
+    "b_complete": 68650,
+    "b_budget": 13730,
+    "b_bonus": 13029,
+    "b_green": 2478,
+    "sq": 14805245
    },
    "cr:qt": {
-    "n": 10038,
-    "win": 976.0833333333337,
-    "survive": 9660,
-    "score": 445812,
-    "cargo": 32004,
-    "time": 621334,
-    "b_cargo": 128016,
-    "b_integrity": 90772,
-    "b_time": 20719,
-    "b_spares": 11715,
-    "b_complete": 96600,
-    "b_budget": 38640,
-    "b_insight": 41825,
-    "b_bonus": 17456,
+    "n": 9997,
+    "win": 996.5000000000003,
+    "survive": 9679,
+    "score": 396318,
+    "cargo": 29319,
+    "time": 613574.5,
+    "b_cargo": 117276,
+    "b_integrity": 88583,
+    "b_time": 23425,
+    "b_spares": 14404,
+    "b_complete": 96790,
+    "b_budget": 38716,
+    "b_bonus": 17055,
     "b_green": 69,
-    "sq": 21005116
-   },
-   "ti:ma": {
-    "n": 9966,
-    "win": 1257.1666666666667,
-    "survive": 8507,
-    "score": 417554,
-    "cargo": 36999,
-    "time": 512304.5,
-    "b_cargo": 147996,
-    "b_integrity": 58743,
-    "b_time": 59041,
-    "b_spares": 1413,
-    "b_complete": 85070,
-    "b_budget": 8507,
-    "b_insight": 40361,
-    "b_bonus": 15460,
-    "b_green": 963,
-    "sq": 20379926
-   },
-   "mg:ext": {
-    "n": 10012,
-    "win": 1672.0333333333328,
-    "survive": 7094,
-    "score": 369438,
-    "cargo": 30816,
-    "time": 441836,
-    "b_cargo": 123264,
-    "b_integrity": 35210,
-    "b_time": 68275,
-    "b_spares": 2429,
-    "b_complete": 70940,
-    "b_budget": 14188,
-    "b_insight": 38397,
-    "b_bonus": 14125,
-    "b_green": 2610,
-    "sq": 18661726
+    "sq": 16879940
    },
    "al:t6": {
-    "n": 10034,
-    "win": 2113.2499999999995,
-    "survive": 8344,
-    "score": 426051,
-    "cargo": 36054,
-    "time": 512738.5,
-    "b_cargo": 144216,
-    "b_integrity": 54217,
-    "b_time": 53722,
-    "b_spares": 5590,
-    "b_complete": 83440,
-    "b_budget": 25032,
-    "b_insight": 39872,
-    "b_bonus": 15462,
-    "b_green": 4500,
-    "sq": 21680391
+    "n": 9944,
+    "win": 2040.666666666666,
+    "survive": 8395,
+    "score": 382465,
+    "cargo": 34703,
+    "time": 512300,
+    "b_cargo": 138812,
+    "b_integrity": 54944,
+    "b_time": 54095,
+    "b_spares": 5904,
+    "b_complete": 83950,
+    "b_budget": 25185,
+    "b_bonus": 15573,
+    "b_green": 4002,
+    "sq": 17915785
+   },
+   "mg:ext": {
+    "n": 9943,
+    "win": 1592.75,
+    "survive": 7078,
+    "score": 323778,
+    "cargo": 28949,
+    "time": 437782.5,
+    "b_cargo": 115796,
+    "b_integrity": 35037,
+    "b_time": 69519,
+    "b_spares": 2740,
+    "b_complete": 70780,
+    "b_budget": 14156,
+    "b_bonus": 13392,
+    "b_green": 2358,
+    "sq": 15159888
    },
    "ss:sa": {
-    "n": 9975,
-    "win": 934.283333333334,
-    "survive": 9932,
-    "score": 458016,
-    "cargo": 22636,
-    "time": 578455.5,
-    "b_cargo": 90544,
-    "b_integrity": 130582,
-    "b_time": 41806,
-    "b_spares": 6976,
-    "b_complete": 99320,
-    "b_budget": 29796,
-    "b_insight": 41781,
-    "b_bonus": 17205,
-    "b_green": 6,
-    "sq": 21640000
+    "n": 10011,
+    "win": 1186.25,
+    "survive": 9960,
+    "score": 415692,
+    "cargo": 18884,
+    "time": 571189.5,
+    "b_cargo": 75536,
+    "b_integrity": 137680,
+    "b_time": 46040,
+    "b_spares": 9916,
+    "b_complete": 99600,
+    "b_budget": 29880,
+    "b_bonus": 17040,
+    "b_green": 0,
+    "sq": 17986832
    },
-   "cf:ep": {
-    "n": 9986,
-    "win": 3297.333333333335,
-    "survive": 7757,
-    "score": 427460,
-    "cargo": 41422,
-    "time": 475653,
-    "b_cargo": 165688,
-    "b_integrity": 34454,
-    "b_time": 70006,
-    "b_spares": 895,
-    "b_complete": 77570,
-    "b_budget": 0,
-    "b_insight": 41014,
-    "b_bonus": 15309,
-    "b_green": 22524,
-    "sq": 22953668
+   "ti:ma": {
+    "n": 9839,
+    "win": 1681.9999999999995,
+    "survive": 8849,
+    "score": 395119,
+    "cargo": 36415,
+    "time": 499625,
+    "b_cargo": 145660,
+    "b_integrity": 68498,
+    "b_time": 63812,
+    "b_spares": 3139,
+    "b_complete": 88490,
+    "b_budget": 8849,
+    "b_bonus": 15498,
+    "b_green": 1173,
+    "sq": 18087909
    },
    "cr:n": {
-    "n": 9962,
-    "win": 1206.45,
-    "survive": 9846,
-    "score": 462968,
-    "cargo": 32275,
-    "time": 619905.5,
-    "b_cargo": 129100,
-    "b_integrity": 105433,
-    "b_time": 20393,
-    "b_spares": 11120,
-    "b_complete": 98460,
-    "b_budget": 39384,
-    "b_insight": 41711,
-    "b_bonus": 17295,
-    "b_green": 72,
-    "sq": 22269742
+    "n": 10003,
+    "win": 1037.166666666667,
+    "survive": 9885,
+    "score": 405834,
+    "cargo": 28973,
+    "time": 617543,
+    "b_cargo": 115892,
+    "b_integrity": 99902,
+    "b_time": 22572,
+    "b_spares": 12110,
+    "b_complete": 98850,
+    "b_budget": 39540,
+    "b_bonus": 16884,
+    "b_green": 84,
+    "sq": 17300792
+   },
+   "cf:ep": {
+    "n": 10013,
+    "win": 2803.833333333334,
+    "survive": 7637,
+    "score": 373999,
+    "cargo": 39449,
+    "time": 482572,
+    "b_cargo": 157796,
+    "b_integrity": 34455,
+    "b_time": 66961,
+    "b_spares": 1304,
+    "b_complete": 76370,
+    "b_budget": 0,
+    "b_bonus": 15114,
+    "b_green": 21999,
+    "sq": 18616975
    }
   },
   "leg": {},
   "tiers": {
    "ti|L1": {
-    "fail": 5037,
-    "partial": 5799,
-    "success": 9164
+    "success": 14386,
+    "fail": 5614
    },
    "ti|L2": {
-    "success": 8011,
-    "partial": 5993,
-    "fail": 5996
+    "fail": 7214,
+    "success": 12786
    },
    "ti|L3": {
-    "partial": 3733,
-    "fail": 2680,
-    "success": 7549
+    "success": 18692,
+    "fail": 1308
    },
    "ti|L4": {
-    "fail": 5600,
-    "success": 8847,
-    "partial": 5339
+    "fail": 4015,
+    "success": 15672
    },
    "ti|L5": {
-    "success": 9521,
-    "partial": 4948,
-    "fail": 4538
+    "success": 14700,
+    "fail": 4243
    },
    "ti|L6": {
-    "partial": 4706,
-    "success": 9508,
-    "fail": 3907
+    "success": 10645,
+    "fail": 7966
    },
    "al|L1": {
-    "fail": 4636,
-    "partial": 5609,
-    "success": 9755
+    "success": 13519,
+    "fail": 6481
    },
    "al|L2": {
-    "partial": 6353,
-    "fail": 7678,
-    "success": 5969
+    "success": 9378,
+    "fail": 10622
    },
    "al|L3": {
-    "fail": 2360,
-    "partial": 3268,
-    "success": 7225
+    "success": 18263,
+    "fail": 1284
    },
    "al|L4": {
-    "partial": 5203,
-    "fail": 6045,
-    "success": 7933
+    "fail": 9540,
+    "success": 9628
    },
    "al|L5": {
-    "fail": 3821,
-    "partial": 4836,
-    "success": 9763
-   },
-   "ss|L1": {
-    "fail": 7541,
-    "success": 6273,
-    "partial": 6186
-   },
-   "ss|L2": {
-    "success": 8484,
-    "partial": 5787,
-    "fail": 5729
-   },
-   "ss|L3": {
-    "success": 7528,
-    "partial": 3771,
-    "fail": 2847
-   },
-   "ss|L4": {
-    "success": 9929,
-    "fail": 4820,
-    "partial": 5251
-   },
-   "ss|L5": {
-    "success": 10172,
-    "partial": 5174,
-    "fail": 4637
-   },
-   "ss|L6": {
-    "success": 10646,
-    "fail": 4133,
-    "partial": 5146
-   },
-   "cf|L1": {
-    "success": 11085,
-    "fail": 3504,
-    "partial": 5411
-   },
-   "cf|L2": {
-    "fail": 6089,
-    "success": 7759,
-    "partial": 6152
-   },
-   "cf|L4": {
-    "success": 8600,
-    "fail": 5767,
-    "partial": 5538
-   },
-   "cf|L5": {
-    "success": 8050,
-    "fail": 5872,
-    "partial": 5150
-   },
-   "cf|L6": {
-    "fail": 3536,
-    "partial": 4295,
-    "success": 9248
-   },
-   "mg|L1": {
-    "partial": 5665,
-    "fail": 4762,
-    "success": 9573
-   },
-   "mg|L2": {
-    "partial": 6091,
-    "success": 7368,
-    "fail": 6541
-   },
-   "mg|L3": {
-    "success": 6842,
-    "partial": 3258,
-    "fail": 2233
-   },
-   "mg|L4": {
-    "fail": 5197,
-    "success": 7725,
-    "partial": 4884
-   },
-   "mg|L5": {
-    "success": 7477,
-    "fail": 4785,
-    "partial": 4623
-   },
-   "mg|L6": {
-    "success": 8449,
-    "fail": 3095,
-    "partial": 3902
-   },
-   "cr|L1": {
-    "fail": 7097,
-    "partial": 6134,
-    "success": 6769
-   },
-   "cr|L2": {
-    "partial": 5825,
-    "fail": 5782,
-    "success": 8393
-   },
-   "cr|L4": {
-    "fail": 4694,
-    "success": 9877,
-    "partial": 5413
-   },
-   "cr|L5": {
-    "success": 8488,
-    "fail": 6036,
-    "partial": 5307
-   },
-   "cr|L6": {
-    "partial": 5012,
-    "fail": 3900,
-    "success": 10751
-   },
-   "cf|L3": {
-    "partial": 3384,
-    "success": 7165,
-    "fail": 2205
-   },
-   "cr|L3": {
-    "success": 7670,
-    "fail": 2788,
-    "partial": 3694
+    "success": 14717,
+    "fail": 3889
    },
    "al|L6": {
-    "success": 9762,
-    "partial": 4479,
-    "fail": 3614
+    "fail": 7699,
+    "success": 10521
+   },
+   "ss|L1": {
+    "success": 11597,
+    "fail": 8403
+   },
+   "ss|L2": {
+    "success": 12827,
+    "fail": 7173
+   },
+   "ss|L3": {
+    "success": 18651,
+    "fail": 1349
+   },
+   "ss|L4": {
+    "success": 15952,
+    "fail": 4048
+   },
+   "ss|L5": {
+    "success": 16878,
+    "fail": 3104
+   },
+   "ss|L6": {
+    "fail": 8539,
+    "success": 11416
+   },
+   "cf|L1": {
+    "success": 15001,
+    "fail": 4999
+   },
+   "cf|L2": {
+    "fail": 7186,
+    "success": 12814
+   },
+   "cf|L3": {
+    "success": 18506,
+    "fail": 1385
+   },
+   "cf|L4": {
+    "success": 11539,
+    "fail": 8318
+   },
+   "cf|L5": {
+    "fail": 5990,
+    "success": 13354
+   },
+   "mg|L1": {
+    "success": 12262,
+    "fail": 7738
+   },
+   "mg|L2": {
+    "success": 10067,
+    "fail": 9933
+   },
+   "mg|L3": {
+    "success": 17319,
+    "fail": 1229
+   },
+   "mg|L4": {
+    "success": 12699,
+    "fail": 5593
+   },
+   "mg|L5": {
+    "success": 10948,
+    "fail": 6312
+   },
+   "mg|L6": {
+    "fail": 6939,
+    "success": 8807
+   },
+   "cr|L1": {
+    "fail": 7697,
+    "success": 12303
+   },
+   "cr|L2": {
+    "success": 13797,
+    "fail": 6203
+   },
+   "cr|L3": {
+    "success": 18619,
+    "fail": 1381
+   },
+   "cr|L4": {
+    "success": 14402,
+    "fail": 5557
+   },
+   "cr|L5": {
+    "success": 10184,
+    "fail": 9721
+   },
+   "cr|L6": {
+    "success": 11313,
+    "fail": 8472
+   },
+   "cf|L6": {
+    "success": 10074,
+    "fail": 7492
    }
   },
-  "turns": 696520,
-  "ties": 1629,
+  "turns": 698872,
+  "ties": 1526,
   "lostLegs": {
-   "al": {
-    "L5": 753,
-    "L6": 848,
-    "L4": 950,
-    "L3": 436
-   },
    "cf": {
-    "L5": 1993,
-    "L6": 2043,
-    "L2": 37,
-    "L4": 833,
-    "L3": 58
-   },
-   "cr": {
-    "L5": 250,
-    "L4": 84,
-    "L6": 160
+    "L5": 1778,
+    "L6": 2092,
+    "L4": 513,
+    "L2": 109,
+    "L3": 34
    },
    "mg": {
-    "L6": 1718,
-    "L5": 1330,
-    "L4": 1915,
-    "L3": 1182
+    "L6": 1803,
+    "L5": 1514,
+    "L3": 1708,
+    "L4": 1032
+   },
+   "al": {
+    "L5": 386,
+    "L4": 832,
+    "L3": 562,
+    "L6": 1205
    },
    "ti": {
-    "L5": 1225,
-    "L6": 1199,
-    "L4": 430
+    "L5": 805,
+    "L6": 576,
+    "L4": 584
+   },
+   "cr": {
+    "L5": 120,
+    "L4": 95,
+    "L6": 221
    },
    "ss": {
-    "L6": 107,
-    "L5": 50,
-    "L4": 2
+    "L6": 104,
+    "L5": 45
    }
   },
   "causes": {
-   "Micrometeoroid Strike": 1131,
-   "Cold Soak in Earth’s Shadow": 1321,
-   "Outgassing & Cold Welding": 1117,
-   "Fracture Detective": 953,
-   "fast fracture from a growing fatigue crack": 4070,
-   "Cargo Transfer Race": 974,
-   "Weld-Flaw Hunt": 976,
-   "Seal & Surface Crisis": 1031,
-   "Manual Docking — Guidance Lost": 1011,
-   "Engine-Bay Fire": 1183,
-   "Cracked Docking Collar": 747,
-   "Atomic Oxygen & UV": 1157,
-   "Ten Thousand Gusts": 11,
-   "Mach 3 Skin Heating": 946,
-   "Sun-Side Warp": 460,
-   "Jet-Stream Tailwind": 25,
-   "corrosion": 205,
-   "Bird Strike!": 167,
-   "Solar Storm Warning": 77,
-   "Engine Flame-Out": 15,
-   "Salt-Spray Corrosion Fatigue": 11,
-   "Rivet-Hole Hot Spot": 6,
-   "Engine-Mount Resonance": 9
+   "Cold Soak in Earth’s Shadow": 4157,
+   "Manual Docking — Guidance Lost": 6001,
+   "Mach 3 Skin Heating": 2432,
+   "Engine Flame-Out": 399,
+   "fast fracture from a growing fatigue crack": 3020,
+   "Ten Thousand Gusts": 109
+  }
+ },
+ "rand6": {
+  "label": "6 crews · all materials · sensible bots · random events",
+  "games": 10000,
+  "nCrews": 6,
+  "mat": {
+   "cf": {
+    "n": 10000,
+    "win": 2948.25,
+    "survive": 8213,
+    "score": 414446,
+    "cargo": 43193,
+    "time": 478001.5,
+    "b_cargo": 172772,
+    "b_integrity": 40213,
+    "b_time": 73981,
+    "b_spares": 1934,
+    "b_complete": 82130,
+    "b_budget": 0,
+    "b_bonus": 19890,
+    "b_green": 23526,
+    "sq": 21238848
+   },
+   "cr": {
+    "n": 10000,
+    "win": 1124.3333333333335,
+    "survive": 9765,
+    "score": 427195,
+    "cargo": 31053,
+    "time": 610114,
+    "b_cargo": 124212,
+    "b_integrity": 104514,
+    "b_time": 25830,
+    "b_spares": 14424,
+    "b_complete": 97650,
+    "b_budget": 39060,
+    "b_bonus": 21490,
+    "b_green": 15,
+    "sq": 19319641
+   },
+   "ss": {
+    "n": 10000,
+    "win": 777.9166666666667,
+    "survive": 9933,
+    "score": 421484,
+    "cargo": 21624,
+    "time": 570991.5,
+    "b_cargo": 86496,
+    "b_integrity": 128597,
+    "b_time": 46303,
+    "b_spares": 9439,
+    "b_complete": 99330,
+    "b_budget": 29799,
+    "b_bonus": 21520,
+    "b_green": 0,
+    "sq": 18504796
+   },
+   "al": {
+    "n": 10000,
+    "win": 2042.6666666666663,
+    "survive": 8752,
+    "score": 415478,
+    "cargo": 36961,
+    "time": 512245.5,
+    "b_cargo": 147844,
+    "b_integrity": 61240,
+    "b_time": 61360,
+    "b_spares": 7692,
+    "b_complete": 87520,
+    "b_budget": 26256,
+    "b_bonus": 20158,
+    "b_green": 3408,
+    "sq": 20226922
+   },
+   "ti": {
+    "n": 10000,
+    "win": 1452.9166666666667,
+    "survive": 8976,
+    "score": 411107,
+    "cargo": 37886,
+    "time": 510019.5,
+    "b_cargo": 151544,
+    "b_integrity": 71789,
+    "b_time": 65551,
+    "b_spares": 2542,
+    "b_complete": 89760,
+    "b_budget": 8976,
+    "b_bonus": 20222,
+    "b_green": 723,
+    "sq": 19279985
+   },
+   "mg": {
+    "n": 10000,
+    "win": 1653.9166666666665,
+    "survive": 7600,
+    "score": 361525,
+    "cargo": 31968,
+    "time": 439471,
+    "b_cargo": 127872,
+    "b_integrity": 41734,
+    "b_time": 76362,
+    "b_spares": 3775,
+    "b_complete": 76000,
+    "b_budget": 15200,
+    "b_bonus": 18254,
+    "b_green": 2328,
+    "sq": 17574177
+   }
+  },
+  "role": {
+   "pilot": {
+    "n": 10013,
+    "win": 1982.833333333333,
+    "survive": 8302,
+    "score": 395747,
+    "cargo": 29433,
+    "time": 460195,
+    "b_cargo": 117732,
+    "b_integrity": 71028,
+    "b_time": 75487,
+    "b_spares": 6199,
+    "b_complete": 83020,
+    "b_budget": 18962,
+    "b_bonus": 19062,
+    "b_green": 4257,
+    "sq": 19378451
+   },
+   "ndt": {
+    "n": 10046,
+    "win": 1568.1666666666665,
+    "survive": 9398,
+    "score": 425207,
+    "cargo": 33453,
+    "time": 525134,
+    "b_cargo": 133812,
+    "b_integrity": 79135,
+    "b_time": 64881,
+    "b_spares": 6406,
+    "b_complete": 93980,
+    "b_budget": 20883,
+    "b_bonus": 21223,
+    "b_green": 4887,
+    "sq": 19805057
+   },
+   "quartermaster": {
+    "n": 10016,
+    "win": 2110.916666666666,
+    "survive": 8757,
+    "score": 421151,
+    "cargo": 43855,
+    "time": 575191.5,
+    "b_cargo": 175420,
+    "b_integrity": 71982,
+    "b_time": 32733,
+    "b_spares": 7525,
+    "b_complete": 87570,
+    "b_budget": 19591,
+    "b_bonus": 19874,
+    "b_green": 6456,
+    "sq": 20722011
+   },
+   "coatings": {
+    "n": 9735,
+    "win": 1312.9999999999998,
+    "survive": 8747,
+    "score": 389222,
+    "cargo": 30802,
+    "time": 508672.5,
+    "b_cargo": 123208,
+    "b_integrity": 72011,
+    "b_time": 56862,
+    "b_spares": 5459,
+    "b_complete": 87470,
+    "b_budget": 19478,
+    "b_bonus": 20045,
+    "b_green": 4689,
+    "sq": 17882158
+   },
+   "structural": {
+    "n": 10055,
+    "win": 1582.3333333333333,
+    "survive": 9025,
+    "score": 413793,
+    "cargo": 32733,
+    "time": 523192.5,
+    "b_cargo": 130932,
+    "b_integrity": 78123,
+    "b_time": 60801,
+    "b_spares": 7904,
+    "b_complete": 90250,
+    "b_budget": 20240,
+    "b_bonus": 20677,
+    "b_green": 4866,
+    "sq": 19496825
+   },
+   "metallurgist": {
+    "n": 10135,
+    "win": 1442.75,
+    "survive": 9010,
+    "score": 406115,
+    "cargo": 32409,
+    "time": 528457.5,
+    "b_cargo": 129636,
+    "b_integrity": 75808,
+    "b_time": 58623,
+    "b_spares": 6313,
+    "b_complete": 90100,
+    "b_budget": 20137,
+    "b_bonus": 20653,
+    "b_green": 4845,
+    "sq": 18859867
+   }
+  },
+  "proc": {
+   "cf:ep": {
+    "n": 5043,
+    "win": 1526.4166666666665,
+    "survive": 4131,
+    "score": 210152,
+    "cargo": 21717,
+    "time": 239562,
+    "b_cargo": 86868,
+    "b_integrity": 21169,
+    "b_time": 38086,
+    "b_spares": 877,
+    "b_complete": 41310,
+    "b_budget": 0,
+    "b_bonus": 10016,
+    "b_green": 11826,
+    "sq": 10851590
+   },
+   "cr:qt": {
+    "n": 4969,
+    "win": 515.6666666666666,
+    "survive": 4792,
+    "score": 206927,
+    "cargo": 15348,
+    "time": 302852,
+    "b_cargo": 61392,
+    "b_integrity": 48018,
+    "b_time": 12647,
+    "b_spares": 7270,
+    "b_complete": 47920,
+    "b_budget": 19168,
+    "b_bonus": 10506,
+    "b_green": 6,
+    "sq": 9249151
+   },
+   "ss:cw": {
+    "n": 5025,
+    "win": 294.99999999999994,
+    "survive": 4973,
+    "score": 206797,
+    "cargo": 11006,
+    "time": 287443.5,
+    "b_cargo": 44024,
+    "b_integrity": 59688,
+    "b_time": 22941,
+    "b_spares": 4739,
+    "b_complete": 49730,
+    "b_budget": 14919,
+    "b_bonus": 10756,
+    "b_green": 0,
+    "sq": 8900023
+   },
+   "al:t73": {
+    "n": 4942,
+    "win": 997.8333333333335,
+    "survive": 4382,
+    "score": 207662,
+    "cargo": 18384,
+    "time": 254965,
+    "b_cargo": 73536,
+    "b_integrity": 30762,
+    "b_time": 30853,
+    "b_spares": 3781,
+    "b_complete": 43820,
+    "b_budget": 13146,
+    "b_bonus": 10036,
+    "b_green": 1728,
+    "sq": 10086954
+   },
+   "ti:ma": {
+    "n": 4989,
+    "win": 673.75,
+    "survive": 4501,
+    "score": 205013,
+    "cargo": 18985,
+    "time": 253648.5,
+    "b_cargo": 75940,
+    "b_integrity": 34991,
+    "b_time": 32842,
+    "b_spares": 1366,
+    "b_complete": 45010,
+    "b_budget": 4501,
+    "b_bonus": 10027,
+    "b_green": 336,
+    "sq": 9565053
+   },
+   "mg:ct6": {
+    "n": 5063,
+    "win": 792.9166666666666,
+    "survive": 3755,
+    "score": 178233,
+    "cargo": 15808,
+    "time": 222092.5,
+    "b_cargo": 63232,
+    "b_integrity": 20416,
+    "b_time": 37520,
+    "b_spares": 1861,
+    "b_complete": 37550,
+    "b_budget": 7510,
+    "b_bonus": 9016,
+    "b_green": 1128,
+    "sq": 8649841
+   },
+   "cr:n": {
+    "n": 5031,
+    "win": 608.6666666666667,
+    "survive": 4973,
+    "score": 220268,
+    "cargo": 15705,
+    "time": 307262,
+    "b_cargo": 62820,
+    "b_integrity": 56496,
+    "b_time": 13183,
+    "b_spares": 7154,
+    "b_complete": 49730,
+    "b_budget": 19892,
+    "b_bonus": 10984,
+    "b_green": 9,
+    "sq": 10070490
+   },
+   "ss:sa": {
+    "n": 4975,
+    "win": 482.91666666666663,
+    "survive": 4960,
+    "score": 214687,
+    "cargo": 10618,
+    "time": 283548,
+    "b_cargo": 42472,
+    "b_integrity": 68909,
+    "b_time": 23362,
+    "b_spares": 4700,
+    "b_complete": 49600,
+    "b_budget": 14880,
+    "b_bonus": 10764,
+    "b_green": 0,
+    "sq": 9604773
+   },
+   "ti:ba": {
+    "n": 5011,
+    "win": 779.1666666666669,
+    "survive": 4475,
+    "score": 206094,
+    "cargo": 18901,
+    "time": 256371,
+    "b_cargo": 75604,
+    "b_integrity": 36798,
+    "b_time": 32709,
+    "b_spares": 1176,
+    "b_complete": 44750,
+    "b_budget": 4475,
+    "b_bonus": 10195,
+    "b_green": 387,
+    "sq": 9714932
+   },
+   "al:t6": {
+    "n": 5058,
+    "win": 1044.8333333333335,
+    "survive": 4370,
+    "score": 207816,
+    "cargo": 18577,
+    "time": 257280.5,
+    "b_cargo": 74308,
+    "b_integrity": 30478,
+    "b_time": 30507,
+    "b_spares": 3911,
+    "b_complete": 43700,
+    "b_budget": 13110,
+    "b_bonus": 10122,
+    "b_green": 1680,
+    "sq": 10139968
+   },
+   "cf:ce": {
+    "n": 4957,
+    "win": 1421.8333333333335,
+    "survive": 4082,
+    "score": 204294,
+    "cargo": 21476,
+    "time": 238439.5,
+    "b_cargo": 85904,
+    "b_integrity": 19044,
+    "b_time": 35895,
+    "b_spares": 1057,
+    "b_complete": 40820,
+    "b_budget": 0,
+    "b_bonus": 9874,
+    "b_green": 11700,
+    "sq": 10387258
+   },
+   "mg:ext": {
+    "n": 4937,
+    "win": 861.0000000000001,
+    "survive": 3845,
+    "score": 183292,
+    "cargo": 16160,
+    "time": 217378.5,
+    "b_cargo": 64640,
+    "b_integrity": 21318,
+    "b_time": 38842,
+    "b_spares": 1914,
+    "b_complete": 38450,
+    "b_budget": 7690,
+    "b_bonus": 9238,
+    "b_green": 1200,
+    "sq": 8924336
+   }
+  },
+  "leg": {},
+  "tiers": {
+   "cf|L1": {
+    "success": 7938,
+    "fail": 2062
+   },
+   "cf|L2": {
+    "success": 6185,
+    "fail": 3815
+   },
+   "cf|L4": {
+    "success": 6452,
+    "fail": 3503
+   },
+   "cf|L5": {
+    "success": 6320,
+    "fail": 3364
+   },
+   "cf|L6": {
+    "fail": 2809,
+    "success": 6214
+   },
+   "cr|L1": {
+    "success": 6232,
+    "fail": 3768
+   },
+   "cr|L2": {
+    "success": 6402,
+    "fail": 3598
+   },
+   "cr|L3": {
+    "success": 5578,
+    "fail": 1861
+   },
+   "cr|L4": {
+    "fail": 2929,
+    "success": 7063
+   },
+   "cr|L5": {
+    "fail": 3408,
+    "success": 6512
+   },
+   "cr|L6": {
+    "fail": 3093,
+    "success": 6749
+   },
+   "ss|L1": {
+    "fail": 3952,
+    "success": 6048
+   },
+   "ss|L2": {
+    "success": 6581,
+    "fail": 3419
+   },
+   "ss|L3": {
+    "success": 5606,
+    "fail": 1909
+   },
+   "ss|L4": {
+    "fail": 3002,
+    "success": 6998
+   },
+   "ss|L5": {
+    "success": 7265,
+    "fail": 2730
+   },
+   "ss|L6": {
+    "success": 6746,
+    "fail": 3224
+   },
+   "al|L1": {
+    "fail": 2563,
+    "success": 7437
+   },
+   "al|L2": {
+    "fail": 5037,
+    "success": 4963
+   },
+   "al|L4": {
+    "fail": 3658,
+    "success": 6028
+   },
+   "ti|L1": {
+    "success": 7089,
+    "fail": 2911
+   },
+   "ti|L2": {
+    "fail": 3558,
+    "success": 6442
+   },
+   "ti|L3": {
+    "success": 5564,
+    "fail": 1821
+   },
+   "ti|L4": {
+    "fail": 3226,
+    "success": 6644
+   },
+   "mg|L1": {
+    "success": 7346,
+    "fail": 2654
+   },
+   "mg|L2": {
+    "success": 5747,
+    "fail": 4253
+   },
+   "mg|L3": {
+    "success": 5249,
+    "fail": 1549
+   },
+   "mg|L4": {
+    "fail": 2972,
+    "success": 6102
+   },
+   "mg|L5": {
+    "fail": 2972,
+    "success": 5751
+   },
+   "mg|L6": {
+    "fail": 2495,
+    "success": 5688
+   },
+   "al|L5": {
+    "success": 7096,
+    "fail": 2212
+   },
+   "al|L6": {
+    "success": 6301,
+    "fail": 2808
+   },
+   "ti|L5": {
+    "fail": 2650,
+    "success": 6896
+   },
+   "ti|L6": {
+    "fail": 2929,
+    "success": 6319
+   },
+   "al|L3": {
+    "fail": 1724,
+    "success": 5468
+   },
+   "cf|L3": {
+    "success": 5327,
+    "fail": 1637
+   }
+  },
+  "turns": 350767,
+  "ties": 731,
+  "lostLegs": {
+   "al": {
+    "L5": 288,
+    "L4": 468,
+    "L3": 135,
+    "L6": 357
+   },
+   "ti": {
+    "L4": 210,
+    "L6": 347,
+    "L5": 467
+   },
+   "mg": {
+    "L4": 847,
+    "L3": 428,
+    "L5": 487,
+    "L6": 638
+   },
+   "cf": {
+    "L6": 810,
+    "L5": 661,
+    "L4": 271,
+    "L2": 17,
+    "L3": 28
+   },
+   "cr": {
+    "L5": 125,
+    "L6": 77,
+    "L4": 33
+   },
+   "ss": {
+    "L5": 24,
+    "L6": 43
+   }
+  },
+  "causes": {
+   "fast fracture from a growing fatigue crack": 1601,
+   "Mach 3 Skin Heating": 375,
+   "Fracture Detective": 357,
+   "Bird Strike!": 108,
+   "Cracked Docking Collar": 358,
+   "Atomic Oxygen & UV": 447,
+   "Cargo Transfer Race": 371,
+   "Cold Soak in Earth’s Shadow": 470,
+   "Outgassing & Cold Welding": 442,
+   "Micrometeoroid Strike": 306,
+   "Weld-Flaw Hunt": 361,
+   "Seal & Surface Crisis": 331,
+   "Manual Docking — Guidance Lost": 358,
+   "Engine-Bay Fire": 476,
+   "Sun-Side Warp": 163,
+   "Ten Thousand Gusts": 3,
+   "Solar Storm Warning": 75,
+   "Engine Flame-Out": 21,
+   "corrosion": 81,
+   "Jet-Stream Tailwind": 29,
+   "Canyon Updraft Shortcut": 14,
+   "Engine-Mount Resonance": 3,
+   "Rivet-Hole Hot Spot": 2,
+   "Salt-Spray Corrosion Fatigue": 9
   }
  },
  "four": {
@@ -694,686 +1245,609 @@
   "nCrews": 4,
   "mat": {
    "ss": {
-    "n": 6712,
-    "win": 855.5000000000001,
-    "survive": 6662,
-    "score": 301469,
-    "cargo": 15248,
-    "time": 389282,
-    "b_cargo": 60992,
-    "b_integrity": 81082,
-    "b_time": 28036,
-    "b_spares": 4925,
-    "b_complete": 66620,
-    "b_budget": 19986,
-    "b_insight": 28096,
-    "b_bonus": 11600,
-    "b_green": 132,
-    "sq": 13995063
+    "n": 6765,
+    "win": 1057.8333333333335,
+    "survive": 6719,
+    "score": 276096,
+    "cargo": 13055,
+    "time": 385960,
+    "b_cargo": 52220,
+    "b_integrity": 86608,
+    "b_time": 31179,
+    "b_spares": 6958,
+    "b_complete": 67190,
+    "b_budget": 20157,
+    "b_bonus": 11685,
+    "b_green": 99,
+    "sq": 11772160
    },
    "cf": {
-    "n": 6853,
-    "win": 2720.5000000000005,
-    "survive": 5143,
-    "score": 283558,
-    "cargo": 27658,
-    "time": 327257,
-    "b_cargo": 110632,
-    "b_integrity": 22339,
-    "b_time": 45323,
-    "b_spares": 716,
-    "b_complete": 51430,
+    "n": 6916,
+    "win": 2517.916666666667,
+    "survive": 5429,
+    "score": 263549,
+    "cargo": 28202,
+    "time": 338571,
+    "b_cargo": 112808,
+    "b_integrity": 24137,
+    "b_time": 44708,
+    "b_spares": 1161,
+    "b_complete": 54290,
     "b_budget": 0,
-    "b_insight": 27739,
-    "b_bonus": 10238,
-    "b_green": 15141,
-    "sq": 15137104
+    "b_bonus": 10599,
+    "b_green": 15846,
+    "sq": 13011655
    },
    "mg": {
-    "n": 5786,
-    "win": 1396.1666666666665,
-    "survive": 4003,
-    "score": 210600,
-    "cargo": 17348,
-    "time": 254251,
-    "b_cargo": 69392,
-    "b_integrity": 19566,
-    "b_time": 38484,
-    "b_spares": 1253,
-    "b_complete": 40030,
-    "b_budget": 8006,
-    "b_insight": 22187,
-    "b_bonus": 8028,
-    "b_green": 3654,
-    "sq": 10708690
+    "n": 5839,
+    "win": 1373.25,
+    "survive": 4020,
+    "score": 187481,
+    "cargo": 16466,
+    "time": 251578.5,
+    "b_cargo": 65864,
+    "b_integrity": 20300,
+    "b_time": 40349,
+    "b_spares": 1625,
+    "b_complete": 40200,
+    "b_budget": 8040,
+    "b_bonus": 7740,
+    "b_green": 3363,
+    "sq": 8952729
    },
    "cr": {
-    "n": 6201,
-    "win": 1043.666666666667,
-    "survive": 6036,
-    "score": 282225,
-    "cargo": 19802,
-    "time": 384162.5,
-    "b_cargo": 79208,
-    "b_integrity": 60737,
-    "b_time": 12984,
-    "b_spares": 7227,
-    "b_complete": 60360,
-    "b_budget": 24144,
-    "b_insight": 25991,
-    "b_bonus": 10965,
-    "b_green": 609,
-    "sq": 13479725
-   },
-   "ti": {
-    "n": 6680,
-    "win": 1467.8333333333333,
-    "survive": 5740,
-    "score": 285797,
-    "cargo": 25088,
-    "time": 344206,
-    "b_cargo": 100352,
-    "b_integrity": 40864,
-    "b_time": 39987,
-    "b_spares": 949,
-    "b_complete": 57400,
-    "b_budget": 5740,
-    "b_insight": 27346,
-    "b_bonus": 10606,
-    "b_green": 2553,
-    "sq": 14173141
+    "n": 6119,
+    "win": 983.6666666666669,
+    "survive": 5995,
+    "score": 246052,
+    "cargo": 17898,
+    "time": 376767.5,
+    "b_cargo": 71592,
+    "b_integrity": 57463,
+    "b_time": 14026,
+    "b_spares": 8082,
+    "b_complete": 59950,
+    "b_budget": 23980,
+    "b_bonus": 10362,
+    "b_green": 597,
+    "sq": 10494196
    },
    "al": {
-    "n": 7768,
-    "win": 2516.3333333333335,
-    "survive": 6634,
-    "score": 343096,
-    "cargo": 28606,
-    "time": 401876.5,
-    "b_cargo": 114424,
-    "b_integrity": 43380,
-    "b_time": 43299,
-    "b_spares": 4482,
-    "b_complete": 66340,
-    "b_budget": 19902,
-    "b_insight": 31248,
-    "b_bonus": 12122,
-    "b_green": 7899,
-    "sq": 17735794
+    "n": 7645,
+    "win": 2260.25,
+    "survive": 6498,
+    "score": 298613,
+    "cargo": 26484,
+    "time": 396760,
+    "b_cargo": 105936,
+    "b_integrity": 42199,
+    "b_time": 42312,
+    "b_spares": 4426,
+    "b_complete": 64980,
+    "b_budget": 19494,
+    "b_bonus": 12096,
+    "b_green": 7170,
+    "sq": 14128169
+   },
+   "ti": {
+    "n": 6716,
+    "win": 1807.083333333333,
+    "survive": 6049,
+    "score": 274287,
+    "cargo": 24968,
+    "time": 343519,
+    "b_cargo": 99872,
+    "b_integrity": 48855,
+    "b_time": 43185,
+    "b_spares": 2036,
+    "b_complete": 60490,
+    "b_budget": 6049,
+    "b_bonus": 10884,
+    "b_green": 2916,
+    "sq": 12753003
    }
   },
   "role": {
    "structural": {
-    "n": 6678,
-    "win": 2069.6666666666665,
-    "survive": 6165,
-    "score": 312651,
-    "cargo": 23840,
-    "time": 350514,
-    "b_cargo": 95360,
-    "b_integrity": 51443,
-    "b_time": 41054,
-    "b_spares": 4829,
-    "b_complete": 61650,
-    "b_budget": 13744,
-    "b_insight": 27657,
-    "b_bonus": 11295,
-    "b_green": 5619,
-    "sq": 16003831
+    "n": 6611,
+    "win": 1672.4166666666665,
+    "survive": 5916,
+    "score": 264958,
+    "cargo": 22019,
+    "time": 353897,
+    "b_cargo": 88076,
+    "b_integrity": 47974,
+    "b_time": 36367,
+    "b_spares": 4800,
+    "b_complete": 59160,
+    "b_budget": 12996,
+    "b_bonus": 10302,
+    "b_green": 5283,
+    "sq": 12183658
    },
    "ndt": {
-    "n": 6653,
-    "win": 1563.3333333333333,
-    "survive": 6031,
-    "score": 294384,
-    "cargo": 22302,
-    "time": 352807,
-    "b_cargo": 89208,
-    "b_integrity": 46116,
-    "b_time": 38576,
-    "b_spares": 2822,
-    "b_complete": 60310,
-    "b_budget": 13449,
-    "b_insight": 27596,
-    "b_bonus": 11150,
-    "b_green": 5157,
-    "sq": 14462542
+    "n": 6651,
+    "win": 1398.4166666666665,
+    "survive": 6043,
+    "score": 258121,
+    "cargo": 20010,
+    "time": 352183,
+    "b_cargo": 80040,
+    "b_integrity": 46564,
+    "b_time": 38742,
+    "b_spares": 3312,
+    "b_complete": 60430,
+    "b_budget": 13382,
+    "b_bonus": 10770,
+    "b_green": 4881,
+    "sq": 11412297
    },
    "coatings": {
-    "n": 6719,
-    "win": 1367.1666666666665,
-    "survive": 5684,
-    "score": 274092,
-    "cargo": 20484,
-    "time": 354317,
-    "b_cargo": 81936,
-    "b_integrity": 43667,
-    "b_time": 33435,
-    "b_spares": 2637,
-    "b_complete": 56840,
-    "b_budget": 13127,
-    "b_insight": 27301,
-    "b_bonus": 10571,
-    "b_green": 4578,
-    "sq": 13235304
+    "n": 6724,
+    "win": 1398.4166666666665,
+    "survive": 5813,
+    "score": 250111,
+    "cargo": 19098,
+    "time": 348810.5,
+    "b_cargo": 76392,
+    "b_integrity": 47287,
+    "b_time": 36715,
+    "b_spares": 3559,
+    "b_complete": 58130,
+    "b_budget": 13082,
+    "b_bonus": 10326,
+    "b_green": 4620,
+    "sq": 11132115
    },
    "pilot": {
-    "n": 6672,
-    "win": 1740.833333333333,
-    "survive": 5252,
-    "score": 269779,
-    "cargo": 18918,
-    "time": 309232.5,
-    "b_cargo": 75672,
-    "b_integrity": 41233,
-    "b_time": 44926,
-    "b_spares": 2703,
-    "b_complete": 52520,
-    "b_budget": 12229,
-    "b_insight": 26513,
-    "b_bonus": 9930,
-    "b_green": 4053,
-    "sq": 13719693
+    "n": 6691,
+    "win": 2022.6666666666665,
+    "survive": 5408,
+    "score": 254885,
+    "cargo": 18457,
+    "time": 303652,
+    "b_cargo": 73828,
+    "b_integrity": 45810,
+    "b_time": 48754,
+    "b_spares": 3789,
+    "b_complete": 54080,
+    "b_budget": 12631,
+    "b_bonus": 11814,
+    "b_green": 4179,
+    "sq": 12348095
    },
    "metallurgist": {
-    "n": 6606,
-    "win": 1352.8333333333335,
-    "survive": 5512,
-    "score": 268356,
-    "cargo": 20318,
-    "time": 347688.5,
-    "b_cargo": 81272,
-    "b_integrity": 42387,
-    "b_time": 32559,
-    "b_spares": 2814,
-    "b_complete": 55120,
-    "b_budget": 12651,
-    "b_insight": 26697,
-    "b_bonus": 10233,
-    "b_green": 4623,
-    "sq": 13053356
+    "n": 6690,
+    "win": 1446.3333333333335,
+    "survive": 5888,
+    "score": 253827,
+    "cargo": 19828,
+    "time": 351275,
+    "b_cargo": 79312,
+    "b_integrity": 47207,
+    "b_time": 36484,
+    "b_spares": 3910,
+    "b_complete": 58880,
+    "b_budget": 12893,
+    "b_bonus": 10239,
+    "b_green": 4902,
+    "sq": 11336025
    },
    "quartermaster": {
-    "n": 6672,
-    "win": 1906.1666666666667,
-    "survive": 5574,
-    "score": 287483,
-    "cargo": 27888,
-    "time": 386476,
-    "b_cargo": 111552,
-    "b_integrity": 43122,
-    "b_time": 17563,
-    "b_spares": 3747,
-    "b_complete": 55740,
-    "b_budget": 12578,
-    "b_insight": 26843,
-    "b_bonus": 10380,
-    "b_green": 5958,
-    "sq": 14754791
+    "n": 6633,
+    "win": 2061.7499999999995,
+    "survive": 5642,
+    "score": 264176,
+    "cargo": 27661,
+    "time": 383338.5,
+    "b_cargo": 110644,
+    "b_integrity": 44720,
+    "b_time": 18697,
+    "b_spares": 4918,
+    "b_complete": 56420,
+    "b_budget": 12736,
+    "b_bonus": 9915,
+    "b_green": 6126,
+    "sq": 12699722
    }
   },
   "proc": {
    "ss:sa": {
-    "n": 3318,
-    "win": 490.5,
-    "survive": 3305,
-    "score": 152364,
-    "cargo": 7470,
-    "time": 192142.5,
-    "b_cargo": 29880,
-    "b_integrity": 43333,
-    "b_time": 14055,
-    "b_spares": 2351,
-    "b_complete": 33050,
-    "b_budget": 9915,
-    "b_insight": 13845,
-    "b_bonus": 5878,
-    "b_green": 57,
-    "sq": 7201560
+    "n": 3319,
+    "win": 554.6666666666667,
+    "survive": 3308,
+    "score": 137773,
+    "cargo": 6236,
+    "time": 189266.5,
+    "b_cargo": 24944,
+    "b_integrity": 45433,
+    "b_time": 15349,
+    "b_spares": 3214,
+    "b_complete": 33080,
+    "b_budget": 9924,
+    "b_bonus": 5781,
+    "b_green": 48,
+    "sq": 5947889
    },
    "cf:ep": {
-    "n": 3374,
-    "win": 1377,
-    "survive": 2584,
-    "score": 142595,
-    "cargo": 13849,
-    "time": 160889.5,
-    "b_cargo": 55396,
-    "b_integrity": 11542,
-    "b_time": 23054,
-    "b_spares": 275,
-    "b_complete": 25840,
+    "n": 3507,
+    "win": 1306.1666666666665,
+    "survive": 2730,
+    "score": 133875,
+    "cargo": 14084,
+    "time": 169066.5,
+    "b_cargo": 56336,
+    "b_integrity": 12499,
+    "b_time": 23945,
+    "b_spares": 478,
+    "b_complete": 27300,
     "b_budget": 0,
-    "b_insight": 13760,
-    "b_bonus": 5144,
-    "b_green": 7584,
-    "sq": 7644315
+    "b_bonus": 5376,
+    "b_green": 7941,
+    "sq": 6673557
    },
    "mg:ext": {
-    "n": 2960,
-    "win": 720.3333333333333,
-    "survive": 2095,
-    "score": 110238,
-    "cargo": 9105,
-    "time": 130296.5,
-    "b_cargo": 36420,
-    "b_integrity": 10201,
-    "b_time": 20259,
-    "b_spares": 690,
-    "b_complete": 20950,
-    "b_budget": 4190,
-    "b_insight": 11436,
-    "b_bonus": 4136,
-    "b_green": 1956,
-    "sq": 5627260
+    "n": 2948,
+    "win": 691.1666666666667,
+    "survive": 2039,
+    "score": 95208,
+    "cargo": 8428,
+    "time": 129137.5,
+    "b_cargo": 33712,
+    "b_integrity": 10377,
+    "b_time": 20122,
+    "b_spares": 829,
+    "b_complete": 20390,
+    "b_budget": 4078,
+    "b_bonus": 3930,
+    "b_green": 1770,
+    "sq": 4555864
    },
    "cr:qt": {
-    "n": 3134,
-    "win": 478.5,
-    "survive": 3014,
-    "score": 139327,
-    "cargo": 9996,
-    "time": 194203,
-    "b_cargo": 39984,
-    "b_integrity": 28277,
-    "b_time": 6347,
-    "b_spares": 3618,
-    "b_complete": 30140,
-    "b_budget": 12056,
-    "b_insight": 13136,
-    "b_bonus": 5451,
-    "b_green": 318,
-    "sq": 6569723
-   },
-   "ti:ma": {
-    "n": 3363,
-    "win": 737.8333333333334,
-    "survive": 2889,
-    "score": 143617,
-    "cargo": 12626,
-    "time": 172834.5,
-    "b_cargo": 50504,
-    "b_integrity": 20304,
-    "b_time": 20083,
-    "b_spares": 534,
-    "b_complete": 28890,
-    "b_budget": 2889,
-    "b_insight": 13724,
-    "b_bonus": 5411,
-    "b_green": 1278,
-    "sq": 7120475
-   },
-   "al:t6": {
-    "n": 3951,
-    "win": 1262.6666666666665,
-    "survive": 3293,
-    "score": 170583,
-    "cargo": 14197,
-    "time": 201157.5,
-    "b_cargo": 56788,
-    "b_integrity": 21549,
-    "b_time": 21550,
-    "b_spares": 2266,
-    "b_complete": 32930,
-    "b_budget": 9879,
-    "b_insight": 15664,
-    "b_bonus": 6087,
-    "b_green": 3870,
-    "sq": 8821937
-   },
-   "ss:cw": {
-    "n": 3394,
-    "win": 365.00000000000006,
-    "survive": 3357,
-    "score": 149105,
-    "cargo": 7778,
-    "time": 197139.5,
-    "b_cargo": 31112,
-    "b_integrity": 37749,
-    "b_time": 13981,
-    "b_spares": 2574,
-    "b_complete": 33570,
-    "b_budget": 10071,
-    "b_insight": 14251,
-    "b_bonus": 5722,
-    "b_green": 75,
-    "sq": 6793503
+    "n": 3053,
+    "win": 492.49999999999994,
+    "survive": 2960,
+    "score": 121463,
+    "cargo": 8973,
+    "time": 187345,
+    "b_cargo": 35892,
+    "b_integrity": 27084,
+    "b_time": 7161,
+    "b_spares": 4309,
+    "b_complete": 29600,
+    "b_budget": 11840,
+    "b_bonus": 5262,
+    "b_green": 315,
+    "sq": 5179977
    },
    "cf:ce": {
-    "n": 3479,
-    "win": 1343.5,
-    "survive": 2559,
-    "score": 140963,
-    "cargo": 13809,
-    "time": 166367.5,
-    "b_cargo": 55236,
-    "b_integrity": 10797,
-    "b_time": 22269,
-    "b_spares": 441,
-    "b_complete": 25590,
+    "n": 3409,
+    "win": 1211.75,
+    "survive": 2699,
+    "score": 129674,
+    "cargo": 14118,
+    "time": 169504.5,
+    "b_cargo": 56472,
+    "b_integrity": 11638,
+    "b_time": 20763,
+    "b_spares": 683,
+    "b_complete": 26990,
     "b_budget": 0,
-    "b_insight": 13979,
-    "b_bonus": 5094,
-    "b_green": 7557,
-    "sq": 7492789
-   },
-   "mg:ct6": {
-    "n": 2826,
-    "win": 675.8333333333334,
-    "survive": 1908,
-    "score": 100362,
-    "cargo": 8243,
-    "time": 123954.5,
-    "b_cargo": 32972,
-    "b_integrity": 9365,
-    "b_time": 18225,
-    "b_spares": 563,
-    "b_complete": 19080,
-    "b_budget": 3816,
-    "b_insight": 10751,
-    "b_bonus": 3892,
-    "b_green": 1698,
-    "sq": 5081430
-   },
-   "ti:ba": {
-    "n": 3317,
-    "win": 730,
-    "survive": 2851,
-    "score": 142180,
-    "cargo": 12462,
-    "time": 171371.5,
-    "b_cargo": 49848,
-    "b_integrity": 20560,
-    "b_time": 19904,
-    "b_spares": 415,
-    "b_complete": 28510,
-    "b_budget": 2851,
-    "b_insight": 13622,
-    "b_bonus": 5195,
-    "b_green": 1275,
-    "sq": 7052666
+    "b_bonus": 5223,
+    "b_green": 7905,
+    "sq": 6338098
    },
    "al:t73": {
-    "n": 3817,
-    "win": 1253.6666666666665,
-    "survive": 3341,
-    "score": 172513,
-    "cargo": 14409,
-    "time": 200719,
-    "b_cargo": 57636,
-    "b_integrity": 21831,
-    "b_time": 21749,
-    "b_spares": 2216,
-    "b_complete": 33410,
-    "b_budget": 10023,
-    "b_insight": 15584,
-    "b_bonus": 6035,
-    "b_green": 4029,
-    "sq": 8913857
+    "n": 3849,
+    "win": 1111.1666666666667,
+    "survive": 3313,
+    "score": 151134,
+    "cargo": 13398,
+    "time": 202112.5,
+    "b_cargo": 53592,
+    "b_integrity": 21245,
+    "b_time": 21463,
+    "b_spares": 2132,
+    "b_complete": 33130,
+    "b_budget": 9939,
+    "b_bonus": 6078,
+    "b_green": 3555,
+    "sq": 7101516
+   },
+   "mg:ct6": {
+    "n": 2891,
+    "win": 682.0833333333333,
+    "survive": 1981,
+    "score": 92273,
+    "cargo": 8038,
+    "time": 122441,
+    "b_cargo": 32152,
+    "b_integrity": 9923,
+    "b_time": 20227,
+    "b_spares": 796,
+    "b_complete": 19810,
+    "b_budget": 3962,
+    "b_bonus": 3810,
+    "b_green": 1593,
+    "sq": 4396865
    },
    "cr:n": {
-    "n": 3067,
-    "win": 565.1666666666666,
-    "survive": 3022,
-    "score": 142898,
-    "cargo": 9806,
-    "time": 189959.5,
-    "b_cargo": 39224,
-    "b_integrity": 32460,
-    "b_time": 6637,
-    "b_spares": 3609,
-    "b_complete": 30220,
-    "b_budget": 12088,
-    "b_insight": 12855,
-    "b_bonus": 5514,
-    "b_green": 291,
-    "sq": 6910002
+    "n": 3066,
+    "win": 491.16666666666663,
+    "survive": 3035,
+    "score": 124589,
+    "cargo": 8925,
+    "time": 189422.5,
+    "b_cargo": 35700,
+    "b_integrity": 30379,
+    "b_time": 6865,
+    "b_spares": 3773,
+    "b_complete": 30350,
+    "b_budget": 12140,
+    "b_bonus": 5100,
+    "b_green": 282,
+    "sq": 5314219
+   },
+   "al:t6": {
+    "n": 3796,
+    "win": 1149.0833333333335,
+    "survive": 3185,
+    "score": 147479,
+    "cargo": 13086,
+    "time": 194647.5,
+    "b_cargo": 52344,
+    "b_integrity": 20954,
+    "b_time": 20849,
+    "b_spares": 2294,
+    "b_complete": 31850,
+    "b_budget": 9555,
+    "b_bonus": 6018,
+    "b_green": 3615,
+    "sq": 7026653
+   },
+   "ti:ma": {
+    "n": 3348,
+    "win": 833.5833333333335,
+    "survive": 3010,
+    "score": 135552,
+    "cargo": 12374,
+    "time": 170327.5,
+    "b_cargo": 49496,
+    "b_integrity": 23440,
+    "b_time": 21661,
+    "b_spares": 1047,
+    "b_complete": 30100,
+    "b_budget": 3010,
+    "b_bonus": 5397,
+    "b_green": 1401,
+    "sq": 6255400
+   },
+   "ss:cw": {
+    "n": 3446,
+    "win": 503.16666666666663,
+    "survive": 3411,
+    "score": 138323,
+    "cargo": 6819,
+    "time": 196693.5,
+    "b_cargo": 27276,
+    "b_integrity": 41175,
+    "b_time": 15830,
+    "b_spares": 3744,
+    "b_complete": 34110,
+    "b_budget": 10233,
+    "b_bonus": 5904,
+    "b_green": 51,
+    "sq": 5824271
+   },
+   "ti:ba": {
+    "n": 3368,
+    "win": 973.5000000000001,
+    "survive": 3039,
+    "score": 138735,
+    "cargo": 12594,
+    "time": 173191.5,
+    "b_cargo": 50376,
+    "b_integrity": 25415,
+    "b_time": 21524,
+    "b_spares": 989,
+    "b_complete": 30390,
+    "b_budget": 3039,
+    "b_bonus": 5487,
+    "b_green": 1515,
+    "sq": 6497603
    }
   },
   "leg": {},
   "tiers": {
    "ss|L1": {
-    "partial": 2063,
-    "fail": 2559,
-    "success": 2090
+    "success": 3841,
+    "fail": 2924
    },
    "ss|L2": {
-    "success": 2933,
-    "partial": 1867,
-    "fail": 1912
-   },
-   "ss|L4": {
-    "partial": 1800,
-    "success": 3235,
-    "fail": 1677
-   },
-   "ss|L5": {
-    "success": 3439,
-    "partial": 1729,
-    "fail": 1539
-   },
-   "ss|L6": {
-    "success": 3573,
-    "partial": 1690,
-    "fail": 1427
-   },
-   "cf|L1": {
-    "fail": 1178,
-    "success": 3833,
-    "partial": 1842
-   },
-   "cf|L2": {
-    "success": 2726,
-    "partial": 2053,
-    "fail": 2074
-   },
-   "cf|L4": {
-    "fail": 2019,
-    "success": 2922,
-    "partial": 1883
-   },
-   "cf|L5": {
-    "partial": 1796,
-    "success": 2766,
-    "fail": 1959
-   },
-   "cf|L6": {
-    "success": 3118,
-    "partial": 1516,
-    "fail": 1215
-   },
-   "mg|L1": {
-    "fail": 1331,
-    "partial": 1631,
-    "success": 2824
-   },
-   "mg|L2": {
-    "partial": 1891,
-    "success": 2029,
-    "fail": 1866
-   },
-   "mg|L3": {
-    "fail": 664,
-    "success": 2018,
-    "partial": 932
-   },
-   "cr|L1": {
-    "partial": 1912,
-    "fail": 2156,
-    "success": 2133
-   },
-   "cr|L2": {
-    "success": 2546,
-    "partial": 1914,
-    "fail": 1741
-   },
-   "cr|L3": {
-    "success": 2383,
-    "partial": 1129,
-    "fail": 843
-   },
-   "cr|L4": {
-    "partial": 1640,
-    "success": 3128,
-    "fail": 1427
-   },
-   "cr|L5": {
-    "partial": 1623,
-    "success": 2633,
-    "fail": 1884
-   },
-   "cr|L6": {
-    "success": 3396,
-    "partial": 1519,
-    "fail": 1171
-   },
-   "ti|L1": {
-    "success": 3009,
-    "fail": 1708,
-    "partial": 1963
-   },
-   "ti|L2": {
-    "fail": 1991,
-    "success": 2735,
-    "partial": 1954
-   },
-   "ti|L4": {
-    "fail": 1806,
-    "success": 2980,
-    "partial": 1801
-   },
-   "ti|L5": {
-    "success": 3206,
-    "fail": 1512,
-    "partial": 1634
-   },
-   "ti|L6": {
-    "fail": 1256,
-    "success": 3256,
-    "partial": 1530
-   },
-   "al|L1": {
-    "success": 3761,
-    "partial": 2157,
-    "fail": 1850
-   },
-   "al|L2": {
-    "fail": 2997,
-    "success": 2333,
-    "partial": 2438
-   },
-   "al|L4": {
-    "partial": 2081,
-    "success": 3098,
-    "fail": 2264
-   },
-   "al|L5": {
-    "success": 3801,
-    "fail": 1475,
-    "partial": 1900
-   },
-   "al|L6": {
-    "partial": 1843,
-    "success": 3736,
-    "fail": 1366
-   },
-   "cf|L3": {
-    "success": 2468,
-    "fail": 710,
-    "partial": 1152
+    "fail": 2438,
+    "success": 4327
    },
    "ss|L3": {
-    "success": 2539,
-    "partial": 1282,
-    "fail": 922
+    "success": 6323,
+    "fail": 442
+   },
+   "ss|L4": {
+    "fail": 1385,
+    "success": 5380
+   },
+   "ss|L5": {
+    "success": 5724,
+    "fail": 1037
+   },
+   "ss|L6": {
+    "success": 3895,
+    "fail": 2860
+   },
+   "cf|L1": {
+    "fail": 1731,
+    "success": 5185
+   },
+   "cf|L2": {
+    "success": 4472,
+    "fail": 2444
+   },
+   "cf|L3": {
+    "success": 6418,
+    "fail": 461
+   },
+   "cf|L4": {
+    "success": 4006,
+    "fail": 2861
+   },
+   "cf|L5": {
+    "success": 4743,
+    "fail": 1968
+   },
+   "cf|L6": {
+    "success": 3533,
+    "fail": 2591
+   },
+   "mg|L1": {
+    "success": 3648,
+    "fail": 2191
+   },
+   "mg|L2": {
+    "fail": 2896,
+    "success": 2943
+   },
+   "mg|L3": {
+    "success": 4994,
+    "fail": 392
    },
    "mg|L4": {
-    "fail": 1507,
-    "partial": 1440,
-    "success": 2209
+    "fail": 1669,
+    "success": 3640
+   },
+   "cr|L1": {
+    "success": 3751,
+    "fail": 2368
+   },
+   "cr|L2": {
+    "fail": 1946,
+    "success": 4173
+   },
+   "cr|L3": {
+    "fail": 407,
+    "success": 5712
+   },
+   "cr|L4": {
+    "fail": 1609,
+    "success": 4492
+   },
+   "cr|L5": {
+    "fail": 3007,
+    "success": 3074
+   },
+   "cr|L6": {
+    "success": 3454,
+    "fail": 2605
    },
    "mg|L5": {
-    "fail": 1431,
-    "success": 2133,
-    "partial": 1328
+    "fail": 1812,
+    "success": 3190
    },
    "mg|L6": {
-    "partial": 1105,
-    "success": 2449,
-    "fail": 926
+    "success": 2580,
+    "fail": 1986
    },
-   "ti|L3": {
-    "success": 2490,
-    "partial": 1318,
-    "fail": 869
+   "al|L1": {
+    "fail": 2469,
+    "success": 5176
+   },
+   "al|L2": {
+    "fail": 4033,
+    "success": 3612
    },
    "al|L3": {
-    "fail": 913,
-    "success": 2756,
-    "partial": 1287
+    "success": 7013,
+    "fail": 464
+   },
+   "al|L4": {
+    "success": 3681,
+    "fail": 3641
+   },
+   "al|L5": {
+    "fail": 1486,
+    "success": 5630
+   },
+   "al|L6": {
+    "fail": 2925,
+    "success": 4032
+   },
+   "ti|L1": {
+    "success": 4785,
+    "fail": 1931
+   },
+   "ti|L2": {
+    "success": 4345,
+    "fail": 2371
+   },
+   "ti|L3": {
+    "success": 6277,
+    "fail": 439
+   },
+   "ti|L4": {
+    "success": 5306,
+    "fail": 1311
+   },
+   "ti|L5": {
+    "success": 4943,
+    "fail": 1414
+   },
+   "ti|L6": {
+    "fail": 2629,
+    "success": 3628
    }
   },
-  "turns": 232354,
-  "ties": 597,
+  "turns": 233069,
+  "ties": 567,
   "lostLegs": {
    "mg": {
-    "L4": 543,
-    "L6": 506,
-    "L3": 348,
-    "L5": 386
-   },
-   "al": {
-    "L5": 289,
-    "L4": 352,
-    "L6": 318,
-    "L3": 175
-   },
-   "ti": {
-    "L5": 375,
-    "L6": 405,
-    "L4": 160
-   },
-   "cr": {
-    "L5": 85,
-    "L6": 51,
-    "L4": 29
+    "L4": 307,
+    "L3": 530,
+    "L6": 546,
+    "L5": 436
    },
    "cf": {
-    "L6": 706,
-    "L4": 303,
-    "L2": 16,
-    "L5": 672,
-    "L3": 13
+    "L5": 587,
+    "L6": 695,
+    "L4": 156,
+    "L3": 12,
+    "L2": 37
+   },
+   "al": {
+    "L5": 159,
+    "L6": 459,
+    "L4": 312,
+    "L3": 217
+   },
+   "ti": {
+    "L4": 190,
+    "L5": 269,
+    "L6": 208
+   },
+   "cr": {
+    "L5": 22,
+    "L6": 64,
+    "L4": 38
    },
    "ss": {
-    "L6": 32,
-    "L5": 18
+    "L5": 10,
+    "L6": 36
    }
   },
   "causes": {
-   "fast fracture from a growing fatigue crack": 1317,
-   "Cold Soak in Earth’s Shadow": 432,
-   "Cracked Docking Collar": 224,
-   "Micrometeoroid Strike": 363,
-   "Cargo Transfer Race": 299,
-   "Engine-Bay Fire": 386,
-   "Sun-Side Warp": 166,
-   "Manual Docking — Guidance Lost": 318,
-   "Salt-Spray Corrosion Fatigue": 5,
-   "Fracture Detective": 357,
-   "Atomic Oxygen & UV": 391,
-   "Outgassing & Cold Welding": 366,
-   "Mach 3 Skin Heating": 304,
-   "Bird Strike!": 50,
-   "Weld-Flaw Hunt": 324,
-   "Seal & Surface Crisis": 352,
-   "Solar Storm Warning": 31,
-   "corrosion": 58,
-   "Engine Flame-Out": 14,
-   "Rivet-Hole Hot Spot": 5,
-   "Jet-Stream Tailwind": 14,
-   "Engine-Mount Resonance": 3,
-   "Ten Thousand Gusts": 3
+   "Mach 3 Skin Heating": 780,
+   "Cold Soak in Earth’s Shadow": 1310,
+   "Manual Docking — Guidance Lost": 2008,
+   "Engine Flame-Out": 138,
+   "fast fracture from a growing fatigue crack": 1017,
+   "Ten Thousand Gusts": 37
   }
  },
  "two": {
@@ -1382,686 +1856,609 @@
   "nCrews": 2,
   "mat": {
    "ti": {
-    "n": 4459,
-    "win": 2116,
-    "survive": 3770,
-    "score": 191980,
-    "cargo": 16484,
-    "time": 229951.5,
-    "b_cargo": 65936,
-    "b_integrity": 27001,
-    "b_time": 26232,
-    "b_spares": 591,
-    "b_complete": 37700,
-    "b_budget": 3770,
-    "b_insight": 18344,
-    "b_bonus": 6958,
-    "b_green": 5448,
-    "sq": 9704342
+    "n": 4455,
+    "win": 2367.5,
+    "survive": 4026,
+    "score": 185892,
+    "cargo": 16627,
+    "time": 227875.5,
+    "b_cargo": 66508,
+    "b_integrity": 31844,
+    "b_time": 28677,
+    "b_spares": 1305,
+    "b_complete": 40260,
+    "b_budget": 4026,
+    "b_bonus": 7110,
+    "b_green": 6162,
+    "sq": 8801728
    },
    "al": {
-    "n": 3800,
-    "win": 2188,
-    "survive": 3230,
-    "score": 170177,
-    "cargo": 13912,
-    "time": 196226,
-    "b_cargo": 55648,
-    "b_integrity": 20885,
-    "b_time": 20810,
-    "b_spares": 2194,
-    "b_complete": 32300,
-    "b_budget": 9690,
-    "b_insight": 15237,
-    "b_bonus": 5925,
-    "b_green": 7488,
-    "sq": 8960815
+    "n": 3728,
+    "win": 1959,
+    "survive": 3122,
+    "score": 146240,
+    "cargo": 12696,
+    "time": 193413,
+    "b_cargo": 50784,
+    "b_integrity": 20113,
+    "b_time": 20015,
+    "b_spares": 2037,
+    "b_complete": 31220,
+    "b_budget": 9366,
+    "b_bonus": 5700,
+    "b_green": 7005,
+    "sq": 7034658
+   },
+   "mg": {
+    "n": 2470,
+    "win": 1105.5,
+    "survive": 1703,
+    "score": 80533,
+    "cargo": 6871,
+    "time": 107181,
+    "b_cargo": 27484,
+    "b_integrity": 8412,
+    "b_time": 16959,
+    "b_spares": 645,
+    "b_complete": 17030,
+    "b_budget": 3406,
+    "b_bonus": 3201,
+    "b_green": 3396,
+    "sq": 3896609
+   },
+   "ss": {
+    "n": 2886,
+    "win": 1213.5,
+    "survive": 2871,
+    "score": 119659,
+    "cargo": 5667,
+    "time": 165094.5,
+    "b_cargo": 22668,
+    "b_integrity": 37035,
+    "b_time": 13099,
+    "b_spares": 2922,
+    "b_complete": 28710,
+    "b_budget": 8613,
+    "b_bonus": 5019,
+    "b_green": 1593,
+    "sq": 5175169
    },
    "cf": {
-    "n": 3653,
-    "win": 2228.5,
-    "survive": 2726,
-    "score": 150921,
-    "cargo": 14697,
-    "time": 173603,
-    "b_cargo": 58788,
-    "b_integrity": 11992,
-    "b_time": 24208,
-    "b_spares": 415,
-    "b_complete": 27260,
+    "n": 3791,
+    "win": 2195.5,
+    "survive": 2936,
+    "score": 142010,
+    "cargo": 15161,
+    "time": 185348,
+    "b_cargo": 60644,
+    "b_integrity": 12860,
+    "b_time": 24238,
+    "b_spares": 649,
+    "b_complete": 29360,
     "b_budget": 0,
-    "b_insight": 14736,
-    "b_bonus": 5365,
-    "b_green": 8157,
-    "sq": 8087151
+    "b_bonus": 5529,
+    "b_green": 8730,
+    "sq": 6987624
    },
    "cr": {
     "n": 2670,
-    "win": 1196,
-    "survive": 2598,
-    "score": 123976,
-    "cargo": 8553,
-    "time": 165653,
-    "b_cargo": 34212,
-    "b_integrity": 26341,
-    "b_time": 5530,
-    "b_spares": 3018,
-    "b_complete": 25980,
-    "b_budget": 10392,
-    "b_insight": 11167,
-    "b_bonus": 4600,
-    "b_green": 2736,
-    "sq": 6041032
-   },
-   "ss": {
-    "n": 2909,
-    "win": 1107.5,
-    "survive": 2878,
-    "score": 132134,
-    "cargo": 6669,
-    "time": 168960,
-    "b_cargo": 26676,
-    "b_integrity": 35047,
-    "b_time": 11976,
-    "b_spares": 2155,
-    "b_complete": 28780,
-    "b_budget": 8634,
-    "b_insight": 12227,
-    "b_bonus": 4869,
-    "b_green": 1770,
-    "sq": 6219076
-   },
-   "mg": {
-    "n": 2509,
-    "win": 1164,
-    "survive": 1717,
-    "score": 92555,
-    "cargo": 7456,
-    "time": 110107,
-    "b_cargo": 29824,
-    "b_integrity": 8563,
-    "b_time": 16454,
-    "b_spares": 535,
-    "b_complete": 17170,
-    "b_budget": 3434,
-    "b_insight": 9635,
-    "b_bonus": 3283,
-    "b_green": 3657,
-    "sq": 4811107
+    "win": 1159,
+    "survive": 2621,
+    "score": 109740,
+    "cargo": 7799,
+    "time": 164342,
+    "b_cargo": 31196,
+    "b_integrity": 25041,
+    "b_time": 6130,
+    "b_spares": 3548,
+    "b_complete": 26210,
+    "b_budget": 10484,
+    "b_bonus": 4557,
+    "b_green": 2574,
+    "sq": 4781030
    }
   },
   "role": {
    "quartermaster": {
-    "n": 3357,
-    "win": 1794,
-    "survive": 2756,
-    "score": 144782,
-    "cargo": 14052,
-    "time": 193198,
-    "b_cargo": 56208,
-    "b_integrity": 20650,
-    "b_time": 9057,
-    "b_spares": 1646,
-    "b_complete": 27560,
-    "b_budget": 5829,
-    "b_insight": 13595,
-    "b_bonus": 4933,
-    "b_green": 5304,
-    "sq": 7536460
+    "n": 3348,
+    "win": 1795,
+    "survive": 2829,
+    "score": 133879,
+    "cargo": 14093,
+    "time": 194254.5,
+    "b_cargo": 56372,
+    "b_integrity": 21472,
+    "b_time": 9510,
+    "b_spares": 2121,
+    "b_complete": 28290,
+    "b_budget": 5914,
+    "b_bonus": 4866,
+    "b_green": 5334,
+    "sq": 6488485
    },
    "structural": {
-    "n": 3355,
-    "win": 1940,
-    "survive": 3103,
-    "score": 160835,
-    "cargo": 12380,
-    "time": 175830.5,
-    "b_cargo": 49520,
-    "b_integrity": 25490,
-    "b_time": 20984,
-    "b_spares": 2168,
-    "b_complete": 31030,
-    "b_budget": 6451,
-    "b_insight": 14012,
-    "b_bonus": 5624,
-    "b_green": 5556,
-    "sq": 8407093
+    "n": 3373,
+    "win": 1757,
+    "survive": 3012,
+    "score": 137067,
+    "cargo": 11418,
+    "time": 179855,
+    "b_cargo": 45672,
+    "b_integrity": 23664,
+    "b_time": 18833,
+    "b_spares": 2200,
+    "b_complete": 30120,
+    "b_budget": 6168,
+    "b_bonus": 5148,
+    "b_green": 5262,
+    "sq": 6401905
    },
    "metallurgist": {
-    "n": 3306,
-    "win": 1505,
-    "survive": 2770,
-    "score": 137555,
-    "cargo": 10445,
-    "time": 173429.5,
-    "b_cargo": 41780,
-    "b_integrity": 20962,
-    "b_time": 16865,
-    "b_spares": 1274,
-    "b_complete": 27700,
-    "b_budget": 5848,
-    "b_insight": 13348,
-    "b_bonus": 5206,
-    "b_green": 4572,
-    "sq": 6817875
-   },
-   "pilot": {
-    "n": 3381,
-    "win": 1606,
-    "survive": 2563,
-    "score": 134300,
-    "cargo": 9417,
-    "time": 155215,
-    "b_cargo": 37668,
-    "b_integrity": 19783,
-    "b_time": 22037,
-    "b_spares": 1254,
-    "b_complete": 25630,
-    "b_budget": 5643,
-    "b_insight": 13380,
-    "b_bonus": 4765,
-    "b_green": 4140,
-    "sq": 6928206
+    "n": 3380,
+    "win": 1570,
+    "survive": 2981,
+    "score": 130763,
+    "cargo": 10240,
+    "time": 176952.5,
+    "b_cargo": 40960,
+    "b_integrity": 23145,
+    "b_time": 18765,
+    "b_spares": 1866,
+    "b_complete": 29810,
+    "b_budget": 6128,
+    "b_bonus": 5103,
+    "b_green": 4986,
+    "sq": 5931809
    },
    "ndt": {
-    "n": 3276,
-    "win": 1630.5,
-    "survive": 2944,
-    "score": 146932,
-    "cargo": 11037,
-    "time": 172736.5,
-    "b_cargo": 44148,
-    "b_integrity": 22501,
-    "b_time": 19239,
-    "b_spares": 1423,
-    "b_complete": 29440,
-    "b_budget": 6265,
-    "b_insight": 13619,
-    "b_bonus": 5368,
-    "b_green": 4929,
-    "sq": 7369004
+    "n": 3395,
+    "win": 1648.5,
+    "survive": 3103,
+    "score": 135648,
+    "cargo": 10509,
+    "time": 179133,
+    "b_cargo": 42036,
+    "b_integrity": 23659,
+    "b_time": 20240,
+    "b_spares": 1654,
+    "b_complete": 31030,
+    "b_budget": 6469,
+    "b_bonus": 5520,
+    "b_green": 5040,
+    "sq": 6129674
    },
    "coatings": {
-    "n": 3325,
-    "win": 1524.5,
-    "survive": 2783,
-    "score": 137339,
-    "cargo": 10440,
-    "time": 174091,
-    "b_cargo": 41760,
-    "b_integrity": 20443,
-    "b_time": 17028,
-    "b_spares": 1143,
-    "b_complete": 27830,
-    "b_budget": 5884,
-    "b_insight": 13392,
-    "b_bonus": 5104,
-    "b_green": 4755,
-    "sq": 6764885
+    "n": 3197,
+    "win": 1493.5,
+    "survive": 2741,
+    "score": 121022,
+    "cargo": 9386,
+    "time": 163858,
+    "b_cargo": 37544,
+    "b_integrity": 21505,
+    "b_time": 18026,
+    "b_spares": 1591,
+    "b_complete": 27410,
+    "b_budget": 5619,
+    "b_bonus": 4779,
+    "b_green": 4548,
+    "sq": 5516650
+   },
+   "pilot": {
+    "n": 3307,
+    "win": 1736,
+    "survive": 2613,
+    "score": 125695,
+    "cargo": 9175,
+    "time": 149201,
+    "b_cargo": 36700,
+    "b_integrity": 21860,
+    "b_time": 23744,
+    "b_spares": 1674,
+    "b_complete": 26130,
+    "b_budget": 5597,
+    "b_bonus": 5700,
+    "b_green": 4290,
+    "sq": 6208295
    }
   },
   "proc": {
    "ti:ba": {
-    "n": 2278,
-    "win": 1102,
-    "survive": 1924,
-    "score": 98332,
-    "cargo": 8382,
-    "time": 117648.5,
-    "b_cargo": 33528,
-    "b_integrity": 14174,
-    "b_time": 13453,
-    "b_spares": 266,
-    "b_complete": 19240,
-    "b_budget": 1924,
-    "b_insight": 9406,
-    "b_bonus": 3560,
-    "b_green": 2781,
-    "sq": 4985436
+    "n": 2263,
+    "win": 1230.5,
+    "survive": 2061,
+    "score": 95708,
+    "cargo": 8504,
+    "time": 116525.5,
+    "b_cargo": 34016,
+    "b_integrity": 17006,
+    "b_time": 14617,
+    "b_spares": 663,
+    "b_complete": 20610,
+    "b_budget": 2061,
+    "b_bonus": 3588,
+    "b_green": 3147,
+    "sq": 4556382
    },
    "al:t73": {
-    "n": 1881,
-    "win": 1116,
-    "survive": 1648,
-    "score": 86883,
-    "cargo": 7082,
-    "time": 98294.5,
-    "b_cargo": 28328,
-    "b_integrity": 10658,
-    "b_time": 10817,
-    "b_spares": 1161,
-    "b_complete": 16480,
-    "b_budget": 4944,
-    "b_insight": 7648,
-    "b_bonus": 3007,
-    "b_green": 3840,
-    "sq": 4587417
-   },
-   "cf:ce": {
-    "n": 1775,
-    "win": 1079,
-    "survive": 1285,
-    "score": 71635,
-    "cargo": 6971,
-    "time": 84048.5,
-    "b_cargo": 27884,
-    "b_integrity": 5647,
-    "b_time": 11374,
-    "b_spares": 273,
-    "b_complete": 12850,
-    "b_budget": 0,
-    "b_insight": 7147,
-    "b_bonus": 2611,
-    "b_green": 3849,
-    "sq": 3848047
-   },
-   "cr:qt": {
-    "n": 1348,
-    "win": 592,
-    "survive": 1289,
-    "score": 60710,
-    "cargo": 4240,
-    "time": 83530.5,
-    "b_cargo": 16960,
-    "b_integrity": 12139,
-    "b_time": 2733,
-    "b_spares": 1483,
-    "b_complete": 12890,
-    "b_budget": 5156,
-    "b_insight": 5657,
-    "b_bonus": 2267,
-    "b_green": 1425,
-    "sq": 2915922
+    "n": 1870,
+    "win": 958,
+    "survive": 1567,
+    "score": 72720,
+    "cargo": 6267,
+    "time": 97846,
+    "b_cargo": 25068,
+    "b_integrity": 9957,
+    "b_time": 10103,
+    "b_spares": 951,
+    "b_complete": 15670,
+    "b_budget": 4701,
+    "b_bonus": 2793,
+    "b_green": 3477,
+    "sq": 3465704
    },
    "ti:ma": {
-    "n": 2181,
-    "win": 1014,
-    "survive": 1846,
-    "score": 93648,
-    "cargo": 8102,
-    "time": 112303,
-    "b_cargo": 32408,
-    "b_integrity": 12827,
-    "b_time": 12779,
-    "b_spares": 325,
-    "b_complete": 18460,
-    "b_budget": 1846,
-    "b_insight": 8938,
-    "b_bonus": 3398,
-    "b_green": 2667,
-    "sq": 4718906
-   },
-   "cr:n": {
-    "n": 1322,
-    "win": 604,
-    "survive": 1309,
-    "score": 63266,
-    "cargo": 4313,
-    "time": 82122.5,
-    "b_cargo": 17252,
-    "b_integrity": 14202,
-    "b_time": 2797,
-    "b_spares": 1535,
-    "b_complete": 13090,
-    "b_budget": 5236,
-    "b_insight": 5510,
-    "b_bonus": 2333,
-    "b_green": 1311,
-    "sq": 3125110
-   },
-   "cf:ep": {
-    "n": 1878,
-    "win": 1149.5,
-    "survive": 1441,
-    "score": 79286,
-    "cargo": 7726,
-    "time": 89554.5,
-    "b_cargo": 30904,
-    "b_integrity": 6345,
-    "b_time": 12834,
-    "b_spares": 142,
-    "b_complete": 14410,
-    "b_budget": 0,
-    "b_insight": 7589,
-    "b_bonus": 2754,
-    "b_green": 4308,
-    "sq": 4239104
-   },
-   "ss:cw": {
-    "n": 1521,
-    "win": 544.5,
-    "survive": 1504,
-    "score": 67790,
-    "cargo": 3517,
-    "time": 88390,
-    "b_cargo": 14068,
-    "b_integrity": 16915,
-    "b_time": 6227,
-    "b_spares": 1128,
-    "b_complete": 15040,
-    "b_budget": 4512,
-    "b_insight": 6402,
-    "b_bonus": 2568,
-    "b_green": 930,
-    "sq": 3131454
+    "n": 2192,
+    "win": 1137,
+    "survive": 1965,
+    "score": 90184,
+    "cargo": 8123,
+    "time": 111350,
+    "b_cargo": 32492,
+    "b_integrity": 14838,
+    "b_time": 14060,
+    "b_spares": 642,
+    "b_complete": 19650,
+    "b_budget": 1965,
+    "b_bonus": 3522,
+    "b_green": 3015,
+    "sq": 4245346
    },
    "mg:ext": {
-    "n": 1248,
-    "win": 605.5,
-    "survive": 872,
-    "score": 47285,
-    "cargo": 3819,
-    "time": 54904.5,
-    "b_cargo": 15276,
-    "b_integrity": 4452,
-    "b_time": 8387,
-    "b_spares": 318,
-    "b_complete": 8720,
-    "b_budget": 1744,
-    "b_insight": 4784,
-    "b_bonus": 1678,
-    "b_green": 1926,
-    "sq": 2484053
-   },
-   "al:t6": {
-    "n": 1919,
-    "win": 1072,
-    "survive": 1582,
-    "score": 83294,
-    "cargo": 6830,
-    "time": 97931.5,
-    "b_cargo": 27320,
-    "b_integrity": 10227,
-    "b_time": 9993,
-    "b_spares": 1033,
-    "b_complete": 15820,
-    "b_budget": 4746,
-    "b_insight": 7589,
-    "b_bonus": 2918,
-    "b_green": 3648,
-    "sq": 4373398
-   },
-   "ss:sa": {
-    "n": 1388,
-    "win": 563,
-    "survive": 1374,
-    "score": 64344,
-    "cargo": 3152,
-    "time": 80570,
-    "b_cargo": 12608,
-    "b_integrity": 18132,
-    "b_time": 5749,
-    "b_spares": 1027,
-    "b_complete": 13740,
-    "b_budget": 4122,
-    "b_insight": 5825,
-    "b_bonus": 2301,
-    "b_green": 840,
-    "sq": 3087622
-   },
-   "mg:ct6": {
-    "n": 1261,
-    "win": 558.5,
+    "n": 1208,
+    "win": 533,
     "survive": 845,
-    "score": 45270,
-    "cargo": 3637,
-    "time": 55202.5,
-    "b_cargo": 14548,
-    "b_integrity": 4111,
-    "b_time": 8067,
-    "b_spares": 217,
+    "score": 39687,
+    "cargo": 3408,
+    "time": 53253,
+    "b_cargo": 13632,
+    "b_integrity": 4103,
+    "b_time": 8233,
+    "b_spares": 324,
     "b_complete": 8450,
     "b_budget": 1690,
-    "b_insight": 4851,
-    "b_bonus": 1605,
-    "b_green": 1731,
-    "sq": 2327054
+    "b_bonus": 1521,
+    "b_green": 1734,
+    "sq": 1908727
+   },
+   "ss:sa": {
+    "n": 1459,
+    "win": 635,
+    "survive": 1454,
+    "score": 61643,
+    "cargo": 2784,
+    "time": 83188.5,
+    "b_cargo": 11136,
+    "b_integrity": 20090,
+    "b_time": 6735,
+    "b_spares": 1429,
+    "b_complete": 14540,
+    "b_budget": 4362,
+    "b_bonus": 2592,
+    "b_green": 759,
+    "sq": 2708523
+   },
+   "al:t6": {
+    "n": 1858,
+    "win": 1001,
+    "survive": 1555,
+    "score": 73520,
+    "cargo": 6429,
+    "time": 95567,
+    "b_cargo": 25716,
+    "b_integrity": 10156,
+    "b_time": 9912,
+    "b_spares": 1086,
+    "b_complete": 15550,
+    "b_budget": 4665,
+    "b_bonus": 2907,
+    "b_green": 3528,
+    "sq": 3568954
+   },
+   "cf:ce": {
+    "n": 1890,
+    "win": 1100.5,
+    "survive": 1494,
+    "score": 71570,
+    "cargo": 7803,
+    "time": 94097,
+    "b_cargo": 31212,
+    "b_integrity": 6355,
+    "b_time": 11419,
+    "b_spares": 402,
+    "b_complete": 14940,
+    "b_budget": 0,
+    "b_bonus": 2784,
+    "b_green": 4458,
+    "sq": 3489770
+   },
+   "ss:cw": {
+    "n": 1427,
+    "win": 578.5,
+    "survive": 1417,
+    "score": 58016,
+    "cargo": 2883,
+    "time": 81906,
+    "b_cargo": 11532,
+    "b_integrity": 16945,
+    "b_time": 6364,
+    "b_spares": 1493,
+    "b_complete": 14170,
+    "b_budget": 4251,
+    "b_bonus": 2427,
+    "b_green": 834,
+    "sq": 2466646
+   },
+   "cr:n": {
+    "n": 1335,
+    "win": 599.5,
+    "survive": 1325,
+    "score": 55811,
+    "cargo": 3891,
+    "time": 82362,
+    "b_cargo": 15564,
+    "b_integrity": 13314,
+    "b_time": 3059,
+    "b_spares": 1625,
+    "b_complete": 13250,
+    "b_budget": 5300,
+    "b_bonus": 2337,
+    "b_green": 1362,
+    "sq": 2442303
+   },
+   "cf:ep": {
+    "n": 1901,
+    "win": 1095,
+    "survive": 1442,
+    "score": 70440,
+    "cargo": 7358,
+    "time": 91251,
+    "b_cargo": 29432,
+    "b_integrity": 6505,
+    "b_time": 12819,
+    "b_spares": 247,
+    "b_complete": 14420,
+    "b_budget": 0,
+    "b_bonus": 2745,
+    "b_green": 4272,
+    "sq": 3497854
+   },
+   "cr:qt": {
+    "n": 1335,
+    "win": 559.5,
+    "survive": 1296,
+    "score": 53929,
+    "cargo": 3908,
+    "time": 81980,
+    "b_cargo": 15632,
+    "b_integrity": 11727,
+    "b_time": 3071,
+    "b_spares": 1923,
+    "b_complete": 12960,
+    "b_budget": 5184,
+    "b_bonus": 2220,
+    "b_green": 1212,
+    "sq": 2338727
+   },
+   "mg:ct6": {
+    "n": 1262,
+    "win": 572.5,
+    "survive": 858,
+    "score": 40846,
+    "cargo": 3463,
+    "time": 53928,
+    "b_cargo": 13852,
+    "b_integrity": 4309,
+    "b_time": 8726,
+    "b_spares": 321,
+    "b_complete": 8580,
+    "b_budget": 1716,
+    "b_bonus": 1680,
+    "b_green": 1662,
+    "sq": 1987882
    }
   },
   "leg": {},
   "tiers": {
    "ti|L1": {
-    "success": 1993,
-    "partial": 1303,
-    "fail": 1163
+    "success": 3188,
+    "fail": 1267
    },
    "ti|L2": {
-    "partial": 1314,
-    "success": 1827,
-    "fail": 1318
+    "success": 2831,
+    "fail": 1624
    },
    "ti|L3": {
-    "fail": 642,
-    "success": 1618,
-    "partial": 888
+    "success": 4160,
+    "fail": 295
    },
    "ti|L4": {
-    "success": 1990,
-    "fail": 1226,
-    "partial": 1203
+    "success": 3522,
+    "fail": 861
    },
    "ti|L5": {
-    "success": 2118,
-    "fail": 1004,
-    "partial": 1124
+    "success": 3239,
+    "fail": 981
    },
    "ti|L6": {
-    "success": 2146,
-    "partial": 1003,
-    "fail": 877
+    "success": 2370,
+    "fail": 1785
    },
    "al|L1": {
-    "success": 1843,
-    "fail": 844,
-    "partial": 1113
+    "success": 2525,
+    "fail": 1203
    },
    "al|L2": {
-    "partial": 1161,
-    "success": 1176,
-    "fail": 1463
+    "fail": 2017,
+    "success": 1711
    },
    "al|L3": {
-    "partial": 646,
-    "fail": 452,
-    "success": 1354
+    "success": 3368,
+    "fail": 276
    },
    "al|L4": {
-    "success": 1471,
-    "partial": 1029,
-    "fail": 1116
+    "success": 1775,
+    "fail": 1786
    },
    "al|L5": {
-    "fail": 708,
-    "partial": 930,
-    "success": 1843
+    "success": 2688,
+    "fail": 760
    },
    "al|L6": {
-    "fail": 729,
-    "success": 1817,
-    "partial": 835
-   },
-   "cf|L1": {
-    "partial": 965,
-    "success": 2040,
-    "fail": 648
-   },
-   "cf|L2": {
-    "success": 1466,
-    "fail": 1090,
-    "partial": 1097
-   },
-   "cf|L4": {
-    "fail": 1107,
-    "success": 1546,
-    "partial": 982
-   },
-   "cf|L5": {
-    "success": 1483,
-    "fail": 1040,
-    "partial": 936
-   },
-   "cf|L6": {
-    "partial": 815,
-    "success": 1653,
-    "fail": 607
-   },
-   "cr|L1": {
-    "success": 914,
-    "partial": 836,
-    "fail": 920
-   },
-   "cr|L2": {
-    "fail": 811,
-    "success": 1099,
-    "partial": 760
-   },
-   "cr|L4": {
-    "success": 1364,
-    "partial": 692,
-    "fail": 614
-   },
-   "cr|L5": {
-    "fail": 770,
-    "success": 1178,
-    "partial": 701
-   },
-   "cr|L6": {
-    "success": 1420,
-    "partial": 685,
-    "fail": 518
-   },
-   "cr|L3": {
-    "partial": 496,
-    "success": 1004,
-    "fail": 380
-   },
-   "cf|L3": {
-    "success": 1316,
-    "partial": 622,
-    "fail": 403
-   },
-   "ss|L1": {
-    "success": 908,
-    "fail": 1077,
-    "partial": 924
-   },
-   "ss|L2": {
-    "success": 1254,
-    "fail": 810,
-    "partial": 845
-   },
-   "ss|L3": {
-    "success": 1103,
-    "partial": 524,
-    "fail": 418
-   },
-   "ss|L4": {
-    "success": 1421,
-    "fail": 686,
-    "partial": 802
-   },
-   "ss|L5": {
-    "partial": 751,
-    "success": 1501,
-    "fail": 652
-   },
-   "ss|L6": {
-    "partial": 735,
-    "fail": 662,
-    "success": 1496
+    "fail": 1447,
+    "success": 1900
    },
    "mg|L1": {
-    "success": 1175,
-    "partial": 703,
-    "fail": 631
+    "fail": 975,
+    "success": 1495
    },
    "mg|L2": {
-    "fail": 835,
-    "success": 903,
-    "partial": 771
-   },
-   "mg|L4": {
-    "success": 965,
-    "partial": 626,
-    "fail": 637
-   },
-   "mg|L5": {
-    "success": 959,
-    "fail": 602,
-    "partial": 555
-   },
-   "mg|L6": {
-    "fail": 393,
-    "success": 1004,
-    "partial": 526
+    "success": 1225,
+    "fail": 1245
    },
    "mg|L3": {
-    "success": 878,
-    "partial": 415,
-    "fail": 268
+    "success": 2145,
+    "fail": 151
+   },
+   "mg|L4": {
+    "success": 1567,
+    "fail": 698
+   },
+   "mg|L5": {
+    "fail": 796,
+    "success": 1337
+   },
+   "mg|L6": {
+    "success": 1067,
+    "fail": 865
+   },
+   "ss|L1": {
+    "success": 1661,
+    "fail": 1225
+   },
+   "ss|L2": {
+    "fail": 1079,
+    "success": 1807
+   },
+   "ss|L3": {
+    "success": 2695,
+    "fail": 191
+   },
+   "ss|L4": {
+    "success": 2304,
+    "fail": 582
+   },
+   "ss|L5": {
+    "success": 2429,
+    "fail": 452
+   },
+   "ss|L6": {
+    "success": 1673,
+    "fail": 1205
+   },
+   "cf|L1": {
+    "fail": 958,
+    "success": 2833
+   },
+   "cf|L2": {
+    "success": 2457,
+    "fail": 1334
+   },
+   "cf|L3": {
+    "success": 3541,
+    "fail": 228
+   },
+   "cf|L4": {
+    "success": 2141,
+    "fail": 1620
+   },
+   "cf|L5": {
+    "fail": 1103,
+    "success": 2559
+   },
+   "cf|L6": {
+    "success": 1843,
+    "fail": 1475
+   },
+   "cr|L1": {
+    "success": 1644,
+    "fail": 1026
+   },
+   "cr|L2": {
+    "fail": 836,
+    "success": 1834
+   },
+   "cr|L3": {
+    "success": 2463,
+    "fail": 207
+   },
+   "cr|L4": {
+    "success": 1937,
+    "fail": 722
+   },
+   "cr|L5": {
+    "success": 1357,
+    "fail": 1296
+   },
+   "cr|L6": {
+    "fail": 1123,
+    "success": 1519
    }
   },
-  "turns": 116021,
-  "ties": 294,
+  "turns": 116504,
+  "ties": 360,
   "lostLegs": {
-   "cf": {
-    "L6": 349,
-    "L5": 384,
-    "L4": 176,
-    "L3": 12,
-    "L2": 6
-   },
-   "mg": {
-    "L4": 246,
-    "L6": 221,
-    "L3": 146,
-    "L5": 179
-   },
    "ti": {
-    "L6": 323,
-    "L5": 284,
-    "L4": 82
+    "L6": 129,
+    "L5": 162,
+    "L4": 138
    },
    "al": {
-    "L4": 174,
-    "L6": 152,
-    "L5": 139,
-    "L3": 105
+    "L6": 225,
+    "L4": 169,
+    "L3": 111,
+    "L5": 101
    },
-   "cr": {
-    "L5": 41,
-    "L6": 25,
-    "L4": 6
+   "cf": {
+    "L5": 344,
+    "L6": 382,
+    "L2": 22,
+    "L3": 8,
+    "L4": 99
+   },
+   "mg": {
+    "L4": 132,
+    "L3": 205,
+    "L6": 229,
+    "L5": 201
    },
    "ss": {
-    "L5": 11,
-    "L6": 20
+    "L5": 8,
+    "L6": 7
+   },
+   "cr": {
+    "L4": 17,
+    "L6": 21,
+    "L5": 11
    }
   },
   "causes": {
-   "Cracked Docking Collar": 113,
-   "Cold Soak in Earth’s Shadow": 239,
-   "fast fracture from a growing fatigue crack": 735,
-   "Sun-Side Warp": 82,
-   "Manual Docking — Guidance Lost": 180,
-   "Atomic Oxygen & UV": 212,
-   "Outgassing & Cold Welding": 202,
-   "Weld-Flaw Hunt": 169,
-   "Micrometeoroid Strike": 193,
-   "Seal & Surface Crisis": 195,
-   "Solar Storm Warning": 8,
-   "Engine Flame-Out": 1,
-   "Fracture Detective": 173,
-   "corrosion": 25,
-   "Cargo Transfer Race": 172,
-   "Engine-Bay Fire": 201,
-   "Mach 3 Skin Heating": 147,
-   "Jet-Stream Tailwind": 1,
-   "Bird Strike!": 27,
-   "Salt-Spray Corrosion Fatigue": 2,
-   "Engine-Mount Resonance": 2,
-   "Rivet-Hole Hot Spot": 1,
-   "Ten Thousand Gusts": 1
+   "Manual Docking — Guidance Lost": 993,
+   "Cold Soak in Earth’s Shadow": 725,
+   "fast fracture from a growing fatigue crack": 499,
+   "Mach 3 Skin Heating": 416,
+   "Ten Thousand Gusts": 22,
+   "Engine Flame-Out": 66
   }
  },
  "mixed": {
@@ -2071,705 +2468,628 @@
   "mat": {
    "ti": {
     "n": 10000,
-    "win": 1491.916666666667,
-    "survive": 8656,
-    "score": 406229,
-    "cargo": 37855,
-    "time": 562805.5,
-    "b_cargo": 151420,
-    "b_integrity": 67986,
-    "b_time": 37642,
-    "b_spares": 2229,
-    "b_complete": 86560,
-    "b_budget": 8656,
-    "b_insight": 35798,
-    "b_bonus": 15299,
-    "b_green": 639,
-    "sq": 19115825
+    "win": 1950.916666666666,
+    "survive": 9130,
+    "score": 394919,
+    "cargo": 37857,
+    "time": 562870.5,
+    "b_cargo": 151428,
+    "b_integrity": 80745,
+    "b_time": 40973,
+    "b_spares": 4285,
+    "b_complete": 91300,
+    "b_budget": 9130,
+    "b_bonus": 16008,
+    "b_green": 1050,
+    "sq": 17595217
    },
    "ss": {
     "n": 10000,
-    "win": 834.9166666666669,
-    "survive": 9940,
-    "score": 427643,
-    "cargo": 23258,
-    "time": 664289,
-    "b_cargo": 93032,
-    "b_integrity": 130761,
-    "b_time": 6751,
-    "b_spares": 12231,
-    "b_complete": 99400,
-    "b_budget": 29820,
-    "b_insight": 38640,
-    "b_bonus": 17005,
+    "win": 984.5833333333337,
+    "survive": 9952,
+    "score": 389660,
+    "cargo": 20265,
+    "time": 656916,
+    "b_cargo": 81060,
+    "b_integrity": 137599,
+    "b_time": 8742,
+    "b_spares": 15729,
+    "b_complete": 99520,
+    "b_budget": 29856,
+    "b_bonus": 17151,
     "b_green": 3,
-    "sq": 18871971
+    "sq": 15872564
    },
    "cf": {
     "n": 10000,
-    "win": 2827.583333333334,
-    "survive": 7562,
-    "score": 388872,
-    "cargo": 40732,
-    "time": 533568,
-    "b_cargo": 162928,
-    "b_integrity": 38690,
-    "b_time": 36592,
-    "b_spares": 1997,
-    "b_complete": 75620,
+    "win": 2676.9166666666665,
+    "survive": 7792,
+    "score": 360707,
+    "cargo": 40696,
+    "time": 534203.5,
+    "b_cargo": 162784,
+    "b_integrity": 41760,
+    "b_time": 37818,
+    "b_spares": 3225,
+    "b_complete": 77920,
     "b_budget": 0,
-    "b_insight": 36239,
-    "b_bonus": 14711,
-    "b_green": 22095,
-    "sq": 19643168
+    "b_bonus": 14601,
+    "b_green": 22599,
+    "sq": 17099391
    },
    "mg": {
     "n": 10000,
-    "win": 1619.9166666666663,
-    "survive": 7268,
-    "score": 353818,
-    "cargo": 31722,
-    "time": 502388.5,
-    "b_cargo": 126888,
-    "b_integrity": 41537,
-    "b_time": 41437,
-    "b_spares": 4336,
-    "b_complete": 72680,
-    "b_budget": 14536,
-    "b_insight": 35913,
-    "b_bonus": 14079,
-    "b_green": 2412,
-    "sq": 16926214
+    "win": 1465.4166666666665,
+    "survive": 7533,
+    "score": 324381,
+    "cargo": 31127,
+    "time": 504776.5,
+    "b_cargo": 124508,
+    "b_integrity": 44061,
+    "b_time": 43484,
+    "b_spares": 5663,
+    "b_complete": 75330,
+    "b_budget": 15066,
+    "b_bonus": 13806,
+    "b_green": 2463,
+    "sq": 14420925
    },
    "al": {
     "n": 10000,
-    "win": 1944.4999999999995,
-    "survive": 8678,
-    "score": 414523,
-    "cargo": 38056,
-    "time": 596406.5,
-    "b_cargo": 152224,
-    "b_integrity": 63011,
-    "b_time": 19630,
-    "b_spares": 10014,
-    "b_complete": 86780,
-    "b_budget": 26034,
-    "b_insight": 36223,
-    "b_bonus": 15774,
-    "b_green": 4833,
-    "sq": 19945017
+    "win": 1800.8333333333326,
+    "survive": 8796,
+    "score": 377417,
+    "cargo": 36616,
+    "time": 596852.5,
+    "b_cargo": 146464,
+    "b_integrity": 63949,
+    "b_time": 21334,
+    "b_spares": 11675,
+    "b_complete": 87960,
+    "b_budget": 26388,
+    "b_bonus": 15795,
+    "b_green": 3852,
+    "sq": 16731387
    },
    "cr": {
     "n": 10000,
-    "win": 1281.1666666666667,
-    "survive": 9755,
-    "score": 441317,
-    "cargo": 32625,
-    "time": 690844,
-    "b_cargo": 130500,
-    "b_integrity": 104851,
-    "b_time": -3415,
-    "b_spares": 17207,
-    "b_complete": 97550,
-    "b_budget": 39020,
-    "b_insight": 38481,
-    "b_bonus": 17105,
-    "b_green": 18,
-    "sq": 20387737
+    "win": 1121.3333333333337,
+    "survive": 9837,
+    "score": 394548,
+    "cargo": 30015,
+    "time": 691139.5,
+    "b_cargo": 120060,
+    "b_integrity": 103342,
+    "b_time": -2843,
+    "b_spares": 19423,
+    "b_complete": 98370,
+    "b_budget": 39348,
+    "b_bonus": 16815,
+    "b_green": 33,
+    "sq": 16398798
    }
   },
   "role": {
    "pilot": {
-    "n": 9882,
-    "win": 1748.9166666666665,
-    "survive": 8196,
-    "score": 386345,
-    "cargo": 30143,
-    "time": 547649,
-    "b_cargo": 120572,
-    "b_integrity": 69819,
-    "b_time": 32835,
-    "b_spares": 6868,
-    "b_complete": 81960,
-    "b_budget": 18769,
-    "b_insight": 36033,
-    "b_bonus": 15034,
-    "b_green": 4455,
-    "sq": 18298391
+    "n": 9886,
+    "win": 2039.416666666666,
+    "survive": 8514,
+    "score": 372263,
+    "cargo": 30029,
+    "time": 539054.5,
+    "b_cargo": 120116,
+    "b_integrity": 77091,
+    "b_time": 38955,
+    "b_spares": 8886,
+    "b_complete": 85140,
+    "b_budget": 19293,
+    "b_bonus": 18159,
+    "b_green": 4623,
+    "sq": 16875123
    },
    "coatings": {
-    "n": 10009,
-    "win": 1282.166666666667,
-    "survive": 8447,
-    "score": 383760,
-    "cargo": 30935,
-    "time": 588565.5,
-    "b_cargo": 123740,
-    "b_integrity": 71133,
-    "b_time": 21938,
-    "b_spares": 6657,
-    "b_complete": 84470,
-    "b_budget": 19289,
-    "b_insight": 36624,
-    "b_bonus": 15229,
-    "b_green": 4680,
-    "sq": 17531246
+    "n": 10095,
+    "win": 1276.2500000000005,
+    "survive": 8786,
+    "score": 357540,
+    "cargo": 29569,
+    "time": 587725.5,
+    "b_cargo": 118276,
+    "b_integrity": 77619,
+    "b_time": 25765,
+    "b_spares": 8651,
+    "b_complete": 87860,
+    "b_budget": 19713,
+    "b_bonus": 15006,
+    "b_green": 4650,
+    "sq": 15102166
    },
    "ndt": {
-    "n": 10033,
-    "win": 1410.7499999999998,
-    "survive": 8924,
-    "score": 408019,
-    "cargo": 32851,
-    "time": 594000,
-    "b_cargo": 131404,
-    "b_integrity": 75098,
-    "b_time": 26603,
-    "b_spares": 6995,
-    "b_complete": 89240,
-    "b_budget": 20270,
-    "b_insight": 37477,
-    "b_bonus": 16147,
-    "b_green": 4785,
-    "sq": 18838569
+    "n": 9984,
+    "win": 1302.4166666666672,
+    "survive": 9022,
+    "score": 367516,
+    "cargo": 30349,
+    "time": 591542.5,
+    "b_cargo": 121396,
+    "b_integrity": 78971,
+    "b_time": 27333,
+    "b_spares": 9011,
+    "b_complete": 90220,
+    "b_budget": 20326,
+    "b_bonus": 15633,
+    "b_green": 4626,
+    "sq": 15520614
    },
    "metallurgist": {
-    "n": 9964,
-    "win": 1364.2499999999998,
-    "survive": 8525,
-    "score": 391416,
-    "cargo": 31572,
-    "time": 587122.5,
-    "b_cargo": 126288,
-    "b_integrity": 73774,
-    "b_time": 22205,
-    "b_spares": 7405,
-    "b_complete": 85250,
-    "b_budget": 19550,
-    "b_insight": 36761,
-    "b_bonus": 15566,
-    "b_green": 4617,
-    "sq": 18099086
+    "n": 10132,
+    "win": 1496.333333333333,
+    "survive": 9093,
+    "score": 374225,
+    "cargo": 31143,
+    "time": 600996.5,
+    "b_cargo": 124572,
+    "b_integrity": 82375,
+    "b_time": 25130,
+    "b_spares": 10213,
+    "b_complete": 90930,
+    "b_budget": 20491,
+    "b_bonus": 15489,
+    "b_green": 5025,
+    "sq": 15980967
    },
    "structural": {
-    "n": 10099,
-    "win": 2057.7499999999995,
-    "survive": 9403,
-    "score": 449486,
-    "cargo": 36729,
-    "time": 597788.5,
-    "b_cargo": 146916,
-    "b_integrity": 85643,
-    "b_time": 31112,
-    "b_spares": 10212,
-    "b_complete": 94030,
-    "b_budget": 21021,
-    "b_insight": 38078,
-    "b_bonus": 16861,
-    "b_green": 5613,
-    "sq": 21761324
+    "n": 9879,
+    "win": 1617.5833333333333,
+    "survive": 8958,
+    "score": 376642,
+    "cargo": 32665,
+    "time": 592171,
+    "b_cargo": 130660,
+    "b_integrity": 79798,
+    "b_time": 25473,
+    "b_spares": 10954,
+    "b_complete": 89580,
+    "b_budget": 20254,
+    "b_bonus": 14979,
+    "b_green": 4944,
+    "sq": 16364162
    },
    "quartermaster": {
-    "n": 10013,
-    "win": 2136.166666666666,
-    "survive": 8364,
-    "score": 413376,
-    "cargo": 42018,
-    "time": 635176,
-    "b_cargo": 168072,
-    "b_integrity": 71369,
-    "b_time": 3944,
-    "b_spares": 9877,
-    "b_complete": 83640,
-    "b_budget": 19167,
-    "b_insight": 36321,
-    "b_bonus": 15136,
-    "b_green": 5850,
-    "sq": 20361316
+    "n": 10024,
+    "win": 2267.9999999999995,
+    "survive": 8667,
+    "score": 393446,
+    "cargo": 42821,
+    "time": 635268.5,
+    "b_cargo": 171284,
+    "b_integrity": 75602,
+    "b_time": 6852,
+    "b_spares": 12285,
+    "b_complete": 86670,
+    "b_budget": 19711,
+    "b_bonus": 14910,
+    "b_green": 6132,
+    "sq": 18275250
    }
   },
   "proc": {
    "ti:ma": {
-    "n": 4960,
-    "win": 724.4166666666665,
-    "survive": 4292,
-    "score": 200873,
-    "cargo": 18825,
-    "time": 278176,
-    "b_cargo": 75300,
-    "b_integrity": 32738,
-    "b_time": 18776,
-    "b_spares": 1181,
-    "b_complete": 42920,
-    "b_budget": 4292,
-    "b_insight": 17733,
-    "b_bonus": 7609,
-    "b_green": 324,
-    "sq": 9435629
+    "n": 5029,
+    "win": 924.9166666666667,
+    "survive": 4581,
+    "score": 196990,
+    "cargo": 18981,
+    "time": 282313.5,
+    "b_cargo": 75924,
+    "b_integrity": 39469,
+    "b_time": 20406,
+    "b_spares": 2277,
+    "b_complete": 45810,
+    "b_budget": 4581,
+    "b_bonus": 7968,
+    "b_green": 555,
+    "sq": 8723140
    },
    "ss:cw": {
-    "n": 5074,
-    "win": 340.75,
-    "survive": 5030,
-    "score": 212606,
-    "cargo": 11824,
-    "time": 336944,
-    "b_cargo": 47296,
-    "b_integrity": 61804,
-    "b_time": 3408,
-    "b_spares": 6388,
-    "b_complete": 50300,
-    "b_budget": 15090,
-    "b_insight": 19662,
-    "b_bonus": 8655,
+    "n": 5001,
+    "win": 431.49999999999994,
+    "survive": 4964,
+    "score": 191805,
+    "cargo": 10424,
+    "time": 328640.5,
+    "b_cargo": 41696,
+    "b_integrity": 64359,
+    "b_time": 4219,
+    "b_spares": 8410,
+    "b_complete": 49640,
+    "b_budget": 14892,
+    "b_bonus": 8586,
     "b_green": 3,
-    "sq": 9216434
+    "sq": 7705635
    },
    "cf:ep": {
-    "n": 5049,
-    "win": 1502.583333333333,
-    "survive": 3936,
-    "score": 202909,
-    "cargo": 21190,
-    "time": 270643,
-    "b_cargo": 84760,
-    "b_integrity": 20848,
-    "b_time": 19491,
-    "b_spares": 941,
-    "b_complete": 39360,
+    "n": 5050,
+    "win": 1431.0833333333333,
+    "survive": 4013,
+    "score": 187010,
+    "cargo": 20880,
+    "time": 271348.5,
+    "b_cargo": 83520,
+    "b_integrity": 22273,
+    "b_time": 20287,
+    "b_spares": 1495,
+    "b_complete": 40130,
     "b_budget": 0,
-    "b_insight": 18442,
-    "b_bonus": 7598,
-    "b_green": 11469,
-    "sq": 10315895
+    "b_bonus": 7692,
+    "b_green": 11613,
+    "sq": 8919608
    },
    "mg:ext": {
-    "n": 5030,
-    "win": 844.5000000000002,
-    "survive": 3689,
-    "score": 179509,
-    "cargo": 16028,
-    "time": 253099.5,
-    "b_cargo": 64112,
-    "b_integrity": 21017,
-    "b_time": 21314,
-    "b_spares": 2198,
-    "b_complete": 36890,
-    "b_budget": 7378,
-    "b_insight": 18253,
-    "b_bonus": 7102,
-    "b_green": 1245,
-    "sq": 8587075
+    "n": 4998,
+    "win": 758.4166666666667,
+    "survive": 3826,
+    "score": 165113,
+    "cargo": 15854,
+    "time": 254608,
+    "b_cargo": 63416,
+    "b_integrity": 22330,
+    "b_time": 22211,
+    "b_spares": 2937,
+    "b_complete": 38260,
+    "b_budget": 7652,
+    "b_bonus": 6984,
+    "b_green": 1323,
+    "sq": 7354311
    },
    "al:t73": {
-    "n": 4975,
-    "win": 986.0000000000001,
-    "survive": 4406,
-    "score": 210394,
-    "cargo": 19264,
-    "time": 298629,
-    "b_cargo": 77056,
-    "b_integrity": 31882,
-    "b_time": 10653,
-    "b_spares": 5084,
-    "b_complete": 44060,
-    "b_budget": 13218,
-    "b_insight": 18100,
-    "b_bonus": 7992,
-    "b_green": 2349,
-    "sq": 10132408
+    "n": 5007,
+    "win": 884.1666666666666,
+    "survive": 4427,
+    "score": 188999,
+    "cargo": 18352,
+    "time": 301457,
+    "b_cargo": 73408,
+    "b_integrity": 31871,
+    "b_time": 10495,
+    "b_spares": 5633,
+    "b_complete": 44270,
+    "b_budget": 13281,
+    "b_bonus": 8040,
+    "b_green": 2001,
+    "sq": 8338917
    },
    "cr:qt": {
-    "n": 4898,
-    "win": 555.8333333333334,
-    "survive": 4712,
-    "score": 210345,
-    "cargo": 15867,
-    "time": 338332,
-    "b_cargo": 63468,
-    "b_integrity": 47188,
-    "b_time": -1876,
-    "b_spares": 8458,
-    "b_complete": 47120,
-    "b_budget": 18848,
-    "b_insight": 18861,
-    "b_bonus": 8269,
-    "b_green": 9,
-    "sq": 9580309
-   },
-   "ti:ba": {
-    "n": 5040,
-    "win": 767.4999999999999,
-    "survive": 4364,
-    "score": 205356,
-    "cargo": 19030,
-    "time": 284629.5,
-    "b_cargo": 76120,
-    "b_integrity": 35248,
-    "b_time": 18866,
-    "b_spares": 1048,
-    "b_complete": 43640,
-    "b_budget": 4364,
-    "b_insight": 18065,
-    "b_bonus": 7690,
-    "b_green": 315,
-    "sq": 9680196
-   },
-   "ss:sa": {
-    "n": 4926,
-    "win": 494.1666666666666,
-    "survive": 4910,
-    "score": 215037,
-    "cargo": 11434,
-    "time": 327345,
-    "b_cargo": 45736,
-    "b_integrity": 68957,
-    "b_time": 3343,
-    "b_spares": 5843,
-    "b_complete": 49100,
-    "b_budget": 14730,
-    "b_insight": 18978,
-    "b_bonus": 8350,
-    "b_green": 0,
-    "sq": 9655537
-   },
-   "cr:n": {
-    "n": 5102,
-    "win": 725.3333333333335,
-    "survive": 5043,
-    "score": 230972,
-    "cargo": 16758,
-    "time": 352512,
-    "b_cargo": 67032,
-    "b_integrity": 57663,
-    "b_time": -1539,
-    "b_spares": 8749,
-    "b_complete": 50430,
-    "b_budget": 20172,
-    "b_insight": 19620,
-    "b_bonus": 8836,
-    "b_green": 9,
-    "sq": 10807428
-   },
-   "al:t6": {
-    "n": 5025,
-    "win": 958.5000000000001,
-    "survive": 4272,
-    "score": 204129,
-    "cargo": 18792,
-    "time": 297777.5,
-    "b_cargo": 75168,
-    "b_integrity": 31129,
-    "b_time": 8977,
-    "b_spares": 4930,
-    "b_complete": 42720,
-    "b_budget": 12816,
-    "b_insight": 18123,
-    "b_bonus": 7782,
-    "b_green": 2484,
-    "sq": 9812609
+    "n": 4999,
+    "win": 528.1666666666665,
+    "survive": 4879,
+    "score": 194328,
+    "cargo": 15048,
+    "time": 345016,
+    "b_cargo": 60192,
+    "b_integrity": 48679,
+    "b_time": -1524,
+    "b_spares": 10338,
+    "b_complete": 48790,
+    "b_budget": 19516,
+    "b_bonus": 8316,
+    "b_green": 21,
+    "sq": 8025316
    },
    "cf:ce": {
-    "n": 4951,
-    "win": 1325,
-    "survive": 3626,
-    "score": 185963,
-    "cargo": 19542,
-    "time": 262925,
-    "b_cargo": 78168,
-    "b_integrity": 17842,
-    "b_time": 17101,
-    "b_spares": 1056,
-    "b_complete": 36260,
+    "n": 4950,
+    "win": 1245.8333333333335,
+    "survive": 3779,
+    "score": 173697,
+    "cargo": 19816,
+    "time": 262855,
+    "b_cargo": 79264,
+    "b_integrity": 19487,
+    "b_time": 17531,
+    "b_spares": 1730,
+    "b_complete": 37790,
     "b_budget": 0,
-    "b_insight": 17797,
-    "b_bonus": 7113,
-    "b_green": 10626,
-    "sq": 9327273
+    "b_bonus": 6909,
+    "b_green": 10986,
+    "sq": 8179783
+   },
+   "ss:sa": {
+    "n": 4999,
+    "win": 553.0833333333333,
+    "survive": 4988,
+    "score": 197855,
+    "cargo": 9841,
+    "time": 328275.5,
+    "b_cargo": 39364,
+    "b_integrity": 73240,
+    "b_time": 4523,
+    "b_spares": 7319,
+    "b_complete": 49880,
+    "b_budget": 14964,
+    "b_bonus": 8565,
+    "b_green": 0,
+    "sq": 8166929
+   },
+   "ti:ba": {
+    "n": 4971,
+    "win": 1026.0000000000005,
+    "survive": 4549,
+    "score": 197929,
+    "cargo": 18876,
+    "time": 280557,
+    "b_cargo": 75504,
+    "b_integrity": 41276,
+    "b_time": 20567,
+    "b_spares": 2008,
+    "b_complete": 45490,
+    "b_budget": 4549,
+    "b_bonus": 8040,
+    "b_green": 495,
+    "sq": 8872077
    },
    "mg:ct6": {
-    "n": 4970,
-    "win": 775.4166666666667,
-    "survive": 3579,
-    "score": 174309,
-    "cargo": 15694,
-    "time": 249289,
-    "b_cargo": 62776,
-    "b_integrity": 20520,
-    "b_time": 20123,
-    "b_spares": 2138,
-    "b_complete": 35790,
-    "b_budget": 7158,
-    "b_insight": 17660,
-    "b_bonus": 6977,
-    "b_green": 1167,
-    "sq": 8339139
+    "n": 5002,
+    "win": 707,
+    "survive": 3707,
+    "score": 159268,
+    "cargo": 15273,
+    "time": 250168.5,
+    "b_cargo": 61092,
+    "b_integrity": 21731,
+    "b_time": 21273,
+    "b_spares": 2726,
+    "b_complete": 37070,
+    "b_budget": 7414,
+    "b_bonus": 6822,
+    "b_green": 1140,
+    "sq": 7066614
+   },
+   "al:t6": {
+    "n": 4993,
+    "win": 916.6666666666669,
+    "survive": 4369,
+    "score": 188418,
+    "cargo": 18264,
+    "time": 295395.5,
+    "b_cargo": 73056,
+    "b_integrity": 32078,
+    "b_time": 10839,
+    "b_spares": 6042,
+    "b_complete": 43690,
+    "b_budget": 13107,
+    "b_bonus": 7755,
+    "b_green": 1851,
+    "sq": 8392470
+   },
+   "cr:n": {
+    "n": 5001,
+    "win": 593.1666666666665,
+    "survive": 4958,
+    "score": 200220,
+    "cargo": 14967,
+    "time": 346123.5,
+    "b_cargo": 59868,
+    "b_integrity": 54663,
+    "b_time": -1319,
+    "b_spares": 9085,
+    "b_complete": 49580,
+    "b_budget": 19832,
+    "b_bonus": 8499,
+    "b_green": 12,
+    "sq": 8373482
    }
   },
   "leg": {},
   "tiers": {
    "ti|L1": {
-    "success": 5097,
-    "partial": 2755,
-    "fail": 2148
+    "success": 7792,
+    "fail": 2208
    },
    "ti|L2": {
-    "fail": 2536,
-    "success": 4567,
-    "partial": 2897
+    "fail": 3068,
+    "success": 6932
    },
    "ti|L3": {
-    "success": 3678,
-    "partial": 1894,
-    "fail": 1333
+    "success": 9342,
+    "fail": 658
    },
    "ti|L4": {
-    "success": 4975,
-    "partial": 2560,
-    "fail": 2365
+    "fail": 1643,
+    "success": 8232
    },
    "ti|L5": {
-    "partial": 2422,
-    "success": 5120,
-    "fail": 2015
-   },
-   "ti|L6": {
-    "success": 4677,
-    "partial": 2425,
-    "fail": 1981
+    "fail": 1930,
+    "success": 7663
    },
    "ss|L1": {
-    "partial": 2930,
-    "success": 4307,
-    "fail": 2763
+    "success": 6749,
+    "fail": 3251
    },
    "ss|L2": {
-    "fail": 2018,
-    "success": 5394,
-    "partial": 2588
+    "fail": 2551,
+    "success": 7449
    },
    "ss|L3": {
-    "partial": 2007,
-    "success": 3722,
-    "fail": 1361
+    "success": 9343,
+    "fail": 657
    },
    "ss|L4": {
-    "success": 6015,
-    "fail": 1757,
-    "partial": 2228
+    "success": 8619,
+    "fail": 1381
    },
    "ss|L5": {
-    "success": 6213,
-    "partial": 2172,
-    "fail": 1612
+    "success": 8869,
+    "fail": 1123
    },
    "ss|L6": {
-    "fail": 2104,
-    "partial": 2601,
-    "success": 5270
+    "fail": 4268,
+    "success": 5717
    },
    "cf|L1": {
-    "fail": 1464,
-    "partial": 2334,
-    "success": 6202
+    "success": 7893,
+    "fail": 2107
    },
    "cf|L2": {
-    "success": 4563,
-    "fail": 2566,
-    "partial": 2871
+    "success": 7194,
+    "fail": 2806
    },
    "cf|L3": {
-    "fail": 1147,
-    "success": 3569,
-    "partial": 1665
+    "success": 9205,
+    "fail": 656
    },
    "cf|L4": {
-    "success": 4917,
-    "partial": 2530,
-    "fail": 2485
+    "fail": 3584,
+    "success": 6265
    },
    "cf|L5": {
-    "success": 4178,
-    "fail": 2801,
-    "partial": 2458
+    "success": 6788,
+    "fail": 2738
    },
    "cf|L6": {
-    "success": 4474,
-    "partial": 2107,
-    "fail": 1782
+    "success": 4867,
+    "fail": 3676
    },
    "mg|L1": {
-    "success": 5674,
-    "fail": 1885,
-    "partial": 2441
+    "success": 6952,
+    "fail": 3048
    },
    "mg|L2": {
-    "success": 4059,
-    "partial": 2963,
-    "fail": 2978
+    "fail": 4276,
+    "success": 5724
    },
    "mg|L3": {
-    "fail": 1147,
-    "success": 3348,
-    "partial": 1700
+    "success": 8770,
+    "fail": 662
    },
    "mg|L4": {
-    "success": 4793,
-    "partial": 2344,
-    "fail": 1962
+    "success": 7206,
+    "fail": 2111
    },
    "mg|L5": {
-    "success": 4193,
-    "fail": 2154,
-    "partial": 2305
+    "success": 6101,
+    "fail": 2809
    },
    "mg|L6": {
-    "success": 4294,
-    "partial": 2027,
-    "fail": 1581
+    "success": 4602,
+    "fail": 3587
    },
    "al|L1": {
-    "partial": 2313,
-    "success": 6052,
-    "fail": 1635
+    "success": 7703,
+    "fail": 2297
    },
    "al|L2": {
-    "success": 3545,
-    "partial": 2969,
-    "fail": 3486
-   },
-   "al|L4": {
-    "success": 5093,
-    "partial": 2326,
-    "fail": 2213
-   },
-   "al|L5": {
-    "partial": 2064,
-    "success": 5803,
-    "fail": 1423
-   },
-   "al|L6": {
-    "partial": 2345,
-    "success": 4833,
-    "fail": 1834
-   },
-   "cr|L1": {
-    "success": 4432,
-    "fail": 2645,
-    "partial": 2923
-   },
-   "cr|L2": {
-    "success": 5073,
-    "partial": 2671,
-    "fail": 2256
-   },
-   "cr|L3": {
-    "success": 3863,
-    "partial": 1904,
-    "fail": 1351
-   },
-   "cr|L4": {
-    "partial": 2338,
-    "fail": 1766,
-    "success": 5890
-   },
-   "cr|L5": {
-    "success": 5136,
-    "fail": 2301,
-    "partial": 2481
-   },
-   "cr|L6": {
-    "fail": 1926,
-    "success": 5305,
-    "partial": 2599
+    "fail": 4473,
+    "success": 5527
    },
    "al|L3": {
-    "success": 3641,
-    "partial": 1648,
-    "fail": 1208
+    "success": 9188,
+    "fail": 657
+   },
+   "al|L4": {
+    "success": 5832,
+    "fail": 3907
+   },
+   "al|L5": {
+    "fail": 1534,
+    "success": 7929
+   },
+   "al|L6": {
+    "fail": 3929,
+    "success": 5265
+   },
+   "cr|L1": {
+    "fail": 2987,
+    "success": 7013
+   },
+   "cr|L2": {
+    "success": 7748,
+    "fail": 2252
+   },
+   "cr|L3": {
+    "success": 9352,
+    "fail": 648
+   },
+   "cr|L4": {
+    "success": 8064,
+    "fail": 1916
+   },
+   "cr|L5": {
+    "success": 5844,
+    "fail": 4118
+   },
+   "cr|L6": {
+    "success": 5605,
+    "fail": 4314
+   },
+   "ti|L6": {
+    "success": 5336,
+    "fail": 4015
    }
   },
-  "turns": 348966,
-  "ties": 725,
+  "turns": 350525,
+  "ties": 736,
   "lostLegs": {
+   "ti": {
+    "L5": 408,
+    "L6": 221,
+    "L4": 241
+   },
    "cf": {
-    "L5": 1074,
-    "L6": 801,
-    "L4": 495,
-    "L2": 36,
-    "L3": 32
+    "L5": 983,
+    "L6": 751,
+    "L2": 139,
+    "L4": 323,
+    "L3": 12
    },
    "mg": {
-    "L3": 499,
-    "L5": 714,
-    "L6": 681,
-    "L4": 838
-   },
-   "ti": {
-    "L5": 613,
-    "L4": 196,
-    "L6": 535
+    "L6": 656,
+    "L5": 721,
+    "L4": 407,
+    "L3": 683
    },
    "al": {
-    "L3": 165,
-    "L6": 335,
-    "L4": 462,
-    "L5": 360
-   },
-   "cr": {
-    "L4": 44,
-    "L5": 125,
-    "L6": 76
+    "L5": 269,
+    "L4": 343,
+    "L3": 194,
+    "L6": 398
    },
    "ss": {
-    "L5": 21,
-    "L6": 39
+    "L6": 33,
+    "L5": 15
+   },
+   "cr": {
+    "L5": 43,
+    "L6": 82,
+    "L4": 38
    }
   },
   "causes": {
-   "Micrometeoroid Strike": 737,
-   "Weld-Flaw Hunt": 386,
-   "Atomic Oxygen & UV": 553,
-   "fast fracture from a growing fatigue crack": 1734,
-   "Engine-Bay Fire": 665,
-   "Fracture Detective": 386,
-   "Sun-Side Warp": 222,
-   "Mach 3 Skin Heating": 437,
-   "Outgassing & Cold Welding": 525,
-   "Cold Soak in Earth’s Shadow": 710,
-   "Seal & Surface Crisis": 447,
-   "Rivet-Hole Hot Spot": 7,
-   "Cracked Docking Collar": 251,
-   "Manual Docking — Guidance Lost": 431,
-   "Bird Strike!": 76,
-   "Engine-Mount Resonance": 12,
-   "Cargo Transfer Race": 405,
-   "Solar Storm Warning": 29,
-   "corrosion": 91,
-   "Salt-Spray Corrosion Fatigue": 7,
-   "Jet-Stream Tailwind": 11,
-   "Ten Thousand Gusts": 10,
-   "Engine Flame-Out": 9
+   "Cold Soak in Earth’s Shadow": 2265,
+   "Manual Docking — Guidance Lost": 2141,
+   "Mach 3 Skin Heating": 1140,
+   "fast fracture from a growing fatigue crack": 1109,
+   "Ten Thousand Gusts": 139,
+   "Engine Flame-Out": 166
   }
  },
  "polStat": {
   "reckless": {
    "n": 20000,
-   "win": 3622.250000000003,
-   "sur": 15523,
-   "sc": 749501
+   "win": 4453.500000000002,
+   "sur": 16116,
+   "sc": 721164
   },
   "cautious": {
    "n": 20000,
-   "win": 1278.1666666666665,
-   "sur": 19458,
-   "sc": 844004
+   "win": 1242.5000000000002,
+   "sur": 19615,
+   "sc": 758478
   },
   "sensible": {
    "n": 20000,
-   "win": 5099.583333333333,
-   "sur": 17111,
-   "sc": 846949
+   "win": 4304.000000000002,
+   "sur": 17354,
+   "sc": 762934
   }
  }
 }

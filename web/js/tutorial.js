@@ -7,10 +7,10 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<'
 const pct = (x) => `${Math.round(x * 100)}%`;
 const sgn = (n) => (n > 0 ? `+${n}` : n < 0 ? `−${Math.abs(n)}` : '±0');
 const badge = (k) => `<span class="hexb sm" style="--mc:${MATERIALS[k].color}">${MATERIALS[k].symbol}</span>`;
-const oddsBar = (o) => `<div class="odds"><div class="ob s" style="flex:${o.success}"></div><div class="ob p" style="flex:${o.partial}"></div><div class="ob f" style="flex:${o.fail}"></div></div>
-  <div class="odds-l"><span class="s">✓ Success ${pct(o.success)}</span><span class="p">~ Partial ${pct(o.partial)}</span><span class="f">✗ Failure ${pct(o.fail)}</span></div>`;
+const oddsBar = (o) => `<div class="odds"><div class="ob s" style="flex:${o.success}"></div><div class="ob f" style="flex:${o.fail}"></div></div>
+  <div class="odds-l"><span class="s">✓ Success ${pct(o.success)}</span><span class="f">✗ Failure ${pct(o.fail)}</span></div>`;
 
-const tutState = { mod: 2, dc: 11, mat: 'al', crates: 4, last: null };
+const tutState = { mod: 2, dc: 6, mat: 'al', crates: 4, last: null };
 
 export const TUTORIAL = [
   { title: 'Welcome, crews', html: () => `
@@ -27,7 +27,7 @@ export const TUTORIAL = [
     <div><b>7075-T73 (over-aged)</b><small>coarser, stable η precipitates</small><span class="down">−1 strength</span><span class="up">+2 corrosion</span><span class="up">+1 crack tolerance</span></div></div>
     <p>Others: mill-annealed vs β-annealed titanium, annealed vs cold-worked 316L, epoxy vs cyanate-ester CFRP, cast vs extruded WE43, normalised vs quenched-and-tempered 4130.</p>` },
   { title: 'Pick a specialist', html: () => `
-    <p>Your role gives a bonus on its home checks and a once-per-game ability. Leg 6 is written specifically for your role.</p>
+    <p>Your role gives a bonus on its home checks and a once-per-game ability. On Leg 6, Manual Docking, a Test Pilot gets +3; with random events on, Leg 6 is written specifically for your role.</p>
     <div class="tut-roles">${ROLE_ORDER.map(r => `<div><span class="role-big">${ROLES[r].icon}</span><b>${esc(ROLES[r].name)}</b><small>${esc(ROLES[r].summary)}</small></div>`).join('')}</div>
     <p class="callout">Good pairings cover a weakness: a Surface Engineer protects corrosion-prone magnesium; a Metallurgist steadies heat-sensitive 7075; an NDT Inspector finds CFRP’s hidden delaminations.</p>` },
   { title: 'Cargo: what it is for', html: () => `
@@ -54,24 +54,24 @@ export const TUTORIAL = [
     } },
   { title: 'The route', html: () => `
     <ol class="tut-legs">${LEGS.map(L => `<li><b>Leg ${L.n} · ${esc(L.name)}</b> — ${esc(L.topic)}${L.kind === 'luck' ? ' <span class="pill">pure probability</span>' : L.kind === 'specialist' ? ' <span class="pill">specialist</span>' : ''}</li>`).join('')}</ol>
-    <p>Each crew draws its own event card for the leg, so the class sees a range of hazards. Legs 3 and 6 deliberately ignore your material: Leg 3 is about reading odds; Leg 6 is your specialist’s moment.</p>` },
+    <p>Every crew faces the same event on each leg, so the class can compare how each frame copes. The host can tick <b>Random events</b> in the lobby to give each crew its own card instead. Legs 3 and 6 deliberately ignore your material: Leg 3 is about reading odds; Leg 6 is a specialist’s moment.</p>` },
   { title: 'Rolling the d20', html: () => `
-    <p>Roll a twenty-sided die and add your modifiers. Reach the <b>DC</b> (difficulty class) for a <b>Success</b>; land up to 5 below for a <b>Partial</b>; anything lower is a <b>Failure</b>. A natural 20 always succeeds and a natural 1 always fails. Each +1 is worth 5 percentage points.</p>
+    <p>Roll a twenty-sided die and add your modifiers. Reach the <b>DC</b> (difficulty class) for a <b>Success</b>; anything lower is a <b>Failure</b>. A natural 20 always succeeds and a natural 1 always fails. Each +1 is worth 5 percentage points.</p>
     <div class="tut-widget" id="tw-dice"></div>`,
     wire(root) {
       const box = root.querySelector('#tw-dice');
       const draw = () => {
         const o = odds(tutState.mod, tutState.dc);
         box.innerHTML = `<label>Your total modifier <b>${sgn(tutState.mod)}</b><input type="range" min="-6" max="8" value="${tutState.mod}" data-k="mod"></label>
-          <label>Difficulty class <b>DC ${tutState.dc}</b><input type="range" min="6" max="18" value="${tutState.dc}" data-k="dc"></label>
-          <p>You need <b>${Math.max(2, tutState.dc - tutState.mod)}+</b> on the die to succeed.</p>${oddsBar(o)}
+          <label>Difficulty class <b>DC ${tutState.dc}</b><input type="range" min="2" max="14" value="${tutState.dc}" data-k="dc"></label>
+          <p>You need <b>${Math.min(20, Math.max(2, tutState.dc - tutState.mod))}+</b> on the die to succeed.</p>${oddsBar(o)}
           <div class="row"><button class="btn small" data-roll="1">Try a roll</button><span class="tw-roll">${tutState.last ? tutState.last : ''}</span></div>`;
       };
       box.addEventListener('input', (e) => { const k = e.target.dataset.k; if (k) { tutState[k] = +e.target.value; draw(); } });
       box.addEventListener('click', (e) => {
         if (!e.target.closest('[data-roll]')) return;
         const d = 1 + Math.floor(Math.random() * 20); const t = d + tutState.mod;
-        const tier = d === 20 ? 'Success (natural 20!)' : d === 1 ? 'Failure (natural 1)' : t >= tutState.dc ? 'Success' : t >= tutState.dc - 5 ? 'Partial' : 'Failure';
+        const tier = d === 20 ? 'Success (natural 20!)' : d === 1 ? 'Failure (natural 1)' : t >= tutState.dc ? 'Success' : 'Failure';
         tutState.last = `Rolled ${d} ${sgn(tutState.mod)} = ${t} → ${tier}`; draw();
       });
       draw();
@@ -84,7 +84,7 @@ export const TUTORIAL = [
       <li><b>★ Special</b> — options that only some frames can use, because of their metallurgy. A locked special tells you why: e.g. only steels and Ti can “stay below the endurance limit”; only a laminate can use aeroelastic tailoring.</li>
       <li><b>Jettison a crate</b> — +3 now, but you lose that crate’s points.</li>
       <li><b>Abilities</b> — once per game, e.g. the Test Pilot’s reroll or the Structural Engineer’s fail-safe.</li>
-    </ul><p>Optional <b>briefing questions</b> give +1 for a right answer (+2 for a Metallurgist, +3 for the Leg 6 specialist question).</p>` },
+    </ul>` },
   { title: 'Damage, hidden cracks and the hangar', html: () => `
     <p><b>Integrity</b> is your hull’s health. At 0 the craft is lost (the crew ejects safely) and scores very little.</p>
     <p><b>Conditions</b> persist between legs: a permanent set, a twisted wing box, active corrosion (−1 per leg), an over-aged microstructure (only a Metallurgist can re-heat-treat it)…</p>

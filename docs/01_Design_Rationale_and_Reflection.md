@@ -9,13 +9,13 @@
 
 | Requirement | Where it is met |
 |---|---|
-| 2–6 players (crews); 5–15 min | Lobby allows 2–6 crews. Estimated length including set-up: ≈6–8 min for 2 crews, ≈10–14 min for 4 crews, ≈14–19 min for 6 crews. For 6 crews, a 45 s timer or briefing questions off brings it under 15 min (playtesting report §A.4). |
+| 2–6 players (crews); 5–15 min | Lobby allows 2–6 crews. Estimated length including set-up: ≈6–8 min for 2 crews, ≈10–14 min for 4 crews, ≈14–19 min for 6 crews. For 6 crews, a 45 s timer brings it under 15 min (playtesting report §A.4). |
 | Six candidate frames: Ti-6Al-4V, 7075-T6, 316L, CFRP, WE43, 4130 chromoly | `web/js/data.js` → `MATERIALS`; Materials Codex in-game |
-| Choose a craft/frame **and** a role; choices must change the odds of finishing | Material, processing route, role and cargo load all feed every roll; survival ranges from 67% (WE43) to 99% (316L) (§7) |
+| Choose a craft/frame **and** a role; choices must change the odds of finishing | Material, processing route, role and cargo load all feed every roll; survival ranges from 70% (WE43) to 99% (316L) (§7) |
 | Material sets weight, speed, transport capacity, torsional performance and environmental resistance | Frame mass → hours per leg and cargo capacity; stiffness/torsion, heat, cryogenic, corrosion and space modifiers on event cards (§3) |
-| Genuine trade-offs (light/fast/more cargo vs vulnerable) | CFRP: 6 crates and 7 h/leg but 75% survival. 316L: 3 crates and 10 h/leg but 99% survival (§7) |
-| Board/route, scripted events, dice, understandable success %, repair and shortcut decisions | Six-leg route map; per-leg event decks; d20 vs DC with the success/partial/fail % shown before every roll; *Push hard* (shortcut), *Play it safe*, hangar repairs and inspections |
-| Legs 3 and 6 are probability-based; Leg 6 is specialist-focused | Leg 3 cards have no material modifiers. Leg 6 has one crisis card per role, with +3 for the specialist and a +3 specialist question |
+| Genuine trade-offs (light/fast/more cargo vs vulnerable) | CFRP: 6 crates and 7 h/leg but 77% survival. 316L: 3 crates and 10 h/leg but 99% survival (§7) |
+| Board/route, scripted events, dice, understandable success %, repair and shortcut decisions | Six-leg route map; a fixed standard event per leg, or per-leg random decks with the *Random events* option; d20 vs DC with the success/fail % shown before every roll; *Push hard* (shortcut), *Play it safe*, hangar repairs and inspections |
+| Legs 3 and 6 are probability-based; Leg 6 is specialist-focused | Leg 3 cards have no material modifiers. Leg 6 is Manual Docking on the standard route (Test Pilot +3); with random events it is one crisis card per role, with +3 for the specialist |
 | Legs 1, 2, 4, 5 = specific strength & stiffness, fatigue, thermal, vacuum/space | Card decks `l1*`, `l2*`, `l4*`, `l5*` (§4) |
 | Metallurgy central: operating conditions ↔ properties ↔ processing ↔ microstructure | Two processing routes per frame change modifiers; heat can permanently over-age or soften a microstructure; fatigue cracks grow, and their critical size scales with K_IC (§3.3, §5) |
 | Material-selection rationale, cost and environment | Codex pages and Ashby charts; budget points; life-cycle CO₂e per crate; debrief discussion prompts (§6) |
@@ -35,9 +35,9 @@
 **Design principles**
 
 1. *No dominant material.* Each frame should win some legs, lose others, and have a real chance overall.
-2. *Visible odds.* D&D-style d20 rolls, but the success/partial/failure percentages are always shown. Decisions are about risk, not guesswork.
+2. *Visible odds.* D&D-style d20 rolls, but the success and failure percentages are always shown. Decisions are about risk, not guesswork.
 3. *Processing matters.* The same alloy, processed differently, should play differently.
-4. *Short and replayable.* Each crew draws its own event card per leg (3–8 per deck), so a class sees many hazards in one game.
+4. *Comparable, then replayable.* By default every crew faces the same event on each leg, so the class can compare directly how each frame copes with the same load. Ticking *Random events* deals each crew its own card per leg (3–8 per deck) for replays, so a class sees many hazards across games.
 5. *Classroom-ready.* Phones join by QR code; a projector can spectate; the host can pause for discussion.
 
 ---
@@ -102,26 +102,26 @@ Some options are available only when the metallurgy allows them. Locked options 
 
 ## 4. Route and legs
 
-| Leg | Topic | Cards (each crew draws one) | Teaching focus |
+| Leg | Topic | Cards (standard event first; the rest appear with *Random events*) | Teaching focus |
 |---|---|---|---|
-| 1 The Heavy Lift | Specific strength & stiffness | Max-G pull-up (σy/ρ) · Flutter boundary (torsion per kg) · Skin-panel buckling (∛E/ρ) | Material indices; cargo raises loads |
-| 2 The Storm Corridor | Fatigue | Ten thousand gusts (S–N, endurance limit) · Rivet-hole hot spot (Kt, Aloha 243, Comet) · Engine-mount resonance (damping) · Salt-spray corrosion fatigue | Initiation vs growth; hidden cracks; damage tolerance |
-| 3 Wildcard Skies | Probability (no material modifiers) | Tailwind, bird strike, navigation glitch, supply drone, solar storm, distress beacon, canyon shortcut, flame-out | Probability × consequence, expected value, risk appetite |
-| 4 The Hypersonic Burn | Thermal behaviour | Mach 3 skin heating (SR-71) · Sun-side warp (k/α) · Engine-bay fire | Microstructural stability, Tg, creep, distortion, ignition |
-| 5 The Edge of Space | Vacuum & space | Cold soak (DBTT) · Atomic oxygen & UV (Pilling–Bedworth, LDEF) · Outgassing & cold welding (ASTM E595, galling, Mg sublimation) · Micrometeoroid (Whipple shield, BVID) | Environment-specific mechanisms |
-| 6 Docking at Meridian | Specialist challenge | One crisis per role (manual docking, cracked collar, fracture detective, weld-flaw NDT, seal/coating crisis, cargo transfer) | Fractography, NDT selection, safety factors, surface engineering, payload |
+| 1 The Heavy Lift | Specific strength & stiffness | **Max-G pull-up (σy/ρ)** · Flutter boundary (torsion per kg) · Skin-panel buckling (∛E/ρ) | Material indices; cargo raises loads |
+| 2 The Storm Corridor | Fatigue | **Ten thousand gusts (S–N, endurance limit)** · Rivet-hole hot spot (Kt, Aloha 243, Comet) · Engine-mount resonance (damping) · Salt-spray corrosion fatigue | Initiation vs growth; hidden cracks; damage tolerance |
+| 3 Wildcard Skies | Probability (no material modifiers) | **Engine flame-out** · tailwind, bird strike, navigation glitch, supply drone, solar storm, distress beacon, canyon shortcut | Probability × consequence, expected value, risk appetite |
+| 4 The Hypersonic Burn | Thermal behaviour | **Mach 3 skin heating (SR-71)** · Sun-side warp (k/α) · Engine-bay fire | Microstructural stability, Tg, creep, distortion, ignition |
+| 5 The Edge of Space | Vacuum & space | **Cold soak (DBTT)** · Atomic oxygen & UV (Pilling–Bedworth, LDEF) · Outgassing & cold welding (ASTM E595, galling, Mg sublimation) · Micrometeoroid (Whipple shield, BVID) | Environment-specific mechanisms |
+| 6 Docking at Meridian | Specialist challenge | **Manual docking** (Test Pilot +3) · with random events, one crisis per role (manual docking, cracked collar, fracture detective, weld-flaw NDT, seal/coating crisis, cargo transfer) | Fractography, NDT selection, safety factors, surface engineering, payload |
 
-**Fatigue as a persistent system.** Fatigue cracks are created *hidden*; players see "suspected damage". Each crack grows one stage at the start of every leg. Past the material's critical stage (higher for tougher materials) it fast-fractures for 5 damage. Crews can spend an hour to inspect and then a spare to repair. The NDT Inspector finds damage at once and stop-drills it. Fast fracture was the single largest cause of craft loss in simulation (3.9% of crews), which suits a fatigue-centred course.
+**Fatigue as a persistent system.** Fatigue cracks are created *hidden*; players see "suspected damage". Each crack grows one stage at the start of every leg. Past the material's critical stage (higher for tougher materials) it fast-fractures for 5 damage. Crews can spend an hour to inspect and then a spare to repair. The NDT Inspector finds damage at once and stop-drills it. Fast fracture from a growing crack destroys 2.5% of crews in simulation, more than any material event except the cold soak, which suits a fatigue-centred course.
 
 ---
 
 ## 5. Core mechanics and why they were chosen
 
-- **d20 vs DC with three tiers.** The d20 was chosen because each +1 is a clean 5 percentage points, so odds are easy to read and to teach. The *partial* tier (within 5 of the DC) reduces swinginess and gives "damaged but flying" outcomes, which better represent real structures than pass/fail.
+- **d20 vs DC, Success or Failure.** The d20 was chosen because each +1 is a clean 5 percentage points, so odds are easy to read and to teach. An earlier version had a third *partial* tier (within 5 of the DC). It was removed after review: two outcomes are quicker to read on a projector, and every DC was lowered by 5 so a roll that used to be a partial now succeeds. "Damaged but flying" survives through conditions, hidden cracks and integrity loss on failures rather than through an extra tier.
 - **Approach choice on every card.** *Standard*, *Push hard* (shortcut: +3 DC, −3 h, +1 damage on a failure), *Play it safe* (−3 DC, +3 h), and ★ specials. A strong material lets a crew afford shortcuts, so material advantage turns into speed or safety rather than only into a better roll.
 - **Cargo.** Cargo is the payload and the main scoring source, so it is the purpose of the mission. Capacity follows from frame mass (payload fraction). Each 2 crates aboard gives −1 on strength and fatigue checks (higher load per g and per gust) and each crate adds 0.5 h per leg. Players can jettison a crate for +3 just before a roll. This makes the classic airframe trade — structure mass vs payload — the first decision every crew makes.
-- **Roles.** Each role has a home leg, a passive bonus and a once-per-game ability. Leg 6 is written per role, so role choice matters at the climax even though the material does not.
-- **Briefing questions.** These are optional multiple-choice questions, three options each with an explanation, worth +1 on that roll. They reward revision without blocking play. The Metallurgist gets +2, and the Leg 6 specialist question is worth +3.
+- **Roles.** Each role has a home leg, a passive bonus and a once-per-game ability. On the standard route Leg 6 is Manual Docking, the Test Pilot's moment; with random events Leg 6 is written per role, so role choice matters at the climax even though the material does not.
+- **Standard route vs random events.** The default deals every crew the same event on each leg. It makes the comparison between frames fair and easy to discuss ("why did the 4130 crew fail the cold soak when the 316L crew passed?"). The *Random events* tickbox restores per-crew draws for variety on replays. An in-game quiz was tried and then removed: it slowed turns and pulled attention from the material reasoning on the card itself.
 - **Timer.** A one-minute control window keeps six-crew games moving and fulfils the brief. When it expires, the autopilot chooses the safe default (the standard profile, or the no-roll option on Leg 3), so a distracted crew is never punished by a random choice.
 
 ---
@@ -141,20 +141,20 @@ Some options are available only when the metallurgy allows them. Locked options 
 
 ## 7. Balance: method and outcome (summary — full data in `03_Playtesting_Report.md`)
 
-Bots played the game through the same engine the browser uses, with seeded and reproducible random numbers. The final configuration over 20,000 six-crew games:
+Bots played the game through the same engine the browser uses, with seeded and reproducible random numbers. The final configuration (v7, standard route) over 20,000 six-crew games:
 
 | Frame | Win rate (fair = 16.7%) | Survival | Mean score | Score SD |
 |---|---|---|---|---|
-| Ti-6Al-4V | 12.9% | 85.7% | 42.2 | 16.9 |
-| Al 7075 | 21.5% | 85.1% | 43.4 | 18.1 |
-| 316L | 7.5% | 99.2% | 44.9 | 8.2 |
-| CFRP | 31.1% | 75.2% | 41.4 | 22.3 |
-| Mg WE43 | 15.9% | 69.3% | 36.1 | 22.7 |
-| 4130 | 10.9% | 97.5% | 45.4 | 10.0 |
+| Ti-6Al-4V | 17.8% | 90.2% | 40.5 | 15.0 |
+| Al 7075 | 19.4% | 85.1% | 38.5 | 17.6 |
+| 316L | 10.6% | 99.3% | 40.8 | 8.7 |
+| CFRP | 26.7% | 77.4% | 37.5 | 21.0 |
+| Mg WE43 | 15.3% | 69.7% | 31.9 | 21.9 |
+| 4130 | 10.2% | 97.8% | 40.1 | 10.0 |
 
-The first version was badly unbalanced: CFRP won 54% of six-crew games and 316L 0.7%. Five tuning passes, logged in the playtesting report, brought every frame into roughly an 8–31% band (7.5–31.1% in the final version). The remaining spread is mostly *variance*, not average strength. 316L and 4130 have the **highest mean scores** but the lowest spread, so they rarely top a six-crew table. CFRP and WE43 are high-risk and high-reward. This was kept on purpose, because it is a real engineering lesson about reliability and risk, and the debrief asks students about it directly. In two-crew games the spread narrows to 38–61%.
+The first version was badly unbalanced: CFRP won 54% of six-crew games and 316L 0.7%. Seven versions, logged in the playtesting report, brought every frame into roughly a 10–27% band on the standard route (7.8–29.5% with random events on). The remaining spread is mostly *variance*, not average strength. 316L and 4130 have among the **highest mean scores** but the lowest spread, so they rarely top a six-crew table. CFRP and WE43 are high-risk and high-reward. This was kept on purpose, because it is a real engineering lesson about reliability and risk, and the debrief asks students about it directly. In two-crew games the spread narrows to 42–58%.
 
-Decisions matter. In mixed games, "sensible" bots (expected-value reasoning) won 25.5% against 6.4% for always-cautious and 18.1% for always-reckless bots.
+Decisions matter, but less sharply than before. In mixed games, "sensible" bots (expected-value reasoning) had the highest mean score (38.1) and won 21.5%, against 6.2% for always-cautious bots. Always-reckless bots now win about as often (22.3%) with a lower mean score (36.1): folding the old partial band into Success makes a pushed roll succeed far more often, so shortcuts now pay off for a high-variance strategy. Raising the *Push hard* failure damage would restore the gap if human playtests show students simply pushing every roll.
 
 ---
 
@@ -189,14 +189,14 @@ Decisions matter. In mixed games, "sensible" bots (expected-value reasoning) won
 3. *Frame-mass model.* Relative frame masses assume one blend of strength- and stiffness-limited structure. Another blend would reorder Mg against Al, and Ti against 4130.
 4. *Life-cycle numbers* are indicative: CO₂e/kg varies by route (Pidgeon vs electrolytic Mg, primary vs recycled Al), and the fuel model is linear in mass. The award judges a single functional unit and service life; changing either changes the winner, which is a discussion point but also a sensitivity.
 5. *Cost counts twice* (spares and budget points). This was deliberate, to give cost enough weight, but it is a modelling choice.
-6. *Bots are not people.* Simulated players answer 70% of questions correctly and reason about expected value. Real students will be more risk-seeking, slower in large groups, and will learn across games. Human playtesting (protocol in the playtesting report) is needed to confirm timings and learning outcomes.
+6. *Bots are not people.* Simulated players reason about expected value. Real students will be more risk-seeking, slower in large groups, and will learn across games. Human playtesting (protocol in the playtesting report) is needed to confirm timings and learning outcomes.
 7. *Variance-driven win rates.* Reliable frames rarely win six-crew games. Raising their reward ceiling further would undermine the payload trade-off, so this is accepted and discussed rather than removed.
 8. *Trust model.* Online rooms trust the clients, so a determined student could cheat through the browser console. That is acceptable for a classroom but not for competitive play; a server-authoritative edge function would fix it.
-9. *Accessibility.* Colour is never the only cue (✓ ~ ✗ symbols and text accompany it), and there is a light projector mode and reduced-motion support. A full screen-reader and contrast audit has not been done.
+9. *Accessibility.* Colour is never the only cue (✓ and ✗ symbols and text accompany it), and there is a light projector mode and reduced-motion support. A full screen-reader and contrast audit has not been done.
 
 **Future work**
 
 - Additional processing routes (additively manufactured Ti with HIP; Al-Li alloys; thermoplastic CFRP), plus an "upgrade" phase between games.
-- Teacher dashboard: aggregated briefing-question accuracy per topic for formative assessment.
+- Teacher dashboard: aggregated results per leg and per frame for formative assessment.
 - Server-authoritative rooms; a reconnect-by-code flow.
 - Calibrate the time-per-turn estimates and difficulty with human playtest data, then retune.
