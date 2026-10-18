@@ -84,7 +84,6 @@ export const SCORING = [
   ['Schedule', '+½ point per hour inside the 66 h docking window (−½ per hour late)'],
   ['Programme budget', 'cheaper frames leave budget unspent: 4130 +4, Al & 316L +3, Mg +2, Ti +1, CFRP 0'],
   ['Spare parts', '+1 per unused spare'],
-  ['Engineering insight', '+1 per correct briefing answer'],
   ['Event bonuses', 'e.g. answering a distress call'],
   ['Green award', '+3 to the crew with the lowest life-cycle CO₂e per delivered crate'],
 ];

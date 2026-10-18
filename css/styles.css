@@ -292,7 +292,7 @@ small { color: var(--muted); }
 .lost-tag { font-size: .8rem; color: var(--bad); }
 .log ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .lg { font-size: .82rem; line-height: 1.35; padding: 5px 0 5px 9px; border-left: 3px solid var(--line2); color: var(--ink2); }
-.lg.success { border-color: var(--good); } .lg.partial { border-color: var(--mid); } .lg.fail, .lg.lost, .lg.fracture { border-color: var(--bad); }
+.lg.success { border-color: var(--good); } .lg.fail, .lg.lost, .lg.fracture { border-color: var(--bad); }
 .lg.leg { border-color: var(--brass); color: var(--brass2); font-weight: 600; }
 .lg.lost, .lg.fracture { color: var(--bad); }
 
@@ -307,16 +307,6 @@ small { color: var(--muted); }
 .event p { font-size: 1.05rem; color: var(--ink2); max-width: 60em; margin: 0; }
 .ev-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
 .ev-leg { font: 700 .78rem var(--f-cond); text-transform: uppercase; letter-spacing: .12em; color: var(--brass); margin-right: 8px; }
-.brief { background: var(--panel); border: 1px dashed var(--line2); border-radius: var(--r); padding: 14px 16px; }
-.br-h { font: 700 .85rem var(--f-cond); text-transform: uppercase; letter-spacing: .1em; color: var(--cyan); margin-bottom: 6px; display: flex; gap: 8px; align-items: center; }
-.brief .q { font-weight: 600; font-size: 1.02rem; }
-.q-opts { display: grid; gap: 6px; }
-.qo { text-align: left; padding: 9px 12px; border-radius: 9px; border: 1px solid var(--line2); background: var(--panel2); cursor: pointer; }
-.qo:hover:not(:disabled) { border-color: var(--cyan); }
-.qo:disabled { cursor: default; opacity: .75; }
-.brief.right { border-color: var(--good); border-style: solid; } .brief.right .br-h { color: var(--good); }
-.brief.wrong { border-color: var(--mid); border-style: solid; } .brief.wrong .br-h { color: var(--mid); }
-.brief .ans { font-size: .92rem; color: var(--ink2); margin: 0; }
 .choose { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; box-shadow: var(--shadow); }
 .apprs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
 .appr { text-align: left; background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px; cursor: pointer; display: grid; gap: 6px; align-content: start; }
@@ -335,9 +325,9 @@ small { color: var(--muted); }
 .odds { display: flex; height: 10px; border-radius: 6px; overflow: hidden; background: var(--line); }
 .odds.compact { height: 7px; }
 .ob { min-width: 0; transition: flex .3s; }
-.ob.s { background: var(--good); } .ob.p { background: var(--mid); } .ob.f { background: var(--bad); }
+.ob.s { background: var(--good); } .ob.f { background: var(--bad); }
 .odds-l { display: flex; gap: 12px; font: 600 .78rem var(--f-mono); margin-top: 3px; }
-.odds-l .s { color: var(--good); } .odds-l .p { color: var(--mid); } .odds-l .f { color: var(--bad); }
+.odds-l .s { color: var(--good); } .odds-l .f { color: var(--bad); }
 .toggles { margin: 10px 0 0; }
 .checkbox { margin-top: 12px; padding: 12px 14px; background: var(--panel2); border-radius: 12px; border: 1px solid var(--line); }
 .checkbox h4 { margin-top: 0; }
@@ -352,13 +342,13 @@ small { color: var(--muted); }
 .waiting { text-align: center; color: var(--muted); font-style: italic; margin: 14px 0 0; animation: pulse 2s infinite; }
 
 .result { border-radius: var(--r); padding: 16px 18px; border: 1px solid var(--line); background: var(--panel); border-left: 6px solid var(--line2); animation: rise .3s ease-out; }
-.result.tier-success { border-left-color: var(--good); } .result.tier-partial { border-left-color: var(--mid); } .result.tier-fail { border-left-color: var(--bad); } .result.tier-auto { border-left-color: var(--cyan); }
+.result.tier-success { border-left-color: var(--good); } .result.tier-fail { border-left-color: var(--bad); } .result.tier-auto { border-left-color: var(--cyan); }
 .res-top { display: flex; gap: 14px; align-items: center; }
 .res-d { width: 64px; height: 64px; }
 .res-d.crit .d20-o { fill: color-mix(in srgb, var(--good) 35%, var(--panel3)); }
 .res-d.fumble .d20-o { fill: color-mix(in srgb, var(--bad) 35%, var(--panel3)); }
 .res-tier { font: 900 1.6rem var(--f-display); letter-spacing: .05em; }
-.tier-success .res-tier { color: var(--good); } .tier-partial .res-tier { color: var(--mid); } .tier-fail .res-tier { color: var(--bad); } .tier-auto .res-tier { color: var(--cyan); }
+.tier-success .res-tier { color: var(--good); } .tier-fail .res-tier { color: var(--bad); } .tier-auto .res-tier { color: var(--cyan); }
 .res-math { font: 600 .95rem var(--f-mono); }
 .res-text { font-size: 1.05rem; margin: 12px 0 6px; }
 .notes { margin: 0 0 8px; padding-left: 18px; }
@@ -483,7 +473,6 @@ table.lca td:first-child { white-space: nowrap; }
 .jlegs { display: flex; gap: 5px; margin: 8px 0; }
 .jl { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 7px; font: 700 .9rem var(--f-mono); background: var(--panel3); }
 .jl.t-success { background: color-mix(in srgb, var(--good) 30%, var(--panel3)); color: var(--good); }
-.jl.t-partial { background: color-mix(in srgb, var(--mid) 30%, var(--panel3)); color: var(--mid); }
 .jl.t-fail, .jl.t-lost { background: color-mix(in srgb, var(--bad) 30%, var(--panel3)); color: var(--bad); }
 .jl.t-auto { color: var(--cyan); }
 .lessons { margin: 0; padding-left: 16px; font-size: .84rem; color: var(--ink2); }
@@ -499,8 +488,8 @@ table.lca td:first-child { white-space: nowrap; }
 #dice.landed .big-d { animation: land .45s cubic-bezier(.2, 1.6, .4, 1); }
 .dc-tier { font: 900 1.8rem var(--f-display); letter-spacing: .08em; min-height: 1.2em; }
 .dc-math { font: 600 1rem var(--f-mono); color: var(--muted); min-height: 1.3em; }
-#dice.t-success .dc-tier { color: var(--good); } #dice.t-partial .dc-tier { color: var(--mid); } #dice.t-fail .dc-tier { color: var(--bad); }
-#dice.t-success .d20-o { stroke: var(--good); } #dice.t-fail .d20-o { stroke: var(--bad); } #dice.t-partial .d20-o { stroke: var(--mid); }
+#dice.t-success .dc-tier { color: var(--good); } #dice.t-fail .dc-tier { color: var(--bad); }
+#dice.t-success .d20-o { stroke: var(--good); } #dice.t-fail .d20-o { stroke: var(--bad); }
 #dice.crit .dice-card { box-shadow: 0 0 0 3px var(--good), 0 0 60px color-mix(in srgb, var(--good) 50%, transparent); }
 #dice.fumble .dice-card { box-shadow: 0 0 0 3px var(--bad), 0 0 60px color-mix(in srgb, var(--bad) 50%, transparent); }
 

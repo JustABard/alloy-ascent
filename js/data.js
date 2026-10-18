@@ -4,7 +4,6 @@
 
 export const CONFIG = {
   die: 20,
-  partialBand: 5,          // total >= DC-5 (but < DC) is a Partial
   crateValue: 4,           // points per delivered crate
   deadline: 66,            // docking window (hours)
   latePenaltyCap: 10,
@@ -14,9 +13,7 @@ export const CONFIG = {
   pushDC: 3, pushTime: -3, pushFailDmg: 1,
   safeDC: -3, safeTime: 3,
   jettisonBonus: 3,
-  briefingBonus: 1,
   specialistBonus: 3,      // leg 6: your own speciality
-  specialistQuestionBonus: 3,
   repairDC: 10, repairTime: 2, patchHeal: 3, inspectTime: 1,
   fractureDamage: 5,
   greenAward: 3,
@@ -148,32 +145,31 @@ export const ROLES = {
     id: 'pilot', name: 'Test Pilot', icon: '✈', home: 'Legs 1, 3, 6',
     tags: ['handling'], bonus: 2,
     summary: '+2 on handling checks. Pushing hard costs only +2 DC (not +3) and saves 4 h (not 3).',
-    ability: { id: 'reroll', name: 'Stick-and-rudder', when: 'preroll', desc: 'Once per game: if this roll is a Partial or Failure, reroll the d20 once and keep the better result.' },
+    ability: { id: 'reroll', name: 'Stick-and-rudder', when: 'preroll', desc: 'Once per game: if this roll is a Failure, reroll the d20 once and keep the better result.' },
     pushDC: 2, pushTime: -4,
   },
   structural: {
     id: 'structural', name: 'Structural Engineer', icon: '⌂', home: 'Legs 1–2',
     tags: ['strength', 'stiffness', 'notch'], bonus: 2,
     summary: '+2 on strength, stiffness and stress-concentration (notch) checks.',
-    ability: { id: 'loadpath', name: 'Redundant load path', when: 'auto', desc: 'Once per game, automatically: the first roll that would be a Failure becomes a Partial instead (a fail-safe design).' },
+    ability: { id: 'loadpath', name: 'Redundant load path', when: 'auto', desc: 'Once per game, automatically: the first strength or stiffness check that would be a Failure becomes a Success instead (a fail-safe design).', tags: ['strength', 'stiffness'] },
   },
   metallurgist: {
     id: 'metallurgist', name: 'Metallurgist', icon: '⚗', home: 'Legs 4–5',
-    tags: ['heat', 'distortion', 'fire', 'cryo'], bonus: 2,
-    summary: '+2 on thermal and cryogenic checks. Correct briefing answers give +2 instead of +1.',
+    tags: ['heat', 'distortion', 'fire', 'cryo'], bonus: 2, otherBonus: 1,
+    summary: '+2 on thermal and cryogenic checks, +1 on every other material check.',
     ability: { id: 'heattreat', name: 'Field heat treatment', when: 'hangar', desc: 'Once per game at a hangar stop: remove a permanent microstructural condition (over-aged, softened). Costs 1 spare.' },
-    briefingBonus: 2,
   },
   ndt: {
     id: 'ndt', name: 'NDT Inspector', icon: '◎', home: 'Leg 2',
-    tags: ['fatigue', 'notch', 'impact'], bonus: 1,
-    summary: '+1 on fatigue and impact checks. Hidden damage is found at once, detected cracks are stop-drilled (no growth), +3 on crack and delamination repairs.',
+    tags: ['fatigue', 'notch', 'impact'], bonus: 2,
+    summary: '+2 on fatigue and impact checks. Hidden damage is found at once, detected cracks are stop-drilled (no growth), +3 on crack and delamination repairs.',
     ability: { id: 'eddy', name: 'Eddy-current survey', when: 'preroll', desc: 'Once per game: +4 on a fatigue, notch or impact check.', tags: ['fatigue', 'notch', 'impact'], value: 4 },
   },
   coatings: {
     id: 'coatings', name: 'Surface & Corrosion Engineer', icon: '◈', home: 'Leg 5',
-    tags: ['corrosion', 'oxidation', 'vacuum'], bonus: 2,
-    summary: '+2 on corrosion, atomic-oxygen and vacuum checks. Corrosion repairs always succeed.',
+    tags: ['corrosion', 'oxidation', 'vacuum', 'cryo'], bonus: 2,
+    summary: '+2 on corrosion, atomic-oxygen, vacuum and cryogenic checks (protective films, thermal-control coatings). Corrosion repairs always succeed.',
     ability: { id: 'coat', name: 'Protective coating', when: 'preroll', desc: 'Once per game: +4 on a corrosion, oxidation, vacuum or cryo check (anodise, PEO, SiO₂ film, MoS₂ dry lube, heater blanket).', tags: ['corrosion', 'oxidation', 'vacuum', 'cryo'], value: 4 },
   },
   quartermaster: {
@@ -232,39 +228,39 @@ export const LEGS = [
     place: 'Ironhold Spaceport → the Serrated Range',
     intro: 'Climbing out at maximum take-off weight. Structure is sized by load per kilogram: specific strength (σy/ρ) for parts that must not yield, and stiffness indices such as E/ρ, √E/ρ and ∛E/ρ for parts that must not bend, twist or buckle. Cargo mass raises every load.',
     watch: ['Specific strength σy/ρ', 'Torsional & buckling stiffness per kg', 'Cargo load penalty'],
-    cards: ['l1a', 'l1b', 'l1c'] },
+    cards: ['l1a', 'l1b', 'l1c'], fixed: 'l1a' },
   { n: 2, id: 'storm', name: 'The Storm Corridor', topic: 'Fatigue under repeated loading', kind: 'material',
     place: 'Jet-stream gust belt over the Grey Sea',
     intro: 'Hours of turbulence put tens of thousands of load cycles into the frame. Fatigue cracks start at notches and surface flaws far below the yield stress, then grow each cycle. Some alloys have a true endurance limit; others accumulate damage at any stress.',
     watch: ['Endurance limit (S–N curve)', 'Notch sensitivity', 'Corrosion fatigue', 'Hidden cracks grow every leg'],
-    cards: ['l2a', 'l2b', 'l2c', 'l2d'] },
+    cards: ['l2a', 'l2b', 'l2c', 'l2d'], fixed: 'l2a' },
   { n: 3, id: 'wild', name: 'Wildcard Skies', topic: 'Probability & risk', kind: 'luck',
     place: 'Open stratosphere',
     intro: 'No single material property rules here — just weather, wildlife and fortune. Read the odds, weigh probability × consequence, and decide how much risk your crew can afford.',
     watch: ['Odds on every option', 'Expected value', 'Your current integrity'],
-    cards: ['l3a', 'l3b', 'l3c', 'l3d', 'l3e', 'l3f', 'l3g', 'l3h'] },
+    cards: ['l3a', 'l3b', 'l3c', 'l3d', 'l3e', 'l3f', 'l3g', 'l3h'], fixed: 'l3h' },
   { n: 4, id: 'burn', name: 'The Hypersonic Burn', topic: 'Thermal behaviour', kind: 'material',
     place: 'Mach 3 climb through the upper atmosphere',
     intro: 'Air friction heats the skin to 300 °C and beyond. Precipitates coarsen, polymer matrices pass their glass transition, cold work anneals out and creep begins. Thermal gradients warp structures, and fire tests melting and ignition behaviour.',
     watch: ['Maximum service temperature', 'Microstructural stability', 'Conductivity ÷ expansion (k/α)'],
-    cards: ['l4a', 'l4b', 'l4c'] },
+    cards: ['l4a', 'l4b', 'l4c'], fixed: 'l4a' },
   { n: 5, id: 'edge', name: 'The Edge of Space', topic: 'Vacuum & space environment', kind: 'material',
     place: 'Above the Kármán line → low Earth orbit',
     intro: 'Hard vacuum, atomic oxygen, ultraviolet light, micrometeoroids and −150 °C shadow passes. Oxide films are not replenished, polymers outgas, magnesium can sublime and BCC steels can turn brittle.',
     watch: ['Ductile-to-brittle transition', 'Protective oxides (Pilling–Bedworth)', 'Outgassing & cold welding'],
-    cards: ['l5a', 'l5b', 'l5c', 'l5d'] },
+    cards: ['l5a', 'l5b', 'l5c', 'l5d'], fixed: 'l5a' },
   { n: 6, id: 'dock', name: 'Docking at Meridian', topic: 'Specialist challenge', kind: 'specialist',
     place: 'Station Meridian, 400 km orbit',
-    intro: 'The station is in trouble and your specialist must step up. Your frame material no longer decides the odds — your crew role and its expertise do. Damage you carried here (seized joints, fogged sensors) still matters.',
-    watch: ['Your role’s +3 specialist bonus', 'Specialist question (+3)', 'Lingering handling damage'],
-    cards: null },
+    intro: 'The station’s docking beacon has failed, so every crew hand-flies the final approach and a Test Pilot gets +3. With random events on, each crew instead faces a crisis written for its own role. Your frame material no longer decides the odds, but damage you carried here (seized joints, fogged sensors) still matters.',
+    watch: ['Test Pilot +3 on manual docking', 'Lingering handling damage'],
+    cards: null, fixed: 'dock:pilot' },
 ];
 
 // ---------------------------------------------------------------- Event cards
 export const CARDS = {
   // ===== LEG 1 — specific strength & stiffness
   l1a: {
-    leg: 1, title: 'Max-G Pull-Up', tags: ['strength'], dc: 11,
+    leg: 1, title: 'Max-G Pull-Up', tags: ['strength'], dc: 6,
     text: 'Wind shear over the ridge! You must pull 4.5 g at full take-off weight. Every spar and longeron sees peak stress — and every crate adds to it.',
     labels: { std: 'Firm, steady pull-up', push: 'Full-power zoom climb', safe: 'Dump fuel, shallow climb' },
     mods: m(3, 2, -3, 3, 0, -1),
@@ -276,18 +272,17 @@ export const CARDS = {
       mg: 'σy/ρ ≈ 100 kN·m/kg: very light but weak',
       cr: 'σy/ρ ≈ 58 kN·m/kg normalised (Q&T roughly doubles it)',
     },
-    special: { id: 'ductile', label: 'Let it yield (ductile reserve)', dc: 0, time: 0, avail: ['ss', 'cr'], effect: 'failToPartialSet',
-      desc: 'Rely on huge ductility and work hardening: a Failure becomes a Partial, but the spar takes a permanent set.',
+    special: { id: 'ductile', label: 'Let it yield (ductile reserve)', dc: 0, time: 0, avail: ['ss', 'cr'], effect: 'failToSuccessSet',
+      desc: 'Rely on huge ductility and work hardening: a Failure becomes a Success, but the spar takes a permanent set.',
       locked: 'Needs high ductility and strain hardening (316L ≈50% elongation, normalised 4130 ≈25%). Ti-6Al-4V (14%), 7075 (11%), WE43 (2–7%) and CFRP (≈1.5% strain, no yield) would crack instead.' },
     outcomes: {
       success: { text: 'The frame takes the load with margin to spare.', fx: [] },
-      partial: { text: 'Rivets pop and a stringer buckles locally — but you clear the ridge.', fx: [{ dmg: 2 }] },
       fail:    { text: 'A main spar yields. Something heavy breaks loose in the hold.', fx: [{ dmg: 4 }, { cond: 'yielded' }, { crate: -1 }] },
     },
     insight: 'For a tie of fixed load and length, minimum mass means maximising σy/ρ. CFRP and Ti lead; annealed 316L needs about six times the mass of 7075 for the same strength. Cargo mass raises the load itself — the reason payload fraction is the airframe designer’s obsession.',
   },
   l1b: {
-    leg: 1, title: 'Flutter Boundary', tags: ['stiffness', 'handling'], dc: 11,
+    leg: 1, title: 'Flutter Boundary', tags: ['stiffness', 'handling'], dc: 6,
     text: 'Approaching Mach 0.9 the wingtips start to buzz: bending and twisting are coupling into flutter. Torsional stiffness per kilogram decides whether it damps out or tears the wing off.',
     labels: { std: 'Hold speed, damp with controls', push: 'Punch through to supersonic', safe: 'Slow below flutter speed' },
     mods: m(1, 2, -2, 3, 2, -1),
@@ -304,13 +299,12 @@ export const CARDS = {
       locked: 'Only an anisotropic laminate can couple bending and twisting by fibre orientation — isotropic metals cannot.' },
     outcomes: {
       success: { text: 'The oscillation damps out. Smooth air.', fx: [] },
-      partial: { text: 'The buzz rattles fittings loose before it damps.', fx: [{ dmg: 2 }] },
       fail:    { text: 'Violent flutter twists the wing box before you can slow down.', fx: [{ dmg: 3 }, { cond: 'twisted' }, { time: 2 }] },
     },
     insight: 'Flutter speed rises with torsional stiffness GJ. Shear modulus per density (G/ρ) is almost identical for Ti, Al, Mg and steel (≈10 MN·m/kg) — light metals win only because low density buys thicker walls for the same mass, which resists twisting and torsional buckling. Composites go further by aligning ±45° fibres.',
   },
   l1c: {
-    leg: 1, title: 'Skin-Panel Buckling', tags: ['stiffness'], dc: 11,
+    leg: 1, title: 'Skin-Panel Buckling', tags: ['stiffness'], dc: 6,
     text: 'The climb compresses the upper skin. Thin panels want to ripple and buckle. For panels, the mass-saving index is ∛E/ρ — density matters far more than modulus.',
     labels: { std: 'Hold the planned climb', push: 'Steeper, faster climb', safe: 'Shallow climb, lower loads' },
     mods: m(0, 2, -2, 3, 3, -2),
@@ -327,7 +321,6 @@ export const CARDS = {
       locked: 'At 4.4–8 g/cm³, thickening the skin costs too much mass. This is exactly why the ∛E/ρ index punishes dense materials.' },
     outcomes: {
       success: { text: 'Panels stay flat; the climb is clean.', fx: [] },
-      partial: { text: 'Panels ripple and fasteners work loose.', fx: [{ dmg: 2 }] },
       fail:    { text: 'An upper panel buckles and the stiffener under it cracks.', fx: [{ dmg: 3 }, { cond: 'yielded' }, { time: 1 }] },
     },
     insight: 'A panel’s buckling load scales with E·t³; at fixed mass t ∝ 1/ρ, so the index to maximise is ∛E/ρ. Magnesium beats aluminium, titanium and steel here — why it is used for gearbox casings, seat frames and laptop chassis.',
@@ -335,7 +328,7 @@ export const CARDS = {
 
   // ===== LEG 2 — fatigue
   l2a: {
-    leg: 2, title: 'Ten Thousand Gusts', tags: ['fatigue'], dc: 11,
+    leg: 2, title: 'Ten Thousand Gusts', tags: ['fatigue'], dc: 6,
     text: 'The jet stream hammers you for hours. Each gust is a small load cycle — far below yield — but there are tens of thousands of them.',
     labels: { std: 'Fly the corridor', push: 'Straight through the core', safe: 'Climb above the jet stream' },
     mods: m(2, -2, 1, 2, -2, 2),
@@ -352,13 +345,12 @@ export const CARDS = {
       locked: 'Aluminium and magnesium alloys have no true endurance limit: every cycle does some damage (Miner’s rule). Composites accumulate matrix damage instead.' },
     outcomes: {
       success: { text: 'The frame rides out the corridor without a mark.', fx: [] },
-      partial: { text: 'Fine. Probably. (A crack may have initiated somewhere you can’t see.)', fx: [{ byMat: { cf: [{ cond: 'microcrack', hidden: true }], default: [{ cond: 'crack', stage: 1, hidden: true }] } }] },
       fail:    { text: 'Something cracked — you heard it. Finding it is another matter.', fx: [{ dmg: 3 }, { byMat: { cf: [{ cond: 'delam', hidden: true }], default: [{ cond: 'crack', stage: 2, hidden: true }] } }] },
     },
     insight: 'BCC steels and Ti alloys show an endurance limit on the S–N curve; aluminium and magnesium alloys do not, so designers use a finite life and Miner’s rule. Damage-tolerant design assumes cracks exist and inspects before they reach critical size.',
   },
   l2b: {
-    leg: 2, title: 'Rivet-Hole Hot Spot', tags: ['fatigue', 'notch'], dc: 11,
+    leg: 2, title: 'Rivet-Hole Hot Spot', tags: ['fatigue', 'notch'], dc: 6,
     text: 'Every fastener hole concentrates stress about three times. In this turbulence the holes along the lap joints are where cracks will start.',
     labels: { std: 'Fly the corridor', push: 'Accept the pounding, go fast', safe: 'Reduce speed in the gusts' },
     mods: m(0, -2, 2, 1, -2, 1),
@@ -375,13 +367,12 @@ export const CARDS = {
       locked: 'Cold expansion relies on plastic deformation of a metal — it would crush and delaminate a composite.' },
     outcomes: {
       success: { text: 'The joints hold. No cracks at the holes.', fx: [] },
-      partial: { text: 'Tiny cracks may be starting at a few rivet holes.', fx: [{ byMat: { cf: [{ cond: 'microcrack', hidden: true }], default: [{ cond: 'crack', stage: 1, hidden: true }] } }] },
       fail:    { text: 'A lap joint fails along a row of rivet holes.', fx: [{ dmg: 3 }, { byMat: { cf: [{ cond: 'delam', hidden: true }], default: [{ cond: 'crack', stage: 2, hidden: true }] } }] },
     },
     insight: 'Fatigue cracks start at stress concentrations: holes, corners, scratches. The Comet 1 losses (1954) began at window and antenna cut-out corners; Aloha 243 lost a section of roof to multi-site cracks at rivet holes after 89,000 flights. Cold expansion and shot peening fight back with compressive residual stress.',
   },
   l2c: {
-    leg: 2, title: 'Engine-Mount Resonance', tags: ['fatigue'], dc: 11,
+    leg: 2, title: 'Engine-Mount Resonance', tags: ['fatigue'], dc: 6,
     text: 'An engine imbalance hits the natural frequency of its mount. Amplitude climbs every second — damping capacity suddenly matters.',
     labels: { std: 'Ride it and adjust throttle', push: 'Ignore it, full power', safe: 'Shut down and relight' },
     mods: m(1, -1, 0, 1, 2, 1),
@@ -395,13 +386,12 @@ export const CARDS = {
     },
     outcomes: {
       success: { text: 'You detune the resonance before it does harm.', fx: [] },
-      partial: { text: 'The mount shook hard. There may be cracks at the welds.', fx: [{ dmg: 1 }, { byMat: { cf: [{ cond: 'microcrack', hidden: true }], default: [{ cond: 'crack', stage: 1, hidden: true }] } }] },
       fail:    { text: 'A mount bracket cracks through and the engine sags.', fx: [{ dmg: 3 }, { time: 1 }, { byMat: { cf: [{ cond: 'delam', hidden: true }], default: [{ cond: 'crack', stage: 2, hidden: true }] } }] },
     },
     insight: 'At resonance, stress amplitude is limited mainly by damping. Magnesium alloys have unusually high damping capacity (strongest in pure Mg and Mg-Zr alloys, moderate in WE43), which is one reason Mg is used for vibrating housings. Steels and titanium ring like bells.',
   },
   l2d: {
-    leg: 2, title: 'Salt-Spray Corrosion Fatigue', tags: ['fatigue', 'corrosion'], dc: 11,
+    leg: 2, title: 'Salt-Spray Corrosion Fatigue', tags: ['fatigue', 'corrosion'], dc: 6,
     text: 'The storm drags you low over the sea. Salt spray coats the structure while it flexes — corrosion pits become crack starters and cracks grow faster in brine.',
     labels: { std: 'Push through the spray', push: 'Skim the waves for speed', safe: 'Climb out of the spray' },
     mods: m(3, -2, 2, 1, -3, -1),
@@ -415,7 +405,6 @@ export const CARDS = {
     },
     outcomes: {
       success: { text: 'Protective films hold. A good wash at the next stop.', fx: [] },
-      partial: { text: 'Pitting has started under the paint.', fx: [{ byMat: { ti: [], ss: [], cf: [{ dmg: 1 }], default: [{ cond: 'corrosion' }] } }] },
       fail:    { text: 'Corrosion pits have become cracks.', fx: [{ dmg: 3 }, { byMat: { ti: [{ cond: 'crack', stage: 1, hidden: true }], ss: [{ cond: 'crack', stage: 1, hidden: true }], cf: [{ cond: 'microcrack', hidden: true }], default: [{ cond: 'corrosion' }, { cond: 'crack', stage: 1, hidden: true }] } }] },
     },
     insight: 'Corrosion and fatigue together are worse than either alone: pits concentrate stress, and many alloys lose their endurance limit in a corrosive environment. Over-ageing 7075 to T73 trades strength for stress-corrosion resistance; magnesium needs coatings and careful galvanic isolation.',
@@ -424,48 +413,48 @@ export const CARDS = {
   // ===== LEG 3 — probability (no material modifiers)
   l3a: { leg: 3, title: 'Jet-Stream Tailwind', tags: ['luck'], text: 'A screaming tailwind core lies just above you. Riding it could save hours — or shake you badly if you misjudge the shear.',
     options: [
-      { id: 'ride', label: 'Ride the jet core', dc: 10, fx: { success: [{ time: -4 }], partial: [{ time: -1 }], fail: [{ time: 2 }, { dmg: 1 }] } },
+      { id: 'ride', label: 'Ride the jet core', dc: 5, fx: { success: [{ time: -4 }], fail: [{ time: 2 }, { dmg: 1 }] } },
       { id: 'hold', label: 'Hold cruise altitude', dc: null, fx: { auto: [] } },
-    ], insight: 'Risk = probability × consequence. A 55% chance of −4 h against a 20% chance of +2 h has a strongly positive expected value.' },
+    ], insight: 'Risk = probability × consequence. An 80% chance of −4 h against a 20% chance of +2 h has a strongly positive expected value.' },
   l3b: { leg: 3, title: 'Bird Strike!', tags: ['luck', 'handling'], text: 'A skein of geese fills the windscreen.',
     options: [
-      { id: 'evade', label: 'Hard evasive turn', dc: 12, fx: { success: [], partial: [{ dmg: 1 }], fail: [{ dmg: 3 }] } },
-      { id: 'climb', label: 'Pull up steeply over them', dc: 8, fx: { success: [{ time: 2 }], partial: [{ time: 2 }, { dmg: 1 }], fail: [{ time: 2 }, { dmg: 3 }] } },
+      { id: 'evade', label: 'Hard evasive turn', dc: 7, fx: { success: [], fail: [{ dmg: 3 }] } },
+      { id: 'climb', label: 'Pull up steeply over them', dc: 3, fx: { success: [{ time: 2 }], fail: [{ time: 2 }, { dmg: 3 }] } },
     ], insight: 'Two options, two risk profiles: one costs time for certain, the other risks damage. Which is "better" depends on what your crew can afford to lose.' },
   l3c: { leg: 3, title: 'Navigation Glitch', tags: ['luck'], text: 'Your satellite fix suddenly jumps 40 km. Spoofing? A fault? You can trust the box — or take a star sighting.',
     options: [
-      { id: 'trust', label: 'Trust the instruments', dc: 11, fx: { success: [], partial: [{ time: 2 }], fail: [{ time: 4 }] } },
+      { id: 'trust', label: 'Trust the instruments', dc: 6, fx: { success: [], fail: [{ time: 4 }] } },
       { id: 'stars', label: 'Recalibrate by star sighting', dc: null, fx: { auto: [{ time: 2 }] } },
-    ], insight: 'A certain small loss versus a gamble with a similar average cost: risk-averse crews take the sighting.' },
+    ], insight: 'A certain 2 h loss versus a 25% chance of losing 4 h (1 h on average). The gamble is cheaper on average, but a crew that cannot afford a bad outcome may still take the sighting.' },
   l3d: { leg: 3, title: 'Supply-Drone Rendezvous', tags: ['luck', 'handling'], text: 'A resupply drone is loitering nearby with a spare-parts pod. A mid-air grab is tricky.',
     options: [
-      { id: 'grab', label: 'Attempt the mid-air pickup', dc: 12, fx: { success: [{ spare: 1 }], partial: [], fail: [{ dmg: 2 }] } },
+      { id: 'grab', label: 'Attempt the mid-air pickup', dc: 7, fx: { success: [{ spare: 1 }], fail: [{ dmg: 2 }] } },
       { id: 'wave', label: 'Wave it off', dc: null, fx: { auto: [] } },
-    ], insight: 'Spares become repair attempts later. Is a 45% chance of a spare worth a 25% chance of 2 damage?' },
+    ], insight: 'Spares become repair attempts later. Is a 70% chance of a spare worth a 30% chance of 2 damage?' },
   l3e: { leg: 3, title: 'Solar Storm Warning', tags: ['luck'], text: 'A coronal mass ejection will arrive within the hour. Avionics may reset; you could wait it out in the planet’s shadow.',
     options: [
-      { id: 'fly', label: 'Fly through it', dc: 12, fx: { success: [], partial: [{ dmg: 1 }, { time: 1 }], fail: [{ dmg: 2 }, { time: 2 }] } },
+      { id: 'fly', label: 'Fly through it', dc: 7, fx: { success: [], fail: [{ dmg: 2 }, { time: 2 }] } },
       { id: 'wait', label: 'Shelter and wait', dc: null, fx: { auto: [{ time: 3 }] } },
     ], insight: 'Waiting costs a certain 3 h; flying risks smaller losses. Compare the expected time and damage.' },
   l3f: { leg: 3, title: 'Distress Beacon', tags: ['luck'], text: 'A weather-balloon crew is down on a glacier below. Helping will cost time.',
     options: [
-      { id: 'help', label: 'Divert and assist', dc: 9, fx: { success: [{ time: 3 }, { pts: 4 }], partial: [{ time: 3 }, { pts: 2 }], fail: [{ time: 3 }] } },
+      { id: 'help', label: 'Divert and assist', dc: 4, fx: { success: [{ time: 3 }, { pts: 4 }], fail: [{ time: 3 }] } },
       { id: 'relay', label: 'Relay their position, continue', dc: null, fx: { auto: [{ pts: 1 }] } },
     ], insight: 'Not every decision is about winning the race. (Engineers have a duty of care.)' },
   l3g: { leg: 3, title: 'Canyon Updraft Shortcut', tags: ['luck', 'handling'], text: 'A narrow canyon funnels a powerful updraft — a short cut to altitude, if you can thread it.',
     options: [
-      { id: 'thread', label: 'Thread the canyon', dc: 14, fx: { success: [{ time: -5 }], partial: [{ time: -2 }, { dmg: 1 }], fail: [{ dmg: 3 }, { time: 1 }] } },
+      { id: 'thread', label: 'Thread the canyon', dc: 9, fx: { success: [{ time: -5 }], fail: [{ dmg: 3 }, { time: 1 }] } },
       { id: 'around', label: 'Go around', dc: null, fx: { auto: [] } },
-    ], insight: 'A low-probability, high-reward gamble. Worth it if you are behind; foolish if your integrity is low.' },
+    ], insight: 'A high-reward gamble: 60% to save 5 h, 40% to take 3 damage. Worth it if you are behind; foolish if your integrity is low.' },
   l3h: { leg: 3, title: 'Engine Flame-Out', tags: ['luck', 'handling'], text: 'Number two engine flames out in the thin air.',
     options: [
-      { id: 'windmill', label: 'Windmill relight at altitude', dc: 11, fx: { success: [], partial: [{ time: 1 }], fail: [{ time: 3 }, { dmg: 2 }] } },
-      { id: 'dive', label: 'Dive for a starter-assisted relight', dc: 7, fx: { success: [{ time: 1 }], partial: [{ time: 2 }], fail: [{ time: 3 }, { dmg: 2 }] } },
+      { id: 'windmill', label: 'Windmill relight at altitude', dc: 6, fx: { success: [], fail: [{ time: 3 }, { dmg: 2 }] } },
+      { id: 'dive', label: 'Dive for a starter-assisted relight', dc: 2, fx: { success: [{ time: 1 }], fail: [{ time: 3 }, { dmg: 2 }] } },
     ], insight: 'The safer option has a certain small cost built in. Many engineering choices look like this.' },
 
   // ===== LEG 4 — thermal behaviour
   l4a: {
-    leg: 4, title: 'Mach 3 Skin Heating', tags: ['heat'], dc: 11,
+    leg: 4, title: 'Mach 3 Skin Heating', tags: ['heat'], dc: 6,
     text: 'At Mach 3 the stagnation temperature drives the skin past 300 °C. Strength now depends on whether your microstructure is stable at temperature.',
     labels: { std: 'Cruise at Mach 3', push: 'Sprint at Mach 3.5', safe: 'Throttle back to Mach 2.2' },
     mods: m(3, -3, 4, -3, 1, 2),
@@ -482,7 +471,6 @@ export const CARDS = {
       locked: 'You have no cargo to give up for the blanket’s mass.' },
     outcomes: {
       success: { text: 'The structure soaks the heat and holds.', fx: [] },
-      partial: { text: 'Hot spots near the leading edges. The frame groans but holds.', fx: [{ dmg: 2 }] },
       fail: { text: 'The heat has changed your material.', fx: [{ dmg: 3 }, { byMat: {
         al: [{ cond: 'overaged' }], cf: [{ cond: 'matrix' }], ti: [{ cond: 'alphacase' }], mg: [{ cond: 'creep' }],
         'ss:cw': [{ cond: 'softened' }], ss: [], 'cr:qt': [{ cond: 'softened' }], cr: [{ cond: 'creep' }] } }] },
@@ -490,7 +478,7 @@ export const CARDS = {
     insight: 'The SR-71 Blackbird cruised at Mach 3.2 with skin temperatures of about 260–320 °C. Aluminium alloys lose their precipitation strengthening above ≈150 °C, so Lockheed built the airframe mostly from titanium. Strength at temperature depends on microstructural stability: precipitates coarsen, cold work recovers, polymers soften past Tg.',
   },
   l4b: {
-    leg: 4, title: 'Sun-Side Warp', tags: ['distortion'], dc: 11,
+    leg: 4, title: 'Sun-Side Warp', tags: ['distortion'], dc: 6,
     text: 'One flank is in blazing sun, the other faces black sky and cold fuel. The temperature gradient bends the airframe like a bimetallic strip, misaligning control surfaces.',
     labels: { std: 'Trim and carry on', push: 'Ignore the warp, keep pace', safe: 'Slow down and re-trim' },
     mods: m(-2, 3, -2, 3, 0, 1),
@@ -506,13 +494,12 @@ export const CARDS = {
       desc: 'Roll slowly about your long axis to even out solar heating — Apollo’s "passive thermal control" (+2 h).' },
     outcomes: {
       success: { text: 'Heat spreads evenly; the frame stays true.', fx: [] },
-      partial: { text: 'The warp costs you time re-trimming.', fx: [{ dmg: 1 }, { time: 2 }] },
       fail:    { text: 'The frame warps and control linkages bind.', fx: [{ dmg: 2 }, { cond: 'twisted' }, { time: 1 }] },
     },
     insight: 'Thermal distortion is controlled by k/α: high conductivity evens out the temperature and low expansion limits the strain. Aluminium and CFRP excel; titanium and stainless steel — the hot-strength champions — distort badly. No material wins every thermal test.',
   },
   l4c: {
-    leg: 4, title: 'Engine-Bay Fire', tags: ['fire'], dc: 11,
+    leg: 4, title: 'Engine-Bay Fire', tags: ['fire'], dc: 6,
     text: 'A fuel line fails and the engine bay is burning. Can the structure keep its strength long enough to put it out?',
     labels: { std: 'Fire drill: shut off, extinguish', push: 'Keep thrust, fight it en route', safe: 'Dive, slow, extinguish' },
     mods: m(0, -1, 3, -2, -1, 2),
@@ -529,7 +516,6 @@ export const CARDS = {
       locked: 'You have no spares to use.' },
     outcomes: {
       success: { text: 'Fire out. Scorched paint, sound structure.', fx: [] },
-      partial: { text: 'The fire is out, but the bay is cooked.', fx: [{ dmg: 2 }] },
       fail:    { text: 'The fire burns through a bulkhead and into the hold.', fx: [{ dmg: 4 }, { crate: -1 }] },
     },
     insight: 'Fire behaviour depends on melting point, ignition resistance and what burns. Rare-earth Mg alloys such as WE43 form protective Y-rich oxides that raise ignition resistance — one reason Mg returned to aircraft cabins after decades of being banned.',
@@ -537,7 +523,7 @@ export const CARDS = {
 
   // ===== LEG 5 — vacuum & space environment
   l5a: {
-    leg: 5, title: 'Cold Soak in Earth’s Shadow', tags: ['cryo'], dc: 11,
+    leg: 5, title: 'Cold Soak in Earth’s Shadow', tags: ['cryo'], dc: 6,
     text: 'Forty minutes in Earth’s shadow: the structure soaks down towards −150 °C. Some crystal structures stay tough. Others cleave like glass.',
     labels: { std: 'Ride out the eclipse', push: 'Manoeuvre while cold', safe: 'Heaters on, minimum loads' },
     mods: m(2, 2, 4, -1, -2, -4),
@@ -551,13 +537,12 @@ export const CARDS = {
     },
     outcomes: {
       success: { text: 'The structure rings, but stays tough.', fx: [] },
-      partial: { text: 'Thermal contraction pops a few fasteners.', fx: [{ dmg: 2 }] },
       fail:    { text: 'A brittle crack runs through a cold fitting.', fx: [{ dmg: 4 }, { byMat: { cf: [{ cond: 'microcrack', hidden: true }], default: [{ cond: 'crack', stage: 1 }] } }] },
     },
     insight: 'BCC metals (ferritic and martensitic steels) show a ductile-to-brittle transition: at low temperature dislocations move only with difficulty and cleavage wins. FCC metals (aluminium, austenitic stainless) do not — so 300-series stainless and aluminium alloys are the go-to for cryogenic tanks. Fine-grained tempered martensite lowers the transition temperature.',
   },
   l5b: {
-    leg: 5, title: 'Atomic Oxygen & UV', tags: ['oxidation'], dc: 11,
+    leg: 5, title: 'Atomic Oxygen & UV', tags: ['oxidation'], dc: 6,
     text: 'At 400 km the thin atmosphere is mostly atomic oxygen, slamming into your leading surfaces at 7.8 km/s with ≈5 eV each, under unfiltered ultraviolet.',
     labels: { std: 'Normal attitude', push: 'Fly lower for speed (denser AO)', safe: 'Edge-on attitude, slower' },
     mods: m(2, 2, 2, -4, -1, 0),
@@ -574,13 +559,12 @@ export const CARDS = {
       locked: 'You have no spares to use.' },
     outcomes: {
       success: { text: 'Surfaces hold. A faint glow on the leading edges.', fx: [] },
-      partial: { text: 'Surfaces are etched and dulled.', fx: [{ dmg: 1 }] },
       fail:    { text: 'The surface is eroding away.', fx: [{ dmg: 3 }, { byMat: { cf: [{ cond: 'eroded' }], mg: [{ cond: 'corrosion' }], default: [] } }] },
     },
     insight: 'NASA’s Long Duration Exposure Facility spent 69 months in orbit: unprotected polymers and composites were deeply eroded by atomic oxygen while most metals barely changed. The Pilling–Bedworth ratio predicts which oxides protect — Al₂O₃ and Cr₂O₃ do; porous MgO does not.',
   },
   l5c: {
-    leg: 5, title: 'Outgassing & Cold Welding', tags: ['vacuum'], dc: 11,
+    leg: 5, title: 'Outgassing & Cold Welding', tags: ['vacuum'], dc: 6,
     text: 'Hard vacuum. Absorbed water boils out of polymers, and the oxide films that normally separate sliding metal surfaces are no longer replenished. Hinges and latches start to stick.',
     labels: { std: 'Cycle mechanisms normally', push: 'Skip the vacuum bake-out', safe: 'Bake out slowly, exercise joints' },
     mods: m(-2, 1, -1, -2, -2, 2),
@@ -597,13 +581,12 @@ export const CARDS = {
       locked: 'You have no spares to use.' },
     outcomes: {
       success: { text: 'Mechanisms move freely; sensors stay clean.', fx: [] },
-      partial: { text: 'Something is sticking — or fogging.', fx: [{ byMat: { ti: [{ cond: 'galled' }], ss: [{ cond: 'galled' }], cf: [{ cond: 'outgassed' }], mg: [{ dmg: 2 }], default: [{ dmg: 1 }] } }] },
       fail:    { text: 'A latch cold-welds shut and the windows fog.', fx: [{ dmg: 3 }, { byMat: { ti: [{ cond: 'galled' }], ss: [{ cond: 'galled' }], cf: [{ cond: 'outgassed' }], mg: [{ dmg: 1 }], al: [{ cond: 'galled' }], default: [] } }] },
     },
     insight: 'In vacuum, clean similar metals pressed together can adhere ("cold welding") — titanium and austenitic stainless are notorious for galling. Polymers outgas, so space materials are screened to ASTM E595 (total mass loss < 1%, condensable volatiles < 0.1%). Magnesium, zinc and cadmium have high vapour pressures and are avoided near hot surfaces.',
   },
   l5d: {
-    leg: 5, title: 'Micrometeoroid Strike', tags: ['impact'], dc: 11,
+    leg: 5, title: 'Micrometeoroid Strike', tags: ['impact'], dc: 6,
     text: 'A grain of dust at 10 km/s hits the hull. Hypervelocity impacts vaporise material and send shock waves through the structure.',
     labels: { std: 'Hold course', push: 'Ignore the debris field', safe: 'Turn the shielded side forward' },
     mods: m(2, 1, 2, -3, -1, 2),
@@ -617,7 +600,6 @@ export const CARDS = {
     },
     outcomes: {
       success: { text: 'A neat crater. Nothing more.', fx: [] },
-      partial: { text: 'The hit left a mark — maybe more inside.', fx: [{ dmg: 2 }, { byMat: { cf: [{ cond: 'delam', hidden: true }], default: [] } }] },
       fail:    { text: 'The impact punches through into the hold.', fx: [{ dmg: 4 }, { crate: -1 }, { byMat: { cf: [{ cond: 'delam', hidden: true }], default: [{ cond: 'crack', stage: 1, hidden: true }] } }] },
     },
     insight: 'Spacecraft shields use a thin aluminium "bumper" to shatter and vaporise the particle before it reaches the wall (the Whipple shield). Composites are vulnerable to impact because delaminations hide below an apparently intact surface.',
@@ -626,13 +608,13 @@ export const CARDS = {
 
 // Leg 6: one card per role. No material modifiers — the specialist decides it.
 const DOCK_OPTIONS = [
-  { id: 'bold', label: 'Bold: fast and precise', dc: 15, time: -3, fx: { success: [{ pts: 3 }], partial: [{ dmg: 2 }], fail: [{ dmg: 3 }, { crate: -1 }] } },
-  { id: 'std', label: 'By the book', dc: 11, time: 0, fx: { success: [], partial: [{ dmg: 2 }], fail: [{ dmg: 3 }, { crate: -1 }] } },
-  { id: 'safe', label: 'Wait for station support', dc: 7, time: 4, fx: { success: [], partial: [{ dmg: 1 }], fail: [{ dmg: 3 }, { crate: -1 }] } },
+  { id: 'bold', label: 'Bold: fast and precise', dc: 10, time: -3, fx: { success: [{ pts: 3 }], fail: [{ dmg: 3 }, { crate: -1 }] } },
+  { id: 'std', label: 'By the book', dc: 6, time: 0, fx: { success: [], fail: [{ dmg: 3 }, { crate: -1 }] } },
+  { id: 'safe', label: 'Wait for station support', dc: 2, time: 4, fx: { success: [], fail: [{ dmg: 3 }, { crate: -1 }] } },
 ];
 export const DOCK_CARDS = {
   pilot: { leg: 6, title: 'Manual Docking — Guidance Lost', tags: ['handling', 'luck'], role: 'pilot',
-    text: 'Meridian’s docking beacon has failed. Your Test Pilot must hand-fly the final 200 m onto a spinning docking port.',
+    text: 'Meridian’s docking beacon has failed. The final 200 m onto a spinning docking port must be hand-flown. A Test Pilot on board gets +3.',
     options: DOCK_OPTIONS, insight: 'Specialist skill shifts the odds more than any material property here — but seized joints or fogged sensors from Leg 5 still hurt.' },
   structural: { leg: 6, title: 'Cracked Docking Collar', tags: ['handling', 'luck'], role: 'structural',
     text: 'The station’s docking collar has a crack. Your Structural Engineer must decide what load it can safely take and brace it.',

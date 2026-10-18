@@ -3,7 +3,6 @@
 // balance simulator. act(state, action, ctx) returns a NEW state; ctx = { now, rng, actor }.
 
 import { CONFIG, MATERIALS, MATERIAL_ORDER, ROLES, ROLE_ORDER, CONDITIONS, STD_APPROACHES, LEGS, CARDS, DOCK_CARDS, cardById, FOOTPRINT } from './data.js';
-import { QUESTIONS, ROLE_QUESTIONS, questionById } from './questions.js';
 
 export const LOCAL_ACTOR = 'local';
 const clone = (o) => structuredClone(o);
@@ -36,21 +35,15 @@ export const loadPenalty = (cargo) => Math.floor((cargo || 0) / 2);
 export const legHours = (crew) => (crewStats(crew)?.legTime || 10) + CONFIG.loadTimePerCrate * (crew.cargo || 0);
 
 export function odds(total, dc) {
-  let s = 0, p = 0, f = 0;
-  for (let r = 1; r <= CONFIG.die; r++) {
-    const t = tierOf(r, total, dc);
-    if (t === 'success') s++; else if (t === 'partial') p++; else f++;
-  }
-  return { success: s / 20, partial: p / 20, fail: f / 20 };
+  let s = 0;
+  for (let r = 1; r <= CONFIG.die; r++) if (tierOf(r, total, dc) === 'success') s++;
+  return { success: s / CONFIG.die, fail: 1 - s / CONFIG.die };
 }
 
 export function tierOf(r, total, dc) {
   if (r === 20) return 'success';
   if (r === 1) return 'fail';
-  const t = r + total;
-  if (t >= dc) return 'success';
-  if (t >= dc - CONFIG.partialBand) return 'partial';
-  return 'fail';
+  return r + total >= dc ? 'success' : 'fail';
 }
 
 function shuffle(arr, rng) {
@@ -66,8 +59,6 @@ function draw(decks, key, pool, rng) {
   if (!decks[key] || decks[key].length === 0) decks[key] = shuffle(pool, rng);
   return decks[key].shift();
 }
-
-export const questionIdsForLeg = (leg) => Object.keys(QUESTIONS).filter(k => QUESTIONS[k].leg === leg);
 
 function isOwner(state, crew, actor) {
   return state.mode === 'local' || actor === LOCAL_ACTOR || crew.owner === actor;
@@ -86,9 +77,9 @@ export function createGame({ mode = 'local', code = null, hostId = null, setting
   return {
     v: 1, mode, code, hostId,
     phase: 'lobby',
-    settings: { uniqueFrames: true, questions: true, timer: CONFIG.defaultTimer, shareResults: true, ...settings },
+    settings: { uniqueFrames: true, randomEvents: false, timer: CONFIG.defaultTimer, shareResults: true, ...settings },
     players: [], crews: [],
-    leg: 0, turn: null, decks: {}, qdecks: {},
+    leg: 0, turn: null, decks: {},
     log: [], logN: 0, rollSeq: 0, seq: 0, gameNo: 0,
     startedAt: null, endedAt: null, results: null, paused: null,
   };
@@ -159,6 +150,8 @@ export function computeCheck(state, crew, cardId, approachId, opts = {}) {
     if (card.role === crew.role) parts.push({ kind: 'role', label: `${R.name} — your speciality`, value: CONFIG.specialistBonus, why: 'Specialist leg' });
   } else if (R.tags && tags.some(t => R.tags.includes(t))) {
     parts.push({ kind: 'role', label: R.name, value: R.bonus, why: R.summary });
+  } else if (R.otherBonus && card.mods) {
+    parts.push({ kind: 'role', label: R.name, value: R.otherBonus, why: R.summary });
   }
   if (tags.includes('strength') || tags.includes('fatigue')) {
     const lp = loadPenalty(crew.cargo);
@@ -173,11 +166,6 @@ export function computeCheck(state, crew, cardId, approachId, opts = {}) {
   }
   if (cv) parts.push({ kind: 'damage', label: hidden ? 'Damage (incl. undetected)' : 'Existing damage', value: cv, why: 'Conditions carried from earlier legs' });
 
-  const t = state.turn;
-  if (t && t.answer?.correct && t.crewId === crew.id) {
-    const b = leg === 6 ? CONFIG.specialistQuestionBonus : (R.briefingBonus || CONFIG.briefingBonus);
-    parts.push({ kind: 'briefing', label: leg === 6 ? 'Specialist answer' : 'Briefing answered', value: b, why: 'Knowledge pays' });
-  }
   if (opts.jettison && (crew.cargo || 0) > 0 && !(appr.cost?.crate)) {
     parts.push({ kind: 'jettison', label: 'Jettison a crate', value: R.jettison || CONFIG.jettisonBonus, why: 'Less mass, lower loads' });
   }
@@ -187,7 +175,7 @@ export function computeCheck(state, crew, cardId, approachId, opts = {}) {
   const total = parts.reduce((a, p) => a + p.value, 0);
   const dc = appr.abs ? appr.dc : card.dc + (appr.dc || 0);
   const auto = appr.abs && (appr.dc === null || appr.dc === undefined);
-  return { card, appr, parts, total, dc, auto, odds: auto ? { success: 1, partial: 0, fail: 0 } : odds(total, dc) };
+  return { card, appr, parts, total, dc, auto, odds: auto ? { success: 1, fail: 0 } : odds(total, dc) };
 }
 
 // ------------------------------------------------------------------ effects
@@ -297,20 +285,13 @@ function beginTurn(s, idx, ctx) {
     return advance(s, idx, ctx);
   }
   const leg = LEGS[s.leg - 1];
-  const card = s.leg === 6 ? `dock:${crew.role}` : draw(s.decks, s.leg, leg.cards, ctx.rng);
-  let q = null;
-  if (s.settings.questions) {
-    if (s.leg === 6) {
-      const arr = ROLE_QUESTIONS[crew.role];
-      q = `r:${crew.role}:${Math.floor(ctx.rng() * arr.length)}`;
-    } else {
-      q = draw(s.qdecks, s.leg, questionIdsForLeg(s.leg), ctx.rng);
-    }
-  }
+  // Standard route: the same event for every crew on each leg. Random events: each crew draws
+  // its own card, and Leg 6 is the crisis written for its role.
+  const card = !s.settings.randomEvents ? leg.fixed : s.leg === 6 ? `dock:${crew.role}` : draw(s.decks, s.leg, leg.cards, ctx.rng);
   s.turn = {
     seq: ++s.seq, crewIdx: idx, crewId: crew.id, leg: s.leg,
     step: s.mode === 'local' ? 'handover' : 'event',
-    card, q, answer: null, roll: null, hangar: null, inspected: false,
+    card, roll: null, hangar: null, inspected: false,
     startNotes: notes, startedAt: ctx.now,
     deadline: (s.mode !== 'local' && s.settings.timer) ? ctx.now + s.settings.timer * 1000 : null,
   };
@@ -358,21 +339,19 @@ function resolveRoll(s, action, ctx, timedOut = false) {
   else {
     d = 1 + Math.floor(ctx.rng() * CONFIG.die);
     tier = tierOf(d, check.total, check.dc);
-    if (useAbility && R.ability.id === 'reroll' && tier !== 'success') {
+    if (useAbility && R.ability.id === 'reroll' && tier === 'fail') {
       d2 = 1 + Math.floor(ctx.rng() * CONFIG.die);
-      const t2 = tierOf(d2, check.total, check.dc);
-      const rank = { fail: 0, partial: 1, success: 2 };
-      if (rank[t2] > rank[tier]) tier = t2;
+      tier = tierOf(d2, check.total, check.dc);
     }
-    if (appr.effect === 'failToPartialSet' && tier === 'fail') {
-      tier = 'partial';
+    if (appr.effect === 'failToSuccessSet' && tier === 'fail') {
+      tier = 'success';
       addCondition(crew, 'yielded');
-      notes.push({ t: 'cond', cond: 'yielded', text: 'Ductile reserve: Failure → Partial, but a spar takes a permanent set' });
+      notes.push({ t: 'cond', cond: 'yielded', text: 'Ductile reserve: Failure → Success, but a spar takes a permanent set' });
     }
     // Structural Engineer: automatic, once per game
-    if (R.ability.id === 'loadpath' && !crew.abilityUsed && tier === 'fail') {
-      tier = 'partial'; crew.abilityUsed = true;
-      notes.push({ t: 'save', text: 'Redundant load path: Failure → Partial' });
+    if (R.ability.id === 'loadpath' && !crew.abilityUsed && tier === 'fail' && card.tags.some(x => R.ability.tags.includes(x))) {
+      tier = 'success'; crew.abilityUsed = true;
+      notes.push({ t: 'save', text: 'Redundant load path: Failure → Success' });
     }
   }
   if (useAbility) crew.abilityUsed = true;
@@ -390,7 +369,7 @@ function resolveRoll(s, action, ctx, timedOut = false) {
   if (card.options) {
     const fx = appr.fx[tier === 'auto' ? 'auto' : tier] || [];
     applyFx(s, crew, fx, notes, cause);
-    text = tier === 'auto' ? 'You take the certain option.' : ({ success: 'It works out.', partial: 'Mixed fortunes.', fail: 'It goes badly.' })[tier];
+    text = tier === 'auto' ? 'You take the certain option.' : ({ success: 'It works out.', fail: 'It goes badly.' })[tier];
   } else {
     const out = card.outcomes[tier];
     text = out.text;
@@ -402,8 +381,8 @@ function resolveRoll(s, action, ctx, timedOut = false) {
     seq: ++s.rollSeq, d, d2, total: check.total, dc: check.dc, tier, approach: appr.id, approachLabel: appr.label,
     parts: check.parts, notes, text, timedOut, jettison: !!action.jettison && !appr.cost?.crate, ability: useAbility,
   };
-  crew.history.push({ leg: s.leg, card: t.card, title: card.title, tier, approach: appr.id, d, total: check.total, dc: check.dc, timedOut, answered: t.answer ? (t.answer.correct ? 'right' : 'wrong') : null });
-  const tierWord = { success: 'SUCCESS', partial: 'PARTIAL', fail: 'FAILURE', auto: 'CHOSEN' }[tier];
+  crew.history.push({ leg: s.leg, card: t.card, title: card.title, tier, approach: appr.id, d, total: check.total, dc: check.dc, timedOut });
+  const tierWord = { success: 'SUCCESS', fail: 'FAILURE', auto: 'CHOSEN' }[tier];
   log(s, tier, `${crew.name} · ${card.title} · ${appr.label}${d ? ` · rolled ${d}${d2 ? `/${d2}` : ''}${check.total >= 0 ? '+' : ''}${check.total} vs ${check.dc}` : ''} → ${tierWord}${timedOut ? ' (timer ran out — autopilot)' : ''}`, crew.id);
   if (t.deadline) t.deadline = Math.max(t.deadline, ctx.now + 15000);
 }
@@ -506,7 +485,7 @@ export function scoreCrew(crew) {
   const embodied = M.frameMass * M.co2PerKg; // t CO2e for the frame
   const perMission = (crew.fuelCO2 || 0) + embodied / CONFIG.missionsPerLife;
   const perCrate = finished && crew.cargo > 0 ? perMission / crew.cargo : null;
-  return { finished, cargoPts, integrityPts, timePts, sparePts, completePts, budgetPts, insightPts: crew.insight, bonusPts: crew.bonus, greenPts: 0, embodied, fuel: crew.fuelCO2 || 0, perMission, perCrate };
+  return { finished, cargoPts, integrityPts, timePts, sparePts, completePts, budgetPts, bonusPts: crew.bonus, greenPts: 0, embodied, fuel: crew.fuelCO2 || 0, perMission, perCrate };
 }
 
 function endGame(s, ctx) {
@@ -519,7 +498,7 @@ function endGame(s, ctx) {
     const best = eligible.reduce((a, b) => (b.perCrate < a.perCrate ? b : a));
     best.greenPts = CONFIG.greenAward;
   }
-  rows.forEach(r => { r.total = r.cargoPts + r.integrityPts + r.timePts + r.sparePts + r.completePts + r.budgetPts + r.insightPts + r.bonusPts + r.greenPts; });
+  rows.forEach(r => { r.total = r.cargoPts + r.integrityPts + r.timePts + r.sparePts + r.completePts + r.budgetPts + r.bonusPts + r.greenPts; });
   const ranked = [...rows].sort((a, b) => b.total - a.total);
   ranked.forEach((r, i) => { r.rank = i + 1; });
   s.results = { rows, winner: ranked[0]?.crewId, durationMs: s.endedAt - s.startedAt };
@@ -532,7 +511,7 @@ function initCrewRuntime(c) {
   const st = crewStats(c);
   Object.assign(c, {
     integrity: st.maxIntegrity, spares: st.spares, cargoStart: c.cargo, time: 0, conditions: [],
-    abilityUsed: false, insight: 0, answered: 0, bonus: 0, lost: false, lostLeg: null, lostCause: null,
+    abilityUsed: false, bonus: 0, lost: false, lostLeg: null, lostCause: null,
     history: [], fuelCO2: 0, dmgTaken: 0, cratesLost: 0, jettisoned: 0, repairs: 0,
   });
 }
@@ -549,7 +528,7 @@ function autoConfigure(s, c, rng) {
 
 function resetToLobby(s) {
   s.phase = 'lobby';
-  s.turn = null; s.leg = 0; s.results = null; s.paused = null; s.decks = {}; s.qdecks = {};
+  s.turn = null; s.leg = 0; s.results = null; s.paused = null; s.decks = {};
   s.crews = s.crews.map(c => ({ id: c.id, name: c.name, owner: c.owner, material: c.material, processing: c.processing, role: c.role, cargo: c.cargoStart ?? c.cargo, ready: false }));
 }
 
@@ -557,7 +536,7 @@ function resetToLobby(s) {
 export function act(prev, action, ctx) {
   const s = clone(prev);
   const actor = ctx.actor ?? LOCAL_ACTOR;
-  const turnAction = ['ready', 'answer', 'roll', 'hangar', 'end', 'timeout'].includes(action.type);
+  const turnAction = ['ready', 'roll', 'hangar', 'end', 'timeout'].includes(action.type);
   if (turnAction) {
     if (s.phase !== 'play' || !s.turn) throw new Error('No turn in progress');
     if (action.seq !== undefined && action.seq !== s.turn.seq) throw new Error('stale');
@@ -634,7 +613,7 @@ export function act(prev, action, ctx) {
       if (!action.force && !s.crews.every(c => c.ready)) throw new Error('Every crew must be ready');
       s.crews.forEach(c => { autoConfigure(s, c, ctx.rng); c.ready = true; initCrewRuntime(c); });
       s.phase = 'play'; s.leg = 1; s.gameNo += 1; s.startedAt = ctx.now; s.endedAt = null; s.results = null;
-      s.decks = {}; s.qdecks = {}; s.log = []; s.logN = 0;
+      s.decks = {}; s.log = []; s.logN = 0;
       log(s, 'leg', `Leg 1: ${LEGS[0].name} — ${LEGS[0].topic}`);
       return beginTurn(s, 0, ctx);
     }
@@ -682,17 +661,6 @@ export function act(prev, action, ctx) {
       s.turn.deadline = s.settings.timer && !s.paused ? ctx.now + s.settings.timer * 1000 : null;
       return s;
     }
-    case 'answer': {
-      const t = s.turn;
-      if (t.step !== 'event' || !t.q || t.answer) throw new Error('Cannot answer now');
-      const Q = questionById(t.q);
-      const correct = action.choice === Q.answer;
-      t.answer = { choice: action.choice, correct };
-      const crew = s.crews[t.crewIdx];
-      crew.answered += 1;
-      if (correct) crew.insight += 1;
-      return s;
-    }
     case 'roll': {
       if (s.turn.step !== 'event') throw new Error('Already rolled');
       resolveRoll(s, action, ctx);
@@ -735,12 +703,12 @@ export function matchSummary(s) {
       return {
         material: c.material, processing: c.processing, role: c.role, cargoStart: c.cargoStart,
         cargoEnd: c.cargo, integrity: c.integrity, time: +c.time.toFixed(1), lost: c.lost, lostLeg: c.lostLeg,
-        lostCause: c.lostCause, insight: c.insight, answered: c.answered, repairs: c.repairs, jettisoned: c.jettisoned,
-        score: r.total, rank: r.rank, breakdown: { cargo: r.cargoPts, integrity: r.integrityPts, time: r.timePts, spares: r.sparePts, complete: r.completePts, budget: r.budgetPts, insight: r.insightPts, bonus: r.bonusPts, green: r.greenPts },
+        lostCause: c.lostCause, repairs: c.repairs, jettisoned: c.jettisoned,
+        score: r.total, rank: r.rank, breakdown: { cargo: r.cargoPts, integrity: r.integrityPts, time: r.timePts, spares: r.sparePts, complete: r.completePts, budget: r.budgetPts, bonus: r.bonusPts, green: r.greenPts },
         perCrateCO2: r.perCrate, history: c.history.map(h => ({ leg: h.leg, card: h.card, tier: h.tier, approach: h.approach, timedOut: h.timedOut })),
       };
     }),
     durationS: Math.round((s.results.durationMs || 0) / 1000),
-    settings: { questions: s.settings.questions, timer: s.settings.timer, uniqueFrames: s.settings.uniqueFrames },
+    settings: { randomEvents: !!s.settings.randomEvents, timer: s.settings.timer, uniqueFrames: s.settings.uniqueFrames },
   };
 }
