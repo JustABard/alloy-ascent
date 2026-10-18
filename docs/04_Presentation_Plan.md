@@ -12,7 +12,7 @@
 | 1:30 | **3. Why these six?** Codex → *Compare* (Ashby charts) | "E/ρ is about 25 for every metal here — specific stiffness can't separate them. Shape-dependent indices (∛E/ρ for panels, σy/ρ for ties) and environment-specific mechanisms can. So every leg tests a different mechanism, and no frame wins them all." |
 | 2:30 | **4. Property → dice.** Show a turn's *Your odds* box | Each card has a −4…+4 modifier per material from a real property, shown with its reason. Example: Cold Soak — 4130 −4 (BCC, below its DBTT); 316L +4 (FCC, no transition). Success % is shown before rolling. |
 | 3:15 | **5. Processing → microstructure → odds** | 7075-T6 vs T73: strength vs stress-corrosion. Heat can *over-age* 7075 mid-game, and a patch can't fix a microstructure. Fatigue cracks hide, grow each leg, and fast-fracture past a size set by K_IC. |
-| 4:00 | **6. Route, cargo, roles** (route map + Codex *Cargo*) | Light frames carry more payload (CFRP 6 crates, 316L 3) but are fragile. Every crew faces the same event on each leg, so the class can compare frames directly. Leg 3 is pure probability; Leg 6 is a hand-flown docking where the Test Pilot gets +3. |
+| 4:00 | **6. Route, cargo, roles** (route map + Codex *Rules*) | Light frames carry more payload (CFRP 6 crates, 316L 3) but are fragile. Every crew faces the same event on each leg, so the class can compare frames directly. Leg 3 is pure probability; Leg 6 is a hand-flown docking where the Pilot gets +3. |
 | 4:45 | **7. LIVE: launch.** Volunteers press *Ready*; the host presses *Launch*. Set the timer to **45 s**. | Talk through the first crew's choices out loud: "Your odds are 60% — push hard to save 3 hours, or play it safe?" |
 | 5:00–9:00 | **Play Legs 1–2** (and 3 if time allows). Press **Pause** once to discuss a result. | After a fatigue roll: "Notice the ⚠ suspected damage — that's a hidden crack. Do you inspect now, or gamble?" |
 | 9:00 | Host → **Lobby** (or let it run during the next slides if the class is engaged) | |
@@ -47,5 +47,5 @@
 ## Likely questions — prepared answers
 - **"Why does CFRP win most often?"** It has the highest payload and specific strength. Its 23% loss rate and zero budget points are the counterweights. Steels have higher *average* scores; CFRP wins on *variance*.
 - **"Aren't the numbers made up?"** The modifiers are rankings of real properties (table in `01_Design_Rationale_and_Reflection.md` §3). Every one is shown with its reason. They teach ranking and mechanism, not design allowables.
-- **"Why is WE43 even an option?"** It is the best metal for panel stiffness per kg and holds strength to 250 °C, but corrosion, low toughness and space effects make it a specialist choice. A Surface & Corrosion Engineer pairs well with it.
+- **"Why is WE43 even an option?"** It is the best metal for panel stiffness per kg and holds strength to 250 °C, but corrosion, low toughness and space effects make it a specialist choice. A Chemical Engineer pairs well with it.
 - **"Is this cheat-proof?"** No. Clients are trusted (fine for a classroom). Next step: server-authoritative rooms.

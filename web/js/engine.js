@@ -211,7 +211,7 @@ function loseCrate(s, crew, notes, why = 'A crate is lost') {
   if ((crew.cargo || 0) <= 0) return;
   if (crew.role === 'quartermaster' && !crew.abilityUsed) {
     crew.abilityUsed = true;
-    notes.push({ t: 'save', text: 'Secured cargo: the Quartermaster saves a crate that would have been lost' });
+    notes.push({ t: 'save', text: 'Secured cargo: the Cargo Technician saves a crate that would have been lost' });
     return;
   }
   crew.cargo -= 1;
@@ -249,7 +249,7 @@ function applyLegStart(s, crew, notes) {
   for (const c of [...crew.conditions]) {
     if (c.id === 'crack') {
       if (crew.role === 'ndt' && !c.hidden) {
-        notes.push({ t: 'info', text: 'Crack stop-drilled by your NDT Inspector — no growth' });
+        notes.push({ t: 'info', text: 'Crack stop-drilled by your Quality Inspector — no growth' });
         continue;
       }
       c.stage += 1;
@@ -400,7 +400,7 @@ export function hangarOptions(s, crew) {
       const C = CONDITIONS[c.id];
       if (c.hidden || !C.repairable) return;
       const auto = c.id === 'corrosion' && crew.role === 'coatings';
-      opts.push({ id: `repair:${i}`, label: `Repair: ${C.name}`, dc: auto ? null : repairDC(crew, c), time: CONFIG.repairTime, desc: auto ? 'Your Surface Engineer treats corrosion reliably. Uses 1 spare.' : 'Remove this condition on success. Uses 1 spare.' });
+      opts.push({ id: `repair:${i}`, label: `Repair: ${C.name}`, dc: auto ? null : repairDC(crew, c), time: CONFIG.repairTime, desc: auto ? 'Your Chemical Engineer treats corrosion reliably. Uses 1 spare.' : 'Remove this condition on success. Uses 1 spare.' });
     });
     if (crew.role === 'metallurgist' && !crew.abilityUsed) {
       crew.conditions.forEach((c, i) => {

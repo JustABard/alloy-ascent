@@ -21,7 +21,7 @@ The six legs are:
 3. Probability (no material modifiers)
 4. Thermal behaviour
 5. Vacuum and space environment
-6. Docking: hand-flown Manual Docking (Test Pilot +3)
+6. Docking: hand-flown Manual Docking (Pilot +3)
 
 By default every crew faces the same event on each leg, so frames can be compared directly. The host can tick *Random events* in the lobby to give each crew its own event card per leg, with a Leg 6 crisis written for its role.
 

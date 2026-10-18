@@ -1,4 +1,4 @@
-// Long-form teaching content: the Materials Codex, cargo explainer, glossary, discussion
+// Long-form teaching content: the Materials Codex, scoring table, discussion
 // prompts and sources. Values are typical/indicative (see docs/ for references).
 
 export const CODEX = {
@@ -64,19 +64,6 @@ export const CODEX = {
   },
 };
 
-export const CARGO_TEXT = {
-  title: 'Cargo: why it matters',
-  points: [
-    ['What it is', 'Crates of science payload and supplies for Station Meridian. Delivering them is the point of the mission.'],
-    ['Why it scores', `Each crate you deliver intact is worth points — the largest single source of score.`],
-    ['Why frames differ', 'A lighter structure leaves more of the maximum take-off mass for payload. That is why CFRP carries 6 crates and 316L only 3 — the payload fraction is a direct consequence of specific strength and stiffness.'],
-    ['Load penalty', 'Cargo has mass. Every 2 crates aboard gives −1 on Strength and Fatigue checks (bigger loads per g and per gust) and each crate adds 0.5 h to every leg.'],
-    ['Losing cargo', 'Some failures break crates loose, burn them or punch through the hold. A lost craft delivers nothing.'],
-    ['Jettison', 'Before any roll you may dump a crate for +3 (Quartermaster +4): you lose its points but cut the load right now.'],
-    ['Strategy', 'Load fully and you score more if you survive — but you fly slower and every strength and fatigue check gets harder. Fragile frames often do better with a lighter load.'],
-  ],
-};
-
 export const SCORING = [
   ['Cargo delivered', 'points per crate (see Cargo)'],
   ['Airframe integrity', '+1 per integrity point left'],
@@ -84,40 +71,7 @@ export const SCORING = [
   ['Schedule', '+½ point per hour inside the 66 h docking window (−½ per hour late)'],
   ['Programme budget', 'cheaper frames leave budget unspent: 4130 +4, Al & 316L +3, Mg +2, Ti +1, CFRP 0'],
   ['Spare parts', '+1 per unused spare'],
-  ['Event bonuses', 'e.g. answering a distress call'],
   ['Green award', '+3 to the crew with the lowest life-cycle CO₂e per delivered crate'],
-];
-
-export const GLOSSARY = [
-  ['Specific strength', 'Yield (or tensile) strength divided by density, σy/ρ. Governs the mass of strength-limited parts.'],
-  ['Specific stiffness', 'Young’s modulus divided by density, E/ρ. Almost the same (≈25 GPa·cm³/g) for all common structural metals.'],
-  ['Material index', 'A combination of properties to maximise for a given design (Ashby). E.g. √E/ρ for a light stiff beam, ∛E/ρ for a light stiff panel.'],
-  ['Torsional stiffness', 'Resistance to twist, GJ (shear modulus × polar moment of area). At fixed mass, low density allows thicker walls and higher J.'],
-  ['Endurance limit', 'Stress amplitude below which a material survives effectively infinite cycles. Shown by BCC steels and Ti alloys, not by Al or Mg alloys.'],
-  ['S–N curve', 'Plot of stress amplitude against cycles to failure.'],
-  ['Miner’s rule', 'Linear damage accumulation: failure when Σ(nᵢ/Nᵢ) = 1.'],
-  ['Stress concentration (Kt)', 'Local stress ÷ nominal stress at a notch or hole. A round hole in a plate gives Kt ≈ 3.'],
-  ['Fracture toughness (K_IC)', 'Resistance to crack propagation. Critical crack length a꜀ ≈ (1/π)(K_IC/Yσ)².'],
-  ['Damage tolerance', 'Design philosophy that assumes flaws exist and sets inspection intervals so they are found before reaching a꜀.'],
-  ['Precipitation hardening', 'Strengthening by fine particles that obstruct dislocations (e.g. η′ in 7075).'],
-  ['Over-ageing', 'Precipitates coarsen with time at temperature; dislocations bypass them and strength falls.'],
-  ['Solution treatment', 'Heating to dissolve alloying elements into a single solid solution before quenching.'],
-  ['Martensite', 'Hard, metastable phase formed by rapid quenching of steel; tempering restores toughness.'],
-  ['Normalising', 'Air cooling steel from the austenite region to produce fine, uniform ferrite + pearlite.'],
-  ['Strain (work) hardening', 'Strength increase from plastic deformation, as dislocation density rises.'],
-  ['Hall–Petch relation', 'σy = σ₀ + k·d^−½: finer grains are stronger. The slope k is large for Mg.'],
-  ['Creep', 'Slow, time-dependent deformation under load at high homologous temperature.'],
-  ['Glass transition (Tg)', 'Temperature at which a polymer softens from glassy to rubbery.'],
-  ['Ductile-to-brittle transition', 'Change from ductile tearing to cleavage fracture as temperature falls — characteristic of BCC metals.'],
-  ['Pilling–Bedworth ratio', 'Oxide volume ÷ metal volume consumed. ≈1–2 gives a protective film; <1 is porous (MgO), ≫2 tends to spall.'],
-  ['Atomic oxygen (AO)', 'Dissociated oxygen in low Earth orbit that erodes polymers and carbon.'],
-  ['Outgassing', 'Release of absorbed gases and volatiles in vacuum; screened by ASTM E595.'],
-  ['Cold welding / galling', 'Adhesion and tearing of clean metal surfaces in contact, worst in vacuum.'],
-  ['BVID', 'Barely visible impact damage — internal delamination in composites with little surface sign.'],
-  ['Galvanic corrosion', 'Accelerated corrosion of the more anodic metal when two dissimilar conductors share an electrolyte.'],
-  ['Embodied carbon', 'CO₂-equivalent emitted to produce a material (cradle-to-gate), per kg.'],
-  ['Functional unit', 'The unit an LCA compares on — here, CO₂e per crate delivered, not per kg of material.'],
-  ['DC (difficulty class)', 'The total you must reach on d20 + modifiers to succeed.'],
 ];
 
 export const DISCUSSION = [
