@@ -2,7 +2,7 @@
 // all clicks go through one delegated handler (data-act attributes).
 import * as E from './engine.js';
 import { CONFIG, MATERIALS, MATERIAL_ORDER, ROLES, ROLE_ORDER, LEGS, CONDITIONS, TAGS, CARDS, cardById } from './data.js';
-import { CODEX, CARGO_TEXT, SCORING, GLOSSARY, DISCUSSION, SOURCES } from './content.js';
+import { CODEX, SCORING, DISCUSSION, SOURCES } from './content.js';
 import { TUTORIAL } from './tutorial.js';
 import * as Net from './net.js';
 
@@ -324,7 +324,7 @@ function crewEditor(s, c) {
     <h4 class="step"><span>3</span> Specialist role</h4>
     <div class="role-grid">${ROLE_ORDER.map(r => { const R = ROLES[r]; return `<button class="role ${c.role === r ? 'on' : ''}" data-act="pick-role" data-crew="${c.id}" data-role="${r}">
       <span class="role-big">${R.icon}</span><b>${esc(R.name)}</b><small>Home: ${esc(R.home)}</small><p>${esc(R.summary)}</p><p class="ab"><i>Ability:</i> ${esc(R.ability.name)} — ${esc(R.ability.desc)}</p></button>`; }).join('')}</div>
-    ${M ? `<h4 class="step"><span>4</span> Load cargo <button class="link small" data-act="codex" data-tab="cargo">what does cargo do? →</button></h4>
+    ${M ? `<h4 class="step"><span>4</span> Load cargo <button class="link small" data-act="codex" data-tab="rules">what does cargo do? →</button></h4>
     <div class="cargo-row">
       <div class="stepper"><button class="btn small" data-act="cargo" data-crew="${c.id}" data-d="-1" ${c.cargo <= 0 ? 'disabled' : ''}>−</button>
       <div class="crates">${Array.from({ length: st.capacity }, (_, i) => `<span class="crate ${i < c.cargo ? 'full' : ''}"></span>`).join('')}</div>
@@ -566,7 +566,7 @@ function resultsScreen(s) {
     <section class="panel"><h3>Scoreboard</h3><div class="tablewrap"><table class="score">
       <thead><tr><th>#</th><th>Crew</th>${cols.map(c => `<th>${c[0]}</th>`).join('')}<th>Total</th></tr></thead>
       <tbody>${rows.map(r => { const c = crewOf(r.crewId); return `<tr class="${c.lost ? 'lost' : ''}"><td>${r.rank}</td><td class="sc-crew">${matBadge(c.material, 'sm')} <b>${esc(c.name)}</b><small>${esc(MATERIALS[c.material].short)} ${esc(E.procOf(c).name)} · ${esc(ROLES[c.role].name)}</small></td>${cols.map(([, k]) => `<td>${r[k]}</td>`).join('')}<td class="tot">${r.total}</td></tr>`; }).join('')}</tbody></table></div>
-      <p class="muted small">Lost craft score only event points. Scoring rules: <button class="link small" data-act="codex" data-tab="scoring">see the Codex</button>.</p></section>
+      <p class="muted small">Lost craft score only event points. Scoring rules: <button class="link small" data-act="codex" data-tab="rules">see the Codex</button>.</p></section>
     <section class="panel"><h3>Each crew’s journey</h3><div class="journeys">${s.crews.map(c => journey(c)).join('')}</div></section>
     <section class="panel"><h3>Cost & environment — the life-cycle view</h3>${lifeCycle(s)}</section>
     <section class="panel"><h3>Discuss</h3><ol class="discuss">${DISCUSSION.map(d => `<li>${esc(d)}</li>`).join('')}</ol></section>
@@ -650,21 +650,16 @@ function legIntro(n) {
 }
 
 function codexView() {
-  const tabs = [['materials', 'Materials'], ['compare', 'Compare'], ['roles', 'Roles'], ['route', 'The route'], ['cargo', 'Cargo'], ['scoring', 'Scoring'], ['rules', 'Rules'], ['glossary', 'Glossary'], ['sources', 'Sources']];
+  const tabs = [['materials', 'Materials'], ['compare', 'Compare'], ['roles', 'Roles'], ['route', 'The route'], ['rules', 'Rules'], ['sources', 'Sources']];
   const tab = S.ui.codexTab;
   let body = '';
   if (tab === 'materials') body = codexMaterial(S.ui.codexMat);
   else if (tab === 'compare') body = codexCompare();
   else if (tab === 'roles') body = `<div class="role-grid static">${ROLE_ORDER.map(r => { const R = ROLES[r]; return `<div class="role"><span class="role-big">${R.icon}</span><b>${esc(R.name)}</b><small>Home: ${esc(R.home)}</small><p>${esc(R.summary)}</p><p class="ab"><i>Ability:</i> ${esc(R.ability.name)} — ${esc(R.ability.desc)}</p></div>`; }).join('')}</div>
-    <p class="muted">Leg 6 is specialist-focused. On the standard route every crew hand-flies Manual Docking, where a Test Pilot gets +${CONFIG.specialistBonus}. With random events on, every crew faces a docking crisis written for its own role and gets +${CONFIG.specialistBonus} for its speciality.</p>`;
+    <p class="muted">Leg 6 is specialist-focused. On the standard route every crew hand-flies Manual Docking, where a Pilot gets +${CONFIG.specialistBonus}. With random events on, every crew faces a docking crisis written for its own role and gets +${CONFIG.specialistBonus} for its speciality.</p>`;
   else if (tab === 'route') body = LEGS.map(L => `<div class="route-leg"><h4>Leg ${L.n} · ${esc(L.name)} <span class="muted">— ${esc(L.topic)}</span></h4><p>${esc(L.intro)}</p>
     <p class="small muted">Standard event: <b>${esc(cardById(L.fixed).title)}</b> · With random events: ${L.cards ? L.cards.map(id => esc(CARDS[id].title)).join(' · ') : 'one crisis per specialist role'}</p></div>`).join('');
-  else if (tab === 'cargo') body = `<dl class="cargo-dl">${CARGO_TEXT.points.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
-    <p>Crates are worth <b>${CONFIG.crateValue} points</b> each. Capacity by frame: ${MATERIAL_ORDER.map(k => `${esc(MATERIALS[k].short)} ${MATERIALS[k].stats.capacity}`).join(' · ')} (Quartermaster +1).</p>`;
-  else if (tab === 'scoring') body = `<table class="plain">${SCORING.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</table>
-    <p class="muted small">Crate value ${CONFIG.crateValue} · mission-complete bonus ${CONFIG.completionBonus} · docking window ${CONFIG.deadline} h.</p>`;
   else if (tab === 'rules') body = rulesText();
-  else if (tab === 'glossary') body = `<dl class="gloss">${GLOSSARY.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`;
   else if (tab === 'sources') body = `<ol class="sources">${SOURCES.map(x => `<li>${esc(x)}</li>`).join('')}</ol><p class="muted small">Property values are typical figures for the stated condition and vary with product form and supplier; game modifiers are rankings derived from them, not design allowables.</p>`;
   return `<div class="modal codex"><div class="cx-head"><h2 class="h-display">Materials Codex</h2><button class="x" data-act="close" aria-label="Close">✕</button></div>
     <nav class="cx-tabs">${tabs.map(([k, l]) => `<button class="${tab === k ? 'on' : ''}" data-act="cx-tab" data-tab="${k}">${l}</button>`).join('')}</nav>
@@ -727,14 +722,17 @@ function codexCompare() {
 }
 
 function rulesText() {
+  // Rules page text as written by the team (Tomas); the scoring table is shared with content.js.
   return `<div class="rules">
-  <h4>Goal</h4><p>Fly your crew’s craft from Ironhold Spaceport to Station Meridian across six legs and score the most mission points — mostly by delivering cargo and arriving intact and on time.</p>
-  <h4>Setup (per crew)</h4><ol><li>Choose a <b>frame material</b> (one crew per material by default).</li><li>Choose its <b>processing route</b> — this sets the microstructure and shifts some checks.</li><li>Choose a <b>specialist role</b>.</li><li>Load <b>cargo</b> (0 to capacity). More cargo = more points, but heavier, slower and harder checks.</li></ol>
-  <h4>A turn (one-minute control window)</h4><ol><li>Start-of-turn effects: cracks grow, corrosion bites.</li><li>Face the leg’s event: the same event for every crew on the standard route, or a random card per crew with random events on.</li><li>Choose an approach: <b>Standard</b>, <b>Push hard</b> (+3 DC, −3 h, failure +1 damage), <b>Play it safe</b> (−3 DC, +3 h), or a ★ material/role special if your frame allows it. Optionally jettison a crate (+3) or use your once-per-game ability.</li><li>Roll d20 + modifiers vs the DC. Total ≥ DC: <b>Success</b>. Lower: <b>Failure</b>. A natural 20 always succeeds; a natural 1 always fails. Odds are shown before you roll.</li><li>Apply the outcome: damage, time, lost crates, conditions.</li><li>Optional <b>hangar stop</b>: inspect for hidden damage (+1 h), then spend a spare on one repair (+2 h; roll d20 + repair modifier ≥ 10).</li></ol>
-  <p>If the timer runs out, the autopilot flies the standard (or no-roll) option and control passes on.</p>
-  <h4>The legs</h4><p>1 Specific strength & stiffness · 2 Fatigue · 3 Probability (no material modifiers) · 4 Thermal · 5 Vacuum & space · 6 Docking (Manual Docking on the standard route; with random events, a crisis for your role).</p>
-  <h4>Damage</h4><p>Integrity 0 = craft lost (crew ejects safely). Conditions persist: fatigue cracks grow one stage per leg and fast-fracture (−5) beyond your material’s critical crack stage; corrosion costs 1 integrity per leg; heat can permanently over-age or soften a microstructure (only a Metallurgist’s field heat treatment fixes that). Some damage is hidden until inspected.</p>
-  <h4>Scoring</h4><table class="plain">${SCORING.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</table></div>`;
+  <p>The aim of skyforge is to fly from the home base to the space station, facing six individual legs designed to test the material chosen. Aswell as its load capacity and the person in charge of the aircraft. Points are based on time taken and the amount of cargo delivered.</p>
+  <h4>How to set up?</h4><ol><li>Choose a material.</li><li>Choose a processing route.</li><li>Choose a specialist role (person in charge).</li><li>Choose the amount of cargo you would like to deliver.</li><li>Ready up</li></ol>
+  <h4>How to play?</h4><ol><li>Each player has 1 minute to analyse the scenario in the given leg of the race and choose a move.</li><li>Choose an option and decide whether to keep the cargo amount consistent.</li><li>Roll the dice.</li><li>Receive feedback on whether the action was a success or not.</li></ol>
+  <p>If a move is not chosen in time, the autopilot flies the standard option for you.</p>
+  <h4>The legs (Designed to test the airframe)</h4><ol><li>Specific strength and stiffness</li><li>Fatigue</li><li>Based on probability</li><li>Thermal</li><li>Vacuum pressure and space</li><li>Docking the airframe (Specialist role)</li></ol>
+  <h4>Damage</h4><p>Damage is taken once the aircraft's integrity reaches 0. Each person will have a chance to repair fatigue on the airframe to prevent the integrity from reaching 0. This can be found through inspection.</p>
+  <h4>Scoring</h4><table class="plain">${SCORING.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</table>
+  <h4>How the cargo works?</h4><p>The cargo consists of supplies for the space station.</p>
+  <p>Each two crates awards -1 on strength and fatigue, due to the added weight. Each crate adds half an hour to the flight time. Crates are worth 4 points each on completion.</p></div>`;
 }
 
 function aboutView() {

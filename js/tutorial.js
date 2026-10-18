@@ -1,7 +1,6 @@
 // Interactive tutorial. Each step returns HTML; optional wire(root) adds live widgets.
-import { odds, crewStats, loadPenalty, legHours } from './engine.js';
-import { CONFIG, MATERIALS, MATERIAL_ORDER, ROLES, ROLE_ORDER, LEGS } from './data.js';
-import { CARGO_TEXT, SCORING } from './content.js';
+import { odds } from './engine.js';
+import { MATERIALS, MATERIAL_ORDER, ROLES, ROLE_ORDER, LEGS } from './data.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const pct = (x) => `${Math.round(x * 100)}%`;
@@ -10,7 +9,7 @@ const badge = (k) => `<span class="hexb sm" style="--mc:${MATERIALS[k].color}">$
 const oddsBar = (o) => `<div class="odds"><div class="ob s" style="flex:${o.success}"></div><div class="ob f" style="flex:${o.fail}"></div></div>
   <div class="odds-l"><span class="s">✓ Success ${pct(o.success)}</span><span class="f">✗ Failure ${pct(o.fail)}</span></div>`;
 
-const tutState = { mod: 2, dc: 6, mat: 'al', crates: 4, last: null };
+const tutState = { mod: 2, dc: 6, last: null };
 
 export const TUTORIAL = [
   { title: 'Welcome, crews', html: () => `
@@ -27,31 +26,9 @@ export const TUTORIAL = [
     <div><b>7075-T73 (over-aged)</b><small>coarser, stable η precipitates</small><span class="down">−1 strength</span><span class="up">+2 corrosion</span><span class="up">+1 crack tolerance</span></div></div>
     <p>Others: mill-annealed vs β-annealed titanium, annealed vs cold-worked 316L, epoxy vs cyanate-ester CFRP, cast vs extruded WE43, normalised vs quenched-and-tempered 4130.</p>` },
   { title: 'Pick a specialist', html: () => `
-    <p>Your role gives a bonus on its home checks and a once-per-game ability. On Leg 6, Manual Docking, a Test Pilot gets +3; with random events on, Leg 6 is written specifically for your role.</p>
+    <p>Your role gives a bonus on its home checks and a once-per-game ability. On Leg 6, Manual Docking, a Pilot gets +3; with random events on, Leg 6 is written specifically for your role.</p>
     <div class="tut-roles">${ROLE_ORDER.map(r => `<div><span class="role-big">${ROLES[r].icon}</span><b>${esc(ROLES[r].name)}</b><small>${esc(ROLES[r].summary)}</small></div>`).join('')}</div>
-    <p class="callout">Good pairings cover a weakness: a Surface Engineer protects corrosion-prone magnesium; a Metallurgist steadies heat-sensitive 7075; an NDT Inspector finds CFRP’s hidden delaminations.</p>` },
-  { title: 'Cargo: what it is for', html: () => `
-    <div class="cargo-dl tut">${CARGO_TEXT.points.slice(0, 4).map(([k, v]) => `<p><b>${esc(k)}.</b> ${esc(v)}</p>`).join('')}</div>
-    <div class="tut-widget" id="tw-cargo"></div>`,
-    wire(root) {
-      const box = root.querySelector('#tw-cargo');
-      const draw = () => {
-        const c = { material: tutState.mat, processing: MATERIALS[tutState.mat].processing[0].id, role: 'pilot', cargo: 0 };
-        const cap = crewStats(c).capacity;
-        tutState.crates = Math.min(tutState.crates, cap);
-        c.cargo = tutState.crates;
-        box.innerHTML = `<div class="tw-mats">${MATERIAL_ORDER.map(k => `<button class="${k === tutState.mat ? 'on' : ''}" data-m="${k}" style="--mc:${MATERIALS[k].color}">${badge(k)} ${esc(MATERIALS[k].short)}</button>`).join('')}</div>
-          <div class="stepper"><button class="btn small" data-d="-1">−</button><div class="crates">${Array.from({ length: cap }, (_, i) => `<span class="crate ${i < c.cargo ? 'full' : ''}"></span>`).join('')}</div><button class="btn small" data-d="1">＋</button></div>
-          <p><b>${c.cargo}/${cap} crates</b> → <b>${c.cargo * CONFIG.crateValue} pts</b> if delivered · load penalty <b>${sgn(-loadPenalty(c.cargo))}</b> on strength & fatigue checks · <b>${legHours(c).toFixed(1)} h</b> per leg</p>`;
-      };
-      box.addEventListener('click', (e) => {
-        const m = e.target.closest('[data-m]'); const d = e.target.closest('[data-d]');
-        if (m) tutState.mat = m.dataset.m;
-        if (d) tutState.crates = Math.max(0, tutState.crates + +d.dataset.d);
-        draw();
-      });
-      draw();
-    } },
+    <p class="callout">Good pairings cover a weakness: a Chemical Engineer protects corrosion-prone magnesium; a Metallurgical Engineer steadies heat-sensitive 7075; a Quality Inspector finds CFRP’s hidden delaminations.</p>` },
   { title: 'The route', html: () => `
     <ol class="tut-legs">${LEGS.map(L => `<li><b>Leg ${L.n} · ${esc(L.name)}</b> — ${esc(L.topic)}${L.kind === 'luck' ? ' <span class="pill">pure probability</span>' : L.kind === 'specialist' ? ' <span class="pill">specialist</span>' : ''}</li>`).join('')}</ol>
     <p>Every crew faces the same event on each leg, so the class can compare how each frame copes. The host can tick <b>Random events</b> in the lobby to give each crew its own card instead. Legs 3 and 6 deliberately ignore your material: Leg 3 is about reading odds; Leg 6 is a specialist’s moment.</p>` },
@@ -83,11 +60,11 @@ export const TUTORIAL = [
       <li><b>Play it safe</b> — −3 DC but +3 h.</li>
       <li><b>★ Special</b> — options that only some frames can use, because of their metallurgy. A locked special tells you why: e.g. only steels and Ti can “stay below the endurance limit”; only a laminate can use aeroelastic tailoring.</li>
       <li><b>Jettison a crate</b> — +3 now, but you lose that crate’s points.</li>
-      <li><b>Abilities</b> — once per game, e.g. the Test Pilot’s reroll or the Structural Engineer’s fail-safe.</li>
+      <li><b>Abilities</b> — once per game, e.g. the Pilot’s reroll or the Structural Engineer’s fail-safe.</li>
     </ul>` },
   { title: 'Damage, hidden cracks and the hangar', html: () => `
     <p><b>Integrity</b> is your hull’s health. At 0 the craft is lost (the crew ejects safely) and scores very little.</p>
-    <p><b>Conditions</b> persist between legs: a permanent set, a twisted wing box, active corrosion (−1 per leg), an over-aged microstructure (only a Metallurgist can re-heat-treat it)…</p>
+    <p><b>Conditions</b> persist between legs: a permanent set, a twisted wing box, active corrosion (−1 per leg), an over-aged microstructure (only a Metallurgical Engineer can re-heat-treat it)…</p>
     <p><b>Fatigue cracks</b> are often <i>hidden</i>. They grow one stage per leg; past your material’s critical stage (higher for tougher materials, because a꜀ ∝ (K_IC/σ)²) they fast-fracture for 5 damage.</p>
     <p>After each roll you get an optional <b>hangar stop</b>: <b>inspect</b> (+1 h) to find hidden damage, then spend a spare on one <b>repair</b> (+2 h). Your material’s repairability matters: 4130 welds anywhere; CFRP needs a difficult scarf repair.</p>` },
   { title: 'One-minute control windows', html: () => `
@@ -95,9 +72,7 @@ export const TUTORIAL = [
     <ul class="tut-list"><li><b>Online rooms:</b> the host creates a room and shares the code, link or QR code. Everyone plays on their own phone or laptop; a projector can join as a spectator.</li>
     <li><b>Pass-and-play:</b> one screen. Between turns a hand-over screen appears; the next crew’s minute starts when they tap “ready”.</li>
     <li>After the debrief the host can <b>return everyone to the lobby</b> to swap frames and fly again.</li></ul>` },
-  { title: 'Scoring', html: () => `<table class="plain">${SCORING.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</table>
-    <p class="muted small">Crates ${CONFIG.crateValue} pts each · mission complete +${CONFIG.completionBonus} · window ${CONFIG.deadline} h.</p>` },
   { title: 'Ready for launch', html: () => `
-    <p>That is everything. The <b>Codex</b> (top bar) explains every material, property, leg and term whenever you need it.</p>
+    <p>That is everything. The <b>Codex</b> (top bar) explains every material, role, leg and rule whenever you need it.</p>
     <div class="row"><button class="btn primary" data-act="local-new">Start a pass-and-play game</button><button class="btn" data-act="go-host">Host an online room</button></div>` },
 ];

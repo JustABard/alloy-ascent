@@ -142,7 +142,7 @@ export const MATERIAL_ORDER = ['ti', 'al', 'ss', 'cf', 'mg', 'cr'];
 
 export const ROLES = {
   pilot: {
-    id: 'pilot', name: 'Test Pilot', icon: '✈', home: 'Legs 1, 3, 6',
+    id: 'pilot', name: 'Pilot', icon: '✈', home: 'Legs 1, 3, 6',
     tags: ['handling'], bonus: 2,
     summary: '+2 on handling checks. Pushing hard costs only +2 DC (not +3) and saves 4 h (not 3).',
     ability: { id: 'reroll', name: 'Stick-and-rudder', when: 'preroll', desc: 'Once per game: if this roll is a Failure, reroll the d20 once and keep the better result.' },
@@ -155,25 +155,25 @@ export const ROLES = {
     ability: { id: 'loadpath', name: 'Redundant load path', when: 'auto', desc: 'Once per game, automatically: the first strength or stiffness check that would be a Failure becomes a Success instead (a fail-safe design).', tags: ['strength', 'stiffness'] },
   },
   metallurgist: {
-    id: 'metallurgist', name: 'Metallurgist', icon: '⚗', home: 'Legs 4–5',
+    id: 'metallurgist', name: 'Metallurgical Engineer', icon: '⚗', home: 'Legs 4–5',
     tags: ['heat', 'distortion', 'fire', 'cryo'], bonus: 2, otherBonus: 1,
     summary: '+2 on thermal and cryogenic checks, +1 on every other material check.',
     ability: { id: 'heattreat', name: 'Field heat treatment', when: 'hangar', desc: 'Once per game at a hangar stop: remove a permanent microstructural condition (over-aged, softened). Costs 1 spare.' },
   },
   ndt: {
-    id: 'ndt', name: 'NDT Inspector', icon: '◎', home: 'Leg 2',
+    id: 'ndt', name: 'Quality Inspector', icon: '◎', home: 'Leg 2',
     tags: ['fatigue', 'notch', 'impact'], bonus: 2,
     summary: '+2 on fatigue and impact checks. Hidden damage is found at once, detected cracks are stop-drilled (no growth), +3 on crack and delamination repairs.',
     ability: { id: 'eddy', name: 'Eddy-current survey', when: 'preroll', desc: 'Once per game: +4 on a fatigue, notch or impact check.', tags: ['fatigue', 'notch', 'impact'], value: 4 },
   },
   coatings: {
-    id: 'coatings', name: 'Surface & Corrosion Engineer', icon: '◈', home: 'Leg 5',
+    id: 'coatings', name: 'Chemical Engineer', icon: '◈', home: 'Leg 5',
     tags: ['corrosion', 'oxidation', 'vacuum', 'cryo'], bonus: 2,
     summary: '+2 on corrosion, atomic-oxygen, vacuum and cryogenic checks (protective films, thermal-control coatings). Corrosion repairs always succeed.',
     ability: { id: 'coat', name: 'Protective coating', when: 'preroll', desc: 'Once per game: +4 on a corrosion, oxidation, vacuum or cryo check (anodise, PEO, SiO₂ film, MoS₂ dry lube, heater blanket).', tags: ['corrosion', 'oxidation', 'vacuum', 'cryo'], value: 4 },
   },
   quartermaster: {
-    id: 'quartermaster', name: 'Quartermaster', icon: '▣', home: 'Cargo',
+    id: 'quartermaster', name: 'Cargo Technician', icon: '▣', home: 'Cargo',
     tags: [], bonus: 0,
     summary: '+1 cargo capacity and +1 spare. Jettisoning a crate gives +4 instead of +3.',
     ability: { id: 'secure', name: 'Secured cargo', when: 'auto', desc: 'Once per game: the first crate you would lose is saved automatically.' },
@@ -251,8 +251,8 @@ export const LEGS = [
     cards: ['l5a', 'l5b', 'l5c', 'l5d'], fixed: 'l5a' },
   { n: 6, id: 'dock', name: 'Docking at Meridian', topic: 'Specialist challenge', kind: 'specialist',
     place: 'Station Meridian, 400 km orbit',
-    intro: 'The station’s docking beacon has failed, so every crew hand-flies the final approach and a Test Pilot gets +3. With random events on, each crew instead faces a crisis written for its own role. Your frame material no longer decides the odds, but damage you carried here (seized joints, fogged sensors) still matters.',
-    watch: ['Test Pilot +3 on manual docking', 'Lingering handling damage'],
+    intro: 'The station’s docking beacon has failed, so every crew hand-flies the final approach and a Pilot gets +3. With random events on, each crew instead faces a crisis written for its own role. Your frame material no longer decides the odds, but damage you carried here (seized joints, fogged sensors) still matters.',
+    watch: ['Pilot +3 on manual docking', 'Lingering handling damage'],
     cards: null, fixed: 'dock:pilot' },
 ];
 
@@ -614,22 +614,22 @@ const DOCK_OPTIONS = [
 ];
 export const DOCK_CARDS = {
   pilot: { leg: 6, title: 'Manual Docking — Guidance Lost', tags: ['handling', 'luck'], role: 'pilot',
-    text: 'Meridian’s docking beacon has failed. The final 200 m onto a spinning docking port must be hand-flown. A Test Pilot on board gets +3.',
+    text: 'Meridian’s docking beacon has failed. The final 200 m onto a spinning docking port must be hand-flown. A Pilot on board gets +3.',
     options: DOCK_OPTIONS, insight: 'Specialist skill shifts the odds more than any material property here — but seized joints or fogged sensors from Leg 5 still hurt.' },
   structural: { leg: 6, title: 'Cracked Docking Collar', tags: ['handling', 'luck'], role: 'structural',
     text: 'The station’s docking collar has a crack. Your Structural Engineer must decide what load it can safely take and brace it.',
     options: DOCK_OPTIONS, insight: 'Safety factors exist because loads, material properties and flaws are all uncertain.' },
   metallurgist: { leg: 6, title: 'Fracture Detective', tags: ['handling', 'luck'], role: 'metallurgist',
-    text: 'A station strut has snapped and nobody knows why. Your Metallurgist reads the fracture surface before anyone docks.',
+    text: 'A station strut has snapped and nobody knows why. Your Metallurgical Engineer reads the fracture surface before anyone docks.',
     options: DOCK_OPTIONS, insight: 'Fractography — reading fracture surfaces — tells you HOW something failed, which tells you how to stop it happening again.' },
   ndt: { leg: 6, title: 'Weld-Flaw Hunt', tags: ['handling', 'luck'], role: 'ndt',
-    text: 'The docking ring was weld-repaired last month. Your NDT Inspector must find any flaw before it takes your mass.',
+    text: 'The docking ring was weld-repaired last month. Your Quality Inspector must find any flaw before it takes your mass.',
     options: DOCK_OPTIONS, insight: 'Every NDT method has a physics behind it — and things it cannot see.' },
   coatings: { leg: 6, title: 'Seal & Surface Crisis', tags: ['handling', 'luck'], role: 'coatings',
-    text: 'The docking seals and latches have degraded in orbit. Your Surface Engineer must choose the right fix under time pressure.',
+    text: 'The docking seals and latches have degraded in orbit. Your Chemical Engineer must choose the right fix under time pressure.',
     options: DOCK_OPTIONS, insight: 'Most "material" failures in service start at the surface.' },
   quartermaster: { leg: 6, title: 'Cargo Transfer Race', tags: ['handling', 'luck'], role: 'quartermaster',
-    text: 'The docking window is closing. Your Quartermaster must get every crate through the hatch before the station swings out of range.',
+    text: 'The docking window is closing. Your Cargo Technician must get every crate through the hatch before the station swings out of range.',
     options: DOCK_OPTIONS, insight: 'Payload is the whole point of the mission — every kilogram of structure saved is a kilogram of payload delivered.' },
 };
 
