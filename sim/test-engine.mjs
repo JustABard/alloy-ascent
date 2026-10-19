@@ -64,6 +64,16 @@ test('every crew faces the same fixed event; Leg 6 is Manual Docking', () => {
   assert.equal(cardById('dock:pilot').title, 'Manual Docking — Guidance Lost');
 });
 
+test('random events: crews draw from the leg decks and Leg 6 follows the role', () => {
+  const seen = {};
+  playThrough({ randomEvents: true }, (s, t) => {
+    (seen[t.leg] ||= []).push(t.card);
+    if (t.leg === 6) assert.equal(t.card, `dock:${s.crews[t.crewIdx].role}`);
+    else assert.ok(LEGS[t.leg - 1].cards.includes(t.card));
+  });
+  assert.ok(Object.entries(seen).some(([L, ids]) => +L < 6 && new Set(ids).size > 1), 'some leg shows more than one event');
+});
+
 test('lighter frames carry more cargo; heavier frames are tougher', () => {
   const st = (m) => crewStats({ material: m, processing: MATERIALS[m].processing[0].id, role: 'pilot' });
   assert.ok(st('cf').capacity > st('ss').capacity);
@@ -112,7 +122,7 @@ test('online permissions: only the owner acts, timeouts need an expired deadline
 
 test('a full random pass-and-play game always terminates with consistent scores', () => {
   for (let g = 0; g < 300; g++) {
-    let s = createGame({ mode: 'local' });
+    let s = createGame({ mode: 'local', settings: { randomEvents: g % 2 === 1 } });
     const ctx = { now: 0, rng, actor: 'local' };
     const n = 2 + Math.floor(rng() * 5);
     for (let i = 0; i < n; i++) s = act(s, { type: 'addCrew', id: `c${i}` }, ctx);

@@ -53,6 +53,8 @@ const now = () => (S.mode === 'online' ? Net.serverNow() : Date.now());
 const actor = () => (S.mode === 'local' ? E.LOCAL_ACTOR : S.me.id);
 const isHost = () => S.mode === 'local' || S.state?.hostId === S.me.id;
 const canControl = (crew) => !!crew && (S.mode === 'local' || crew.owner === S.me.id);
+// random.html sets data-variant="random": the same game plus a host tickbox for Random events.
+const RANDOM_VARIANT = document.documentElement.dataset.variant === 'random';
 const shareLink = (code) => `${location.origin}${location.pathname}?room=${code}`;
 
 // ------------------------------------------------------------------ dispatch
@@ -259,6 +261,7 @@ function lobbyScreen(s) {
       <div class="panel settings">
         <h3>Mission settings ${host ? '' : '<span class="muted small">(host)</span>'}</h3>
         <label class="tog"><input type="checkbox" data-set="uniqueFrames" ${s.settings.uniqueFrames ? 'checked' : ''} ${host ? '' : 'disabled'}> One crew per frame material</label>
+        ${RANDOM_VARIANT ? `<label class="tog"><input type="checkbox" data-set="randomEvents" ${s.settings.randomEvents ? 'checked' : ''} ${host ? '' : 'disabled'}> Random events (each crew draws its own event card per leg; Leg 6 is a crisis for its role)</label>` : ''}
         <label class="tog"><input type="checkbox" data-set="shareResults" ${s.settings.shareResults ? 'checked' : ''} ${host ? '' : 'disabled'}> Share anonymous results for playtest data</label>
         <label class="sel">Control window per crew
           <select data-set="timer" ${host ? '' : 'disabled'}>${[[0, 'Off (untimed)'], [45, '45 s'], [60, '60 s (standard)'], [90, '90 s']].map(([v, l]) => `<option value="${v}" ${+s.settings.timer === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -655,9 +658,9 @@ function codexView() {
   if (tab === 'materials') body = codexMaterial(S.ui.codexMat);
   else if (tab === 'compare') body = codexCompare();
   else if (tab === 'roles') body = `<div class="role-grid static">${ROLE_ORDER.map(r => { const R = ROLES[r]; return `<div class="role"><span class="role-big">${R.icon}</span><b>${esc(R.name)}</b><small>Home: ${esc(R.home)}</small><p>${esc(R.summary)}</p><p class="ab"><i>Ability:</i> ${esc(R.ability.name)} — ${esc(R.ability.desc)}</p></div>`; }).join('')}</div>
-    <p class="muted">Leg 6 is specialist-focused: every crew hand-flies Manual Docking, where a Pilot gets +${CONFIG.specialistBonus}.</p>`;
+    <p class="muted">Leg 6 is specialist-focused: every crew hand-flies Manual Docking, where a Pilot gets +${CONFIG.specialistBonus}.${RANDOM_VARIANT ? ` With Random events on, every crew instead faces a docking crisis written for its own role and gets +${CONFIG.specialistBonus} for its speciality.` : ''}</p>`;
   else if (tab === 'route') body = LEGS.map(L => `<div class="route-leg"><h4>Leg ${L.n} · ${esc(L.name)} <span class="muted">— ${esc(L.topic)}</span></h4><p>${esc(L.intro)}</p>
-    <p class="small muted">Event: <b>${esc(cardById(L.fixed).title)}</b></p></div>`).join('');
+    <p class="small muted">Event: <b>${esc(cardById(L.fixed).title)}</b>${RANDOM_VARIANT ? ` · With Random events: ${L.cards ? L.cards.map(id => esc(CARDS[id].title)).join(' · ') : 'one crisis per specialist role'}` : ''}</p></div>`).join('');
   else if (tab === 'rules') body = rulesText();
   else if (tab === 'sources') body = `<ol class="sources">${SOURCES.map(x => `<li>${esc(x)}</li>`).join('')}</ol><p class="muted small">Property values are typical figures for the stated condition and vary with product form and supplier; game modifiers are rankings derived from them, not design allowables.</p>`;
   return `<div class="modal codex"><div class="cx-head"><h2 class="h-display">Materials Codex</h2><button class="x" data-act="close" aria-label="Close">✕</button></div>

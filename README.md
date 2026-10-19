@@ -3,6 +3,7 @@
 A tabletop-style (D&D-flavoured) engineering game for **2–6 crews** and **5–15 minutes**, built as a second-year metallurgical engineering design project. Each crew chooses an airframe material, its processing route, a specialist role and a cargo load. They then fly six legs to an orbital station, rolling a d20 against odds that come straight from the metallurgy.
 
 **Play online:** https://skyforge-game.vercel.app (mirror of https://justabard.github.io/alloy-ascent/)
+**Random-events variant:** https://skyforge-game.vercel.app/random: the same game plus a host tickbox that deals each crew its own event card per leg, with a Leg 6 crisis written for its role.
 Host a room and share the code, link or QR code, or choose *Pass-and-play* to play on one screen.
 
 | Frame | Family | Character |
@@ -29,7 +30,7 @@ Every crew faces the same event on each leg, so frames can be compared directly.
 
 | Path | What it is |
 |---|---|
-| `web/` | The game: static HTML/CSS/JS with no build step. Deployed to GitHub Pages by `.github/workflows/pages.yml`. |
+| `web/` | The game: static HTML/CSS/JS with no build step. Deployed to GitHub Pages by `.github/workflows/pages.yml`. `web/random.html` is the same game with the *Random events* tickbox, served at `/random`. |
 | `web/js/engine.js` | Pure rules engine (state machine), shared by the browser and the simulator. |
 | `web/js/data.js` | Materials, processing routes, roles, legs, event cards and every modifier with its reason. |
 | `web/js/net.js`, `supabase/schema.sql` | Online rooms: one Postgres row per room, optimistic version checks and Realtime push. |

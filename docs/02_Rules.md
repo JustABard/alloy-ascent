@@ -2,6 +2,8 @@
 
 **Players:** 2–6 crews (one device each online, or one shared screen) · **Time:** 5–15 minutes · **Play at:** https://skyforge-game.vercel.app
 
+*Variant:* https://skyforge-game.vercel.app/random adds a **Random events** host setting. When it is ticked, each crew draws its own event card per leg, and Leg 6 becomes a crisis written for the crew's role (+3 for its speciality).
+
 ## Goal
 Fly your crew from Ironhold Spaceport to Station Meridian across **six legs** and finish with the most **mission points**. Most points come from delivering cargo and arriving intact, on time and on budget.
 
