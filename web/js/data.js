@@ -251,7 +251,7 @@ export const LEGS = [
     cards: ['l5a', 'l5b', 'l5c', 'l5d'], fixed: 'l5a' },
   { n: 6, id: 'dock', name: 'Docking at Meridian', topic: 'Specialist challenge', kind: 'specialist',
     place: 'Station Meridian, 400 km orbit',
-    intro: 'The station’s docking beacon has failed, so every crew hand-flies the final approach and a Pilot gets +3. With random events on, each crew instead faces a crisis written for its own role. Your frame material no longer decides the odds, but damage you carried here (seized joints, fogged sensors) still matters.',
+    intro: 'The station’s docking beacon has failed, so every crew hand-flies the final approach and a Pilot gets +3. Your frame material no longer decides the odds, but damage you carried here (seized joints, fogged sensors) still matters.',
     watch: ['Pilot +3 on manual docking', 'Lingering handling damage'],
     cards: null, fixed: 'dock:pilot' },
 ];
@@ -616,21 +616,6 @@ export const DOCK_CARDS = {
   pilot: { leg: 6, title: 'Manual Docking — Guidance Lost', tags: ['handling', 'luck'], role: 'pilot',
     text: 'Meridian’s docking beacon has failed. The final 200 m onto a spinning docking port must be hand-flown. A Pilot on board gets +3.',
     options: DOCK_OPTIONS, insight: 'Specialist skill shifts the odds more than any material property here — but seized joints or fogged sensors from Leg 5 still hurt.' },
-  structural: { leg: 6, title: 'Cracked Docking Collar', tags: ['handling', 'luck'], role: 'structural',
-    text: 'The station’s docking collar has a crack. Your Structural Engineer must decide what load it can safely take and brace it.',
-    options: DOCK_OPTIONS, insight: 'Safety factors exist because loads, material properties and flaws are all uncertain.' },
-  metallurgist: { leg: 6, title: 'Fracture Detective', tags: ['handling', 'luck'], role: 'metallurgist',
-    text: 'A station strut has snapped and nobody knows why. Your Metallurgical Engineer reads the fracture surface before anyone docks.',
-    options: DOCK_OPTIONS, insight: 'Fractography — reading fracture surfaces — tells you HOW something failed, which tells you how to stop it happening again.' },
-  ndt: { leg: 6, title: 'Weld-Flaw Hunt', tags: ['handling', 'luck'], role: 'ndt',
-    text: 'The docking ring was weld-repaired last month. Your Quality Inspector must find any flaw before it takes your mass.',
-    options: DOCK_OPTIONS, insight: 'Every NDT method has a physics behind it — and things it cannot see.' },
-  coatings: { leg: 6, title: 'Seal & Surface Crisis', tags: ['handling', 'luck'], role: 'coatings',
-    text: 'The docking seals and latches have degraded in orbit. Your Chemical Engineer must choose the right fix under time pressure.',
-    options: DOCK_OPTIONS, insight: 'Most "material" failures in service start at the surface.' },
-  quartermaster: { leg: 6, title: 'Cargo Transfer Race', tags: ['handling', 'luck'], role: 'quartermaster',
-    text: 'The docking window is closing. Your Cargo Technician must get every crate through the hatch before the station swings out of range.',
-    options: DOCK_OPTIONS, insight: 'Payload is the whole point of the mission — every kilogram of structure saved is a kilogram of payload delivered.' },
 };
 
 export function cardById(id) {

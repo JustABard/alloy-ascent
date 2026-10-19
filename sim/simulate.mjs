@@ -87,9 +87,9 @@ function hangarChoice(s, crew) {
   return null;
 }
 
-function playGame(nCrews, rng, policyFor, cfgFor, randomEvents = false) {
+function playGame(nCrews, rng, policyFor, cfgFor) {
   const ctx = () => ({ now: 0, rng, actor: 'local' });
-  let s = act({ v: 1, mode: 'sim', phase: 'lobby', settings: { uniqueFrames: true, randomEvents, timer: 0 }, players: [], crews: [], leg: 0, turn: null, decks: {}, log: [], rollSeq: 0, seq: 0, gameNo: 0 }, { type: 'join', player: { id: 'local', name: 'sim' } }, ctx());
+  let s = act({ v: 1, mode: 'sim', phase: 'lobby', settings: { uniqueFrames: true, timer: 0 }, players: [], crews: [], leg: 0, turn: null, log: [], rollSeq: 0, seq: 0, gameNo: 0 }, { type: 'join', player: { id: 'local', name: 'sim' } }, ctx());
   const mats = [...MATERIAL_ORDER].sort(() => rng() - 0.5);
   for (let i = 0; i < nCrews; i++) {
     s = act(s, { type: 'addCrew', id: `c${i}`, name: `Crew ${i + 1}` }, ctx());
@@ -134,13 +134,13 @@ function randomCfg(i, mat, rng) {
   };
 }
 
-function runBatch(label, games, nCrews, policyFor, cfgFor = randomCfg, seed = 1, randomEvents = false) {
+function runBatch(label, games, nCrews, policyFor, cfgFor = randomCfg, seed = 1) {
   const rng = mulberry32(seed);
   const by = (k) => ({});
   const stat = { mat: {}, role: {}, proc: {}, leg: {}, tiers: {}, turns: 0, games: 0, ties: 0, lostLegs: {}, causes: {} };
   const bump = (obj, key, field, v = 1) => { obj[key] ||= {}; obj[key][field] = (obj[key][field] || 0) + v; };
   for (let g = 0; g < games; g++) {
-    const { s, turns } = playGame(nCrews, rng, policyFor, cfgFor, randomEvents);
+    const { s, turns } = playGame(nCrews, rng, policyFor, cfgFor);
     stat.turns += turns; stat.games++;
     const sum = matchSummary(s);
     const top = Math.max(...sum.crews.map(c => c.score));
@@ -232,8 +232,7 @@ function procTable(b) {
 
 const sensible = () => POLICIES.sensible;
 const t0 = Date.now();
-const main6 = runBatch('6 crews · all materials · sensible bots · standard route', N, 6, sensible, randomCfg, 11);
-const rand6 = runBatch('6 crews · all materials · sensible bots · random events', Math.round(N / 2), 6, sensible, randomCfg, 66, true);
+const main6 = runBatch('6 crews · all materials · sensible bots', N, 6, sensible, randomCfg, 11);
 const four = runBatch('4 crews · random materials · sensible bots', Math.round(N / 2), 4, sensible, randomCfg, 22);
 const two = runBatch('2 crews · random materials · sensible bots', Math.round(N / 2), 2, sensible, randomCfg, 33);
 const mixed = runBatch('6 crews · policy mix (2 reckless, 2 cautious, 2 sensible)', Math.round(N / 2), 6,
@@ -273,8 +272,6 @@ md.push('#### Causes of craft loss (6-crew batch)');
 md.push('');
 md.push(Object.entries(main6.causes).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([k, v]) => `- ${k}: ${v} (${pct(v / (main6.games * 6))} of crews)`).join('\n'));
 md.push('');
-md.push(report(rand6));
-md.push('');
 md.push(report(four));
 md.push('');
 md.push(report(two));
@@ -288,6 +285,6 @@ console.log(text);
 if (OUT) {
   mkdirSync(OUT, { recursive: true });
   writeFileSync(`${OUT}/sim-results.md`, text + '\n');
-  writeFileSync(`${OUT}/sim-results.json`, JSON.stringify({ main6, rand6, four, two, mixed, polStat }, null, 1));
+  writeFileSync(`${OUT}/sim-results.json`, JSON.stringify({ main6, four, two, mixed, polStat }, null, 1));
   console.error(`wrote ${OUT}/sim-results.md`);
 }

@@ -10,7 +10,6 @@ Fly your crew from Ironhold Spaceport to Station Meridian across **six legs** an
 - **Pass-and-play.** Press *Pass-and-play on one screen* and add crews (2–6).
 - **Host settings:**
   - one crew per material (default on);
-  - random events (off by default: every crew faces the same event on each leg; on: each crew draws its own card and Leg 6 is a crisis for its role);
   - turn timer (45 s, 60 s, 90 s or off);
   - share anonymous results.
 
@@ -25,7 +24,7 @@ Fly your crew from Ironhold Spaceport to Station Meridian across **six legs** an
 Crews take turns in seat order. Each crew has **60 seconds** (in pass-and-play, the clock starts when the crew taps *I'm ready*).
 
 1. **Start-of-turn effects.** Fatigue cracks grow one stage, and active corrosion costs 1 integrity.
-2. **Event.** On the standard route every crew faces the same event on each leg. With *Random events* on, your crew draws its own card for the leg.
+2. **Event.** Every crew faces the same event on each leg.
 3. **Choose an approach.** The success and failure chances are shown for each option:
    - **Standard profile:** the card's DC.
    - **Push hard (shortcut):** DC +3, 3 h faster; a Failure does +1 damage. (Pilot: +2 DC, 4 h faster.)
@@ -46,7 +45,7 @@ Crews take turns in seat order. Each crew has **60 seconds** (in pass-and-play, 
 If the timer runs out, the autopilot flies the standard option (or the no-roll option on Leg 3) and control passes on. The host can pause the timer for discussion.
 
 ## The six legs
-| Leg | Name | Tests | Standard event | Material modifiers? |
+| Leg | Name | Tests | Event | Material modifiers? |
 |---|---|---|---|---|
 | 1 | The Heavy Lift | Specific strength & stiffness (σy/ρ, torsion per kg, ∛E/ρ) | Max-G Pull-Up | Yes |
 | 2 | The Storm Corridor | Fatigue (endurance limit, notches, damping, corrosion fatigue) | Ten Thousand Gusts | Yes |
@@ -54,8 +53,6 @@ If the timer runs out, the autopilot flies the standard option (or the no-roll o
 | 4 | The Hypersonic Burn | Thermal behaviour (hot strength, k/α distortion, fire) | Mach 3 Skin Heating | Yes |
 | 5 | The Edge of Space | Vacuum & space (cold soak/DBTT, atomic oxygen, outgassing/cold welding, micrometeoroids) | Cold Soak in Earth’s Shadow | Yes |
 | 6 | Docking at Meridian | Hand-flying the final approach (Pilot +3) | Manual Docking — Guidance Lost | **No** — role-driven |
-
-With *Random events* on, Legs 1–5 deal each crew a random card from the leg's deck, and Leg 6 becomes a crisis written for the crew's own role (+3 for its speciality).
 
 ## Damage and conditions
 - **Integrity 0 = craft lost.** The crew ejects safely, but a lost craft scores only event points.

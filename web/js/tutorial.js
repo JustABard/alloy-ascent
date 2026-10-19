@@ -26,12 +26,12 @@ export const TUTORIAL = [
     <div><b>7075-T73 (over-aged)</b><small>coarser, stable η precipitates</small><span class="down">−1 strength</span><span class="up">+2 corrosion</span><span class="up">+1 crack tolerance</span></div></div>
     <p>Others: mill-annealed vs β-annealed titanium, annealed vs cold-worked 316L, epoxy vs cyanate-ester CFRP, cast vs extruded WE43, normalised vs quenched-and-tempered 4130.</p>` },
   { title: 'Pick a specialist', html: () => `
-    <p>Your role gives a bonus on its home checks and a once-per-game ability. On Leg 6, Manual Docking, a Pilot gets +3; with random events on, Leg 6 is written specifically for your role.</p>
+    <p>Your role gives a bonus on its home checks and a once-per-game ability. On Leg 6, Manual Docking, a Pilot gets +3.</p>
     <div class="tut-roles">${ROLE_ORDER.map(r => `<div><span class="role-big">${ROLES[r].icon}</span><b>${esc(ROLES[r].name)}</b><small>${esc(ROLES[r].summary)}</small></div>`).join('')}</div>
     <p class="callout">Good pairings cover a weakness: a Chemical Engineer protects corrosion-prone magnesium; a Metallurgical Engineer steadies heat-sensitive 7075; a Quality Inspector finds CFRP’s hidden delaminations.</p>` },
   { title: 'The route', html: () => `
     <ol class="tut-legs">${LEGS.map(L => `<li><b>Leg ${L.n} · ${esc(L.name)}</b> — ${esc(L.topic)}${L.kind === 'luck' ? ' <span class="pill">pure probability</span>' : L.kind === 'specialist' ? ' <span class="pill">specialist</span>' : ''}</li>`).join('')}</ol>
-    <p>Every crew faces the same event on each leg, so the class can compare how each frame copes. The host can tick <b>Random events</b> in the lobby to give each crew its own card instead. Legs 3 and 6 deliberately ignore your material: Leg 3 is about reading odds; Leg 6 is a specialist’s moment.</p>` },
+    <p>Every crew faces the same event on each leg, so the class can compare how each frame copes. Legs 3 and 6 deliberately ignore your material: Leg 3 is about reading odds; Leg 6 is a specialist’s moment.</p>` },
   { title: 'Rolling the d20', html: () => `
     <p>Roll a twenty-sided die and add your modifiers. Reach the <b>DC</b> (difficulty class) for a <b>Success</b>; anything lower is a <b>Failure</b>. A natural 20 always succeeds and a natural 1 always fails. Each +1 is worth 5 percentage points.</p>
     <div class="tut-widget" id="tw-dice"></div>`,

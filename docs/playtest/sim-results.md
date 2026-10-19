@@ -1,7 +1,7 @@
 # Automated playtest results
-Generated 2026-10-18 by `sim/simulate.mjs` (500.3 s). Same rules engine as the web game; seeded RNG so results are reproducible.
+Generated 2026-10-19 by `sim/simulate.mjs` (414.0 s). Same rules engine as the web game; seeded RNG so results are reproducible.
 
-### 6 crews · all materials · sensible bots · standard route
+### 6 crews · all materials · sensible bots
 20 000 games · 6 crews · 34.9 turns/game · ties 7.6%
 Estimated play time at 20–30 s per turn: **11.6–17.5 min** (+≈2 min set-up)
 
@@ -71,39 +71,6 @@ Each cell: success % / failure % on that leg’s main check.
 - Mach 3 Skin Heating: 2432 (2.0% of crews)
 - Engine Flame-Out: 399 (0.3% of crews)
 - Ten Thousand Gusts: 109 (0.1% of crews)
-
-### 6 crews · all materials · sensible bots · random events
-10 000 games · 6 crews · 35.1 turns/game · ties 7.3%
-Estimated play time at 20–30 s per turn: **11.7–17.5 min** (+≈2 min set-up)
-
-| Material | Win rate | Fair share | Survival | Mean score | Crates delivered | Mean hours | Score SD |
-|---|---|---|---|---|---|---|---|
-| Ti-6Al-4V | 14.5% | 16.7% | 89.8% | 41.1 | 3.79 | 51.0 | 15.4 |
-| Al 7075 | 20.4% | 16.7% | 87.5% | 41.5 | 3.70 | 51.2 | 17.2 |
-| 316L | 7.8% | 16.7% | 99.3% | 42.1 | 2.16 | 57.1 | 8.6 |
-| CFRP | 29.5% | 16.7% | 82.1% | 41.4 | 4.32 | 47.8 | 20.2 |
-| Mg WE43 | 16.5% | 16.7% | 76.0% | 36.2 | 3.20 | 43.9 | 21.2 |
-| 4130 | 11.2% | 16.7% | 97.7% | 42.7 | 3.11 | 61.0 | 10.3 |
-
-Mean score breakdown by material:
-
-| Material | cargo | integrity | time | spares | complete | budget | bonus | green |
-|---|---|---|---|---|---|---|---|---|
-| Ti-6Al-4V | 15.2 | 7.2 | 6.6 | 0.3 | 9.0 | 0.9 | 2.0 | 0.1 |
-| Al 7075 | 14.8 | 6.1 | 6.1 | 0.8 | 8.8 | 2.6 | 2.0 | 0.3 |
-| 316L | 8.6 | 12.9 | 4.6 | 0.9 | 9.9 | 3.0 | 2.2 | 0.0 |
-| CFRP | 17.3 | 4.0 | 7.4 | 0.2 | 8.2 | 0.0 | 2.0 | 2.4 |
-| Mg WE43 | 12.8 | 4.2 | 7.6 | 0.4 | 7.6 | 1.5 | 1.8 | 0.2 |
-| 4130 | 12.4 | 10.5 | 2.6 | 1.4 | 9.8 | 3.9 | 2.1 | 0.0 |
-
-| Role | Win rate | Survival | Mean score |
-|---|---|---|---|
-| pilot | 19.8% | 82.9% | 39.5 |
-| structural | 15.7% | 89.8% | 41.2 |
-| metallurgist | 14.2% | 88.9% | 40.1 |
-| ndt | 15.6% | 93.5% | 42.3 |
-| coatings | 13.5% | 89.9% | 40.0 |
-| quartermaster | 21.1% | 87.4% | 42.0 |
 
 ### 4 crews · random materials · sensible bots
 10 000 games · 4 crews · 23.3 turns/game · ties 5.7%

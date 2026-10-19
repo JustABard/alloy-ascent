@@ -16,7 +16,7 @@
 | 4:45 | **7. LIVE: launch.** Volunteers press *Ready*; the host presses *Launch*. Set the timer to **45 s**. | Talk through the first crew's choices out loud: "Your odds are 60% — push hard to save 3 hours, or play it safe?" |
 | 5:00–9:00 | **Play Legs 1–2** (and 3 if time allows). Press **Pause** once to discuss a result. | After a fatigue roll: "Notice the ⚠ suspected damage — that's a hidden crack. Do you inspect now, or gamble?" |
 | 9:00 | Host → **Lobby** (or let it run during the next slides if the class is engaged) | |
-| 9:15 | **8. Playtesting evidence** (`03_Playtesting_Report.md` tables) | 20,000 simulated games: first draft CFRP won 54%, 316L 0.7%. Seven versions → roughly 10–27% for every frame on the standard route. Key insight: steels have the *highest mean score* but the *lowest variance*, so they rarely win a six-way race. That's reliability vs performance. |
+| 9:15 | **8. Playtesting evidence** (`03_Playtesting_Report.md` tables) | 20,000 simulated games: first draft CFRP won 54%, 316L 0.7%. Seven versions → roughly 10–27% for every frame. Key insight: steels have the *highest mean score* but the *lowest variance*, so they rarely win a six-way race. That's reliability vs performance. |
 | 10:15 | **9. Cost & environment** (a debrief screen) | Budget points and life-cycle CO₂e per crate delivered. The use phase dominates aircraft, so light frames repay embodied carbon — *if* they survive. Ask: how many missions before CFRP beats 4130? |
 | 11:00 | **10. Critical reflection** | Ordinal modifiers; one property per mechanism; bots ≠ people; trust model; next steps (human playtests, server-authoritative rooms, more processing routes). |
 | 11:45 | **11. Close** — link and QR code | "Play it yourselves — pass-and-play works on one laptop." |
@@ -32,7 +32,7 @@
 - [ ] **Within 7 days before the presentation**, open the site and host a test room. The free database pauses after a week with no use, unless you enable the keep-alive in `ci/README.md`. If it is paused, press *Restore* in the Supabase dashboard.
 - [ ] Test a room with two phones on the classroom Wi-Fi (campus networks sometimes block real-time connections; the game falls back to polling every 2.5 s).
 - [ ] Projector: light mode (☀), browser zoom 110–125%.
-- [ ] Settings: 45 s timer for the demo, *Random events* off (everyone faces the same event, which is easier to compare on the projector), one crew per frame.
+- [ ] Settings: 45 s timer for the demo, one crew per frame.
 - [ ] Backup plan: if Wi-Fi fails, use **pass-and-play** on the laptop with two volunteers.
 - [ ] Have `03_Playtesting_Report.md` tables and two screenshots ready in case the demo overruns.
 

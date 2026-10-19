@@ -18,10 +18,10 @@ Strand A is complete; its numbers are reproducible with `npm run sim`. Strand B 
   - **Reckless** — always pushes hard.
   - **Cautious** — always plays it safe.
 - **Set-up.** Random material assignment (unique frames), random processing route and role, and a cargo load of full capacity or capacity − 1.
-- **Sample.** 20,000 six-crew games, 10,000 four-crew games and 10,000 two-crew games, plus 10,000 mixed-policy games, all on the standard route (the same event for every crew), and 10,000 six-crew games with *Random events* on. Seeded RNG (mulberry32) makes the run reproducible.
+- **Sample.** 20,000 six-crew games, 10,000 four-crew games and 10,000 two-crew games, plus 10,000 mixed-policy games. Every crew faces the same event on each leg. Seeded RNG (mulberry32) makes the run reproducible.
 - **Engine tests.** `sim/test-engine.mjs` checks:
   - only Success or Failure, and the odds sum to 1;
-  - on the standard route every crew faces the same event and Leg 6 is Manual Docking; with random events, crews draw from the leg decks and Leg 6 follows the role;
+  - every crew faces the same event on each leg, and Leg 6 is Manual Docking;
   - every card explains every material;
   - Legs 3 and 6 have no material modifiers;
   - permission rules for online play;
@@ -38,7 +38,7 @@ Strand A is complete; its numbers are reproducible with `npm run sim`. Strand B 
 | v4 | Crate value 5→4 (narrows high-payload upside) | 30.0% | 23.0% | 17.4% | 10.1% | 12.0% | 7.4% | 34.8–44.5 |
 | v5 | Ti 9→8.5 h/leg | 29.9% | 21.0% | 16.0% | 13.5% | 11.6% | 7.9% | 34.8–44.8 |
 | v6 | Structural Engineer's *Redundant load path* made automatic (no checkbox) | 31.1% | 21.5% | 15.9% | 12.9% | 10.9% | 7.5% | 36.1–45.4 |
-| **v7 (final)** | Partial tier folded into Success (every DC −5); in-game quiz removed; standard route of fixed events with *Random events* as an option; Leg 6 = Manual Docking; role retune | **26.7%** | **19.4%** | **15.3%** | **17.8%** | **10.2%** | **10.6%** | **31.9–40.8** |
+| **v7 (final)** | Partial tier folded into Success (every DC −5); in-game quiz removed; one fixed event per leg for every crew; Leg 6 = Manual Docking; role retune | **26.7%** | **19.4%** | **15.3%** | **17.8%** | **10.2%** | **10.6%** | **31.9–40.8** |
 
 Fair share for 6 crews is 16.7%. Versions v0–v4 used 1,500–2,000 games each; v5–v7 used 20,000. Mean scores fall by about 4 points in v7 because the quiz's insight points are gone, not because crews do worse.
 
@@ -47,12 +47,13 @@ Fair share for 6 crews is 16.7%. Versions v0–v4 used 1,500–2,000 games each;
 - Mean score and win rate are different things. 316L and 4130 finish with among the **highest mean scores** (40–41, level with Ti) but the **lowest spread** (SD 9–10 vs 21–22 for CFRP and WE43). In a six-way contest, the top score usually comes from a high-variance frame that got lucky. More payload for steels would have fixed this numerically, but it would break the core physical trade-off (heavier structure → less payload). So we kept it and turned it into a discussion question.
 - v6 made the Structural Engineer's once-per-game save trigger automatically on the first Failure, instead of needing a checkbox ticked before the roll. Its six-crew win rate rose from 13.0% (weakest role) to 20.6% (strongest), because a pre-roll choice is easy to waste: you have to guess which roll will fail. All six roles now sit between 12.7% and 20.6%, and every frame shifted by less than 1.5 points.
 - v7 applied four review requests together: no Partial results (a roll within 5 of the old DC now succeeds, so every DC dropped by 5), no in-game quiz, every crew facing the same event on each leg by default, and Manual Docking as the Leg 6 event. Two-tier rolls made the Structural Engineer's automatic save (now Failure → Success) too strong: 27.9% win rate in a 2,000-game check. It was limited to strength and stiffness checks. The Metallurgical Engineer lost the quiz bonus and gained +1 on every other material check, the Quality Inspector's passive rose from +1 to +2, and the Chemical Engineer's bonus now covers cryogenic checks. Roles now sit between 13.2% and 21.7%.
-- A fixed route concentrates risk. When every crew faces the same Leg 5 cold soak, BCC 4130 is the frame that suffers, and on the standard route Leg 6 is Manual Docking, where only a Pilot gets a bonus. Both now appear at the top of the causes of loss (below). Frame win rates moved by less than 5 points; Ti gained most (12.9% → 17.8%) and CFRP lost most (31.1% → 26.7%).
+- A fixed route concentrates risk. When every crew faces the same Leg 5 cold soak, BCC 4130 is the frame that suffers, and Leg 6 is Manual Docking, where only a Pilot gets a bonus. Both now appear at the top of the causes of loss (below). Frame win rates moved by less than 5 points; Ti gained most (12.9% → 17.8%) and CFRP lost most (31.1% → 26.7%).
+- v7 briefly offered a *Random events* lobby option (each crew draws its own card; Leg 6 a crisis for its role). In 10,000 six-crew games it gave CFRP 29.5%, Al 20.4%, WE43 16.5%, Ti 14.5%, 4130 11.2% and 316L 7.8%. The team then removed it so every game runs the same route. The fixed-route results above were unaffected, because the random path never ran in those games.
 - The material modifiers were mostly right first time. The imbalance came from **scoring weights**. Material fidelity and game balance can be tuned largely independently.
 
 ### A.3 Final results (v7)
 
-**Six crews, standard route** — 20,000 games · 34.9 turns per game · 7.6% ties
+**Six crews** — 20,000 games · 34.9 turns per game · 7.6% ties
 
 | Frame | Win rate | Survival | Mean score | Crates delivered | Mean hours | Score SD |
 |---|---|---|---|---|---|---|
@@ -63,13 +64,11 @@ Fair share for 6 crews is 16.7%. Versions v0–v4 used 1,500–2,000 games each;
 | Mg WE43 | 15.3% | 69.7% | 31.9 | 2.83 | 43.3 | 21.9 |
 | 4130 | 10.2% | 97.8% | 40.1 | 2.91 | 61.6 | 10.0 |
 
-**Six crews, random events on** (10,000 games): Ti 14.5% · Al 20.4% · 316L 7.8% · CFRP 29.5% · WE43 16.5% · 4130 11.2%; survival 76.0% (WE43) to 99.3% (316L).
-
 **Four crews** (fair share 25%): Ti 26.9% · Al 29.6% · 316L 15.6% · CFRP 36.4% · WE43 23.5% · 4130 16.1%.
 
 **Two crews** (fair share 50%): Ti 53.1% · Al 52.5% · 316L 42.0% · CFRP 57.9% · WE43 44.8% · 4130 43.4%.
 
-**Roles** (six crews, standard route): Pilot 21.7% · Structural Engineer 16.5% · Metallurgical Engineer 13.8% · Quality Inspector 13.4% · Chemical Engineer 13.2% · Cargo Technician 21.4%.
+**Roles** (six crews): Pilot 21.7% · Structural Engineer 16.5% · Metallurgical Engineer 13.8% · Quality Inspector 13.4% · Chemical Engineer 13.2% · Cargo Technician 21.4%.
 
 **Where each frame struggles.** Success % / failure % on each leg's standard event, six-crew batch:
 
@@ -97,7 +96,7 @@ The fixed route makes each leg's lesson easy to read: 7075 struggles with fatigu
 
 The higher-strength route wins in only two of six frames (7075-T6 and extruded WE43), and only narrowly. Elsewhere damage tolerance, repairability and environmental resistance matter more over a whole mission — the same reasoning behind T73/T7351 tempers and normalised tube frames in practice.
 
-**Causes of craft loss** (share of all crews, six-crew batch, standard route):
+**Causes of craft loss** (share of all crews, six-crew batch):
 
 | Cause | Share of crews |
 |---|---|
