@@ -259,7 +259,6 @@ function lobbyScreen(s) {
       <div class="panel settings">
         <h3>Mission settings ${host ? '' : '<span class="muted small">(host)</span>'}</h3>
         <label class="tog"><input type="checkbox" data-set="uniqueFrames" ${s.settings.uniqueFrames ? 'checked' : ''} ${host ? '' : 'disabled'}> One crew per frame material</label>
-        <label class="tog"><input type="checkbox" data-set="randomEvents" ${s.settings.randomEvents ? 'checked' : ''} ${host ? '' : 'disabled'}> Random events (each crew draws its own event card per leg; Leg 6 is a crisis for its role)</label>
         <label class="tog"><input type="checkbox" data-set="shareResults" ${s.settings.shareResults ? 'checked' : ''} ${host ? '' : 'disabled'}> Share anonymous results for playtest data</label>
         <label class="sel">Control window per crew
           <select data-set="timer" ${host ? '' : 'disabled'}>${[[0, 'Off (untimed)'], [45, '45 s'], [60, '60 s (standard)'], [90, '90 s']].map(([v, l]) => `<option value="${v}" ${+s.settings.timer === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -656,9 +655,9 @@ function codexView() {
   if (tab === 'materials') body = codexMaterial(S.ui.codexMat);
   else if (tab === 'compare') body = codexCompare();
   else if (tab === 'roles') body = `<div class="role-grid static">${ROLE_ORDER.map(r => { const R = ROLES[r]; return `<div class="role"><span class="role-big">${R.icon}</span><b>${esc(R.name)}</b><small>Home: ${esc(R.home)}</small><p>${esc(R.summary)}</p><p class="ab"><i>Ability:</i> ${esc(R.ability.name)} — ${esc(R.ability.desc)}</p></div>`; }).join('')}</div>
-    <p class="muted">Leg 6 is specialist-focused. On the standard route every crew hand-flies Manual Docking, where a Pilot gets +${CONFIG.specialistBonus}. With random events on, every crew faces a docking crisis written for its own role and gets +${CONFIG.specialistBonus} for its speciality.</p>`;
+    <p class="muted">Leg 6 is specialist-focused: every crew hand-flies Manual Docking, where a Pilot gets +${CONFIG.specialistBonus}.</p>`;
   else if (tab === 'route') body = LEGS.map(L => `<div class="route-leg"><h4>Leg ${L.n} · ${esc(L.name)} <span class="muted">— ${esc(L.topic)}</span></h4><p>${esc(L.intro)}</p>
-    <p class="small muted">Standard event: <b>${esc(cardById(L.fixed).title)}</b> · With random events: ${L.cards ? L.cards.map(id => esc(CARDS[id].title)).join(' · ') : 'one crisis per specialist role'}</p></div>`).join('');
+    <p class="small muted">Event: <b>${esc(cardById(L.fixed).title)}</b></p></div>`).join('');
   else if (tab === 'rules') body = rulesText();
   else if (tab === 'sources') body = `<ol class="sources">${SOURCES.map(x => `<li>${esc(x)}</li>`).join('')}</ol><p class="muted small">Property values are typical figures for the stated condition and vary with product form and supplier; game modifiers are rankings derived from them, not design allowables.</p>`;
   return `<div class="modal codex"><div class="cx-head"><h2 class="h-display">Materials Codex</h2><button class="x" data-act="close" aria-label="Close">✕</button></div>
@@ -669,11 +668,12 @@ function codexView() {
 function codexMaterial(k) {
   const M = MATERIALS[k], C = CODEX[k];
   const strong = [], weak = [];
-  for (const card of Object.values(CARDS)) {
+  const onRoute = new Set(LEGS.map(L => L.fixed));
+  for (const [id, card] of Object.entries(CARDS)) {
     if (!card.mods) continue;
-    const v = card.mods[k];
-    if (v >= 2) strong.push(`<li><b>${esc(card.title)}</b> (${sgn(v)}): ${esc(card.why[k])}</li>`);
-    if (v <= -2) weak.push(`<li><b>${esc(card.title)}</b> (${sgn(v)}): ${esc(card.why[k])}</li>`);
+    const v = card.mods[k], star = onRoute.has(id) ? '★ ' : '';
+    if (v >= 2) strong.push(`<li>${star}<b>${esc(card.title)}</b> (${sgn(v)}): ${esc(card.why[k])}</li>`);
+    if (v <= -2) weak.push(`<li>${star}<b>${esc(card.title)}</b> (${sgn(v)}): ${esc(card.why[k])}</li>`);
   }
   const p = M.props;
   const props = [['Density', `${p.density} g/cm³`], ['Young’s modulus E', `${p.E} GPa`], ['Shear modulus G', `${p.G} GPa`], ['Yield strength', `${p.yield} MPa`], ['Tensile strength', `${p.uts} MPa`], ['Elongation', `${p.elong} %`], ['Fatigue', `${p.fatigue} MPa`], ['Fracture toughness', `${p.kic} MPa√m`], ['Max service temp.', `${p.tmax} °C`], ['Thermal conductivity', `${p.k} W/m·K`], ['Thermal expansion', `${p.cte} µm/m·K`], ['Melting range', `${p.melt} °C`], ['Crystal structure', p.structure], ['Price', `${p.cost} $/kg`], ['Embodied carbon', `${p.co2} kg CO₂e/kg`]];
@@ -689,7 +689,7 @@ function codexMaterial(k) {
       <h4>Real-world uses</h4><ul>${C.uses.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
       <h4>Selection rationale</h4><p>${esc(C.selection)}</p>
       <h4>Cost & sustainability</h4><p>${esc(C.sustainability)} Recyclability: ${esc(M.recyclability)}.</p>
-      <h4>In the game</h4><div class="cx-cols"><div><p class="good small">Where it shines</p><ul class="small">${strong.join('') || '<li>—</li>'}</ul></div><div><p class="bad small">Where it struggles</p><ul class="small">${weak.join('') || '<li>—</li>'}</ul></div></div>
+      <h4>In the game</h4><p class="small muted">★ = an event on the route. The others are further hazards for this material, kept for reference.</p><div class="cx-cols"><div><p class="good small">Where it shines</p><ul class="small">${strong.join('') || '<li>—</li>'}</ul></div><div><p class="bad small">Where it struggles</p><ul class="small">${weak.join('') || '<li>—</li>'}</ul></div></div>
       <p class="small muted">Game stats: integrity ${M.stats.integrity}, ${M.stats.legTime} h per leg, ${M.stats.capacity} crates, ${M.stats.spares} spares, repair ${sgn(M.stats.repair)}, critical crack stage ${M.stats.crackTol}, budget ${M.stats.budget}.</p>
     </article></div>`;
 }

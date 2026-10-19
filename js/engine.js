@@ -2,7 +2,7 @@
 // Pure state machine shared by the browser (pass-and-play and online rooms) and the Node
 // balance simulator. act(state, action, ctx) returns a NEW state; ctx = { now, rng, actor }.
 
-import { CONFIG, MATERIALS, MATERIAL_ORDER, ROLES, ROLE_ORDER, CONDITIONS, STD_APPROACHES, LEGS, CARDS, DOCK_CARDS, cardById, FOOTPRINT } from './data.js';
+import { CONFIG, MATERIALS, MATERIAL_ORDER, ROLES, ROLE_ORDER, CONDITIONS, STD_APPROACHES, LEGS, CARDS, cardById, FOOTPRINT } from './data.js';
 
 export const LOCAL_ACTOR = 'local';
 const clone = (o) => structuredClone(o);
@@ -46,20 +46,6 @@ export function tierOf(r, total, dc) {
   return r + total >= dc ? 'success' : 'fail';
 }
 
-function shuffle(arr, rng) {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-function draw(decks, key, pool, rng) {
-  if (!decks[key] || decks[key].length === 0) decks[key] = shuffle(pool, rng);
-  return decks[key].shift();
-}
-
 function isOwner(state, crew, actor) {
   return state.mode === 'local' || actor === LOCAL_ACTOR || crew.owner === actor;
 }
@@ -77,9 +63,9 @@ export function createGame({ mode = 'local', code = null, hostId = null, setting
   return {
     v: 1, mode, code, hostId,
     phase: 'lobby',
-    settings: { uniqueFrames: true, randomEvents: false, timer: CONFIG.defaultTimer, shareResults: true, ...settings },
+    settings: { uniqueFrames: true, timer: CONFIG.defaultTimer, shareResults: true, ...settings },
     players: [], crews: [],
-    leg: 0, turn: null, decks: {},
+    leg: 0, turn: null,
     log: [], logN: 0, rollSeq: 0, seq: 0, gameNo: 0,
     startedAt: null, endedAt: null, results: null, paused: null,
   };
@@ -285,9 +271,8 @@ function beginTurn(s, idx, ctx) {
     return advance(s, idx, ctx);
   }
   const leg = LEGS[s.leg - 1];
-  // Standard route: the same event for every crew on each leg. Random events: each crew draws
-  // its own card, and Leg 6 is the crisis written for its role.
-  const card = !s.settings.randomEvents ? leg.fixed : s.leg === 6 ? `dock:${crew.role}` : draw(s.decks, s.leg, leg.cards, ctx.rng);
+  // Every crew faces the same event on each leg.
+  const card = leg.fixed;
   s.turn = {
     seq: ++s.seq, crewIdx: idx, crewId: crew.id, leg: s.leg,
     step: s.mode === 'local' ? 'handover' : 'event',
@@ -528,7 +513,7 @@ function autoConfigure(s, c, rng) {
 
 function resetToLobby(s) {
   s.phase = 'lobby';
-  s.turn = null; s.leg = 0; s.results = null; s.paused = null; s.decks = {};
+  s.turn = null; s.leg = 0; s.results = null; s.paused = null;
   s.crews = s.crews.map(c => ({ id: c.id, name: c.name, owner: c.owner, material: c.material, processing: c.processing, role: c.role, cargo: c.cargoStart ?? c.cargo, ready: false }));
 }
 
@@ -613,7 +598,7 @@ export function act(prev, action, ctx) {
       if (!action.force && !s.crews.every(c => c.ready)) throw new Error('Every crew must be ready');
       s.crews.forEach(c => { autoConfigure(s, c, ctx.rng); c.ready = true; initCrewRuntime(c); });
       s.phase = 'play'; s.leg = 1; s.gameNo += 1; s.startedAt = ctx.now; s.endedAt = null; s.results = null;
-      s.decks = {}; s.log = []; s.logN = 0;
+      s.log = []; s.logN = 0;
       log(s, 'leg', `Leg 1: ${LEGS[0].name} — ${LEGS[0].topic}`);
       return beginTurn(s, 0, ctx);
     }
@@ -709,6 +694,6 @@ export function matchSummary(s) {
       };
     }),
     durationS: Math.round((s.results.durationMs || 0) / 1000),
-    settings: { randomEvents: !!s.settings.randomEvents, timer: s.settings.timer, uniqueFrames: s.settings.uniqueFrames },
+    settings: { timer: s.settings.timer, uniqueFrames: s.settings.uniqueFrames },
   };
 }
